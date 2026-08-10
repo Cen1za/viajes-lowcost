@@ -69,6 +69,15 @@ button {
   padding: calc(env(safe-area-inset-top) + 14px) 18px 12px;
 }
 
+/* En escritorio la columna se lee como una tarjeta sobre el fondo. */
+@media (min-width: 700px) {
+  .app {
+    background: var(--fondo);
+    border-left: 1px solid var(--borde);
+    border-right: 1px solid var(--borde);
+  }
+}
+
 .cabecera h1 {
   margin: 0;
   font-size: 1.22rem;
@@ -94,8 +103,12 @@ main {
 .barra {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  /* Centrada y con el mismo ancho que el contenido: en escritorio, una barra
+     de lado a lado bajo una columna estrecha se ve desencajada. */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 680px;
   z-index: 30;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -103,6 +116,14 @@ main {
   backdrop-filter: blur(12px);
   border-top: 1px solid var(--borde);
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+@media (min-width: 700px) {
+  .barra {
+    border-left: 1px solid var(--borde);
+    border-right: 1px solid var(--borde);
+    border-radius: var(--r-l) var(--r-l) 0 0;
+  }
 }
 
 .barra button {
