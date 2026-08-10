@@ -203,9 +203,12 @@ No tiene sentido que todas las fuentes vayan al mismo ritmo:
   verdad. Consultarla cada hora sería machacar su web para nada: las tarifas no
   cambian tan rápido.
 
-Si algún día quieres cambiarlo, es el `cron` de cada workflow. Ten en cuenta
-que el histórico crece: con la vigilancia horaria son unos **4 MB al mes** en
-`data/historico/`.
+Si algún día quieres cambiarlo, es el `cron` de cada workflow.
+
+El histórico **solo anota los cambios**: si un tren sigue costando lo mismo
+que la última vez, no se escribe otra línea. Con la vigilancia horaria eso es
+la diferencia entre unos megabytes al mes y unos pocos kilobytes, y la mediana
+sale igual porque le basta un punto por día.
 
 ## Tests
 
@@ -242,5 +245,13 @@ buscador/            paquete Python
   avisos/telegram.py
 config/              tu configuración
 data/                histórico y JSON publicados
-web/                 PWA (Vite + React + TypeScript)
+scripts/             utilidades del build
+tests/               pruebas de la lógica interna
+web/src/             PWA (Vite + React + TypeScript)
+  App.tsx            las cuatro vistas
+  componentes.tsx    tarjeta de tren, chips, iconos, estados vacíos
+  companias.ts       color e identidad de cada operador
+  preferencias.ts    filtros del usuario en localStorage
+  datos.ts           carga de los JSON y formateo
+  estilos.css        el sistema visual entero
 ```

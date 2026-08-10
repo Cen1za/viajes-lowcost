@@ -86,12 +86,15 @@ def _cerrar_ciclo(
     if not args.guardar and not args.avisar:
         return []
 
-    referencia = historico.Referencia(historico.cargar())
+    previas = historico.cargar()
+    referencia = historico.Referencia(previas)
     gangas = motor_ofertas.detectar(encontradas, referencia, config)
 
     if args.guardar:
-        guardadas = historico.guardar(encontradas)
-        consola.print(f"Histórico: {guardadas} registros añadidos.")
+        guardadas = historico.guardar(encontradas, previas)
+        omitidas = len(encontradas) - guardadas
+        detalle = f" ({omitidas} sin cambio de precio)" if omitidas else ""
+        consola.print(f"Histórico: {guardadas} registros añadidos{detalle}.")
 
     if gangas:
         consola.print(f"\n[bold green]{len(gangas)} ofertas destacadas[/bold green]")

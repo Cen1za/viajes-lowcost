@@ -23,14 +23,35 @@ def _fichero(momento: date) -> Path:
     return DIR_HISTORICO / f"{momento:%Y-%m}.jsonl"
 
 
-def guardar(ofertas: list[Oferta]) -> int:
-    """Añade las ofertas al fichero del mes en que se capturaron."""
+def guardar(ofertas: list[Oferta], conocidas: list[Oferta] | None = None) -> int:
+    """Añade al histórico solo lo que aporta información nueva.
+
+    Con la vigilancia corriendo cada hora, guardar los mismos precios una y
+    otra vez engordaría el repositorio varios MB al mes sin añadir nada: la
+    mediana se calcula igual con un punto al día que con veinticuatro
+    idénticos. Así que solo se escribe un tren cuando cambia de precio o
+    cuando es el primero que se ve de él ese día.
+    """
     if not ofertas:
+        return 0
+
+    ultimos = _ultimo_precio(conocidas or [])
+    nuevas = []
+    for oferta in ofertas:
+        clave = (oferta.clave_tren, oferta.capturado_en.date())
+        anterior = ultimos.get(oferta.clave_tren)
+        if anterior is not None and abs(anterior[0] - oferta.precio_eur) < 0.005:
+            if anterior[1] == oferta.capturado_en.date():
+                continue  # mismo precio y ya anotado hoy
+        nuevas.append(oferta)
+        ultimos[oferta.clave_tren] = (oferta.precio_eur, clave[1])
+
+    if not nuevas:
         return 0
 
     DIR_HISTORICO.mkdir(parents=True, exist_ok=True)
     por_mes: dict[Path, list[Oferta]] = defaultdict(list)
-    for oferta in ofertas:
+    for oferta in nuevas:
         por_mes[_fichero(oferta.capturado_en.date())].append(oferta)
 
     escritas = 0
@@ -40,6 +61,17 @@ def guardar(ofertas: list[Oferta]) -> int:
                 fichero.write(oferta.model_dump_json() + "\n")
                 escritas += 1
     return escritas
+
+
+def _ultimo_precio(ofertas: list[Oferta]) -> dict[str, tuple[float, date]]:
+    """Último precio conocido de cada tren y el día en que se anotó."""
+    ultimos: dict[str, tuple[float, date]] = {}
+    for oferta in ofertas:
+        actual = ultimos.get(oferta.clave_tren)
+        dia = oferta.capturado_en.date()
+        if actual is None or dia >= actual[1]:
+            ultimos[oferta.clave_tren] = (oferta.precio_eur, dia)
+    return ultimos
 
 
 def cargar(desde: date | None = None) -> list[Oferta]:
