@@ -1,29 +1,29 @@
 {
-  "actualizado": "2026-08-10T20:29:08+00:00",
+  "actualizado": "2026-08-10T20:53:53+00:00",
   "fuentes": [
     {
       "fuente": "ouigo",
       "ok": true,
-      "ofertas": 3,
+      "ofertas": 60,
       "descartadas": 0,
-      "duracion_s": 3.14,
+      "duracion_s": 60.21,
       "error": null
     },
     {
       "fuente": "renfe",
       "ok": true,
-      "ofertas": 14,
+      "ofertas": 204,
       "descartadas": 0,
-      "duracion_s": 30.7,
+      "duracion_s": 736.49,
       "error": null
     },
     {
       "fuente": "iryo",
-      "ok": true,
-      "ofertas": 1,
+      "ok": false,
+      "ofertas": 0,
       "descartadas": 0,
-      "duracion_s": 39.86,
-      "error": null
+      "duracion_s": 385.34,
+      "error": "TimeoutError: Locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for locator(\"#ilsa-main-search-radio-outbound\").first\n | TimeoutError: Locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for locator(\"#ilsa-main-search-radio-outbound\").first\n | TimeoutError: Locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for locator(\"#ilsa-main-search-radio-outbound\").first\n"
     }
   ]
 }
