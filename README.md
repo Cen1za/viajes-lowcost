@@ -25,7 +25,7 @@ GitHub Actions (cron)
 |---|---|---|
 | **Ouigo** | funcionando | API JSON propia. Rápida (~1 s por consulta). |
 | **Renfe** (AVE y Avlo) | funcionando | Navegador real con Playwright. Lenta (~30 s por consulta). |
-| iryo | pendiente | Ver el diagnóstico más abajo. |
+| **iryo** | funcionando | Navegador real, pero con **Chrome de verdad**: detecta el Chromium de Playwright y devuelve la página en blanco. Solo llega a Alicante, no a Elche. |
 | eDreams | pendiente | Sí vende trenes. Ver el diagnóstico más abajo. |
 | Trainline | pendiente | Su búsqueda está protegida con DataDome (403 y captcha). Su API de estaciones sí responde sin problema. |
 | Omio, trenes.com, promociones | pendiente | Omio carga sin bloqueo, es la siguiente candidata razonable. |
@@ -48,26 +48,32 @@ GitHub Actions (cron)
 - **No tiene URLs de resultados**: `/trenes/madrid-elche/` da 404 y el patrón
   `#/results/...` de sus vuelos no vale para trenes.
 
-### Diagnóstico de iryo (para quien lo retome)
+### Lo que costó sacar de iryo
 
-Está a medio camino y esto es lo que ya se sabe, para no repetir el trabajo:
+Tres cosas, por si alguna vuelve a romperse:
 
-- Su web **sí carga** con navegador real; solo bloquea las peticiones directas
-  (Cloudflare responde 403 idéntico a cualquier ruta, incluso inexistente).
-- `https://iryo.eu/assets/properties/config.json` publica toda su arquitectura.
-  Los endpoints que interesan son `api.iryo.eu/b2c/availability` (búsqueda) y
-  `api.iryo.eu/b2c/support/stations` (estaciones).
-- Esas rutas **existen**: llamadas desde dentro de la página responden 401 con
-  *"missing subscription key"*, no 404. Es Azure API Management.
-- La clave **no está en el bundle**. El código la asigna desde `this.apiManager`,
-  o sea que se resuelve en tiempo de ejecución (probablemente vía
-  `api.iryo.eu/b2c/config` o el flujo de Keycloak que también carga la web).
+1. **Necesita Chrome de verdad** (`channel="chrome"`). Con el Chromium que trae
+   Playwright devuelve la página en blanco: carga el título y nada más. Por eso
+   el workflow instala los dos navegadores.
+2. **La fecha hay que picarla en su calendario.** Inyectarla en el
+   `input[type=date]` por JS deja el campo correcto, pero Angular no se entera,
+   el formulario nunca es válido y BUSCAR se queda deshabilitado. Y sus celdas
+   no llevan la fecha en el DOM: hay que cruzar el mes de la cabecera (que va en
+   base 0) con el número del día.
+3. **Su API no vale.** `api.iryo.eu` existe y responde, pero exige una clave de
+   Azure API Management que la web resuelve en tiempo de ejecución y no está en
+   su código. Se intentó y es un callejón sin salida.
 
-El siguiente paso lógico es interceptar una búsqueda real con
-`page.on("request")` y leer la cabecera `Ocp-Apim-Subscription-Key` que envía
-la propia SPA. La dificultad añadida es que su buscador va en web components
-con shadow DOM, así que hay que usar los locators de Playwright (que sí lo
-atraviesan) en vez de `querySelector`.
+Y una limitación que no tiene arreglo: **iryo no llega a Elche ni a Murcia**.
+De sus 15 estaciones solo Alicante Terminal sirve para esta ruta.
+
+### Groupon y Oferplan: comprobado que no venden trenes
+
+Se buscó en sus propios buscadores. Groupon devuelve para "tren AVE" un gorro
+de punto, un viaje a Amsterdam con vuelos y un enlace de afiliado a códigos de
+TrainPal; para "Renfe", clases de defensa personal y una cata de ron. Oferplan
+(Las Provincias, grupo Vocento) son cupones de comercios locales y no tiene
+transporte. No es que estén bloqueados: es que no tienen el dato.
 
 > **eDreams, Groupon y Oferplan no venden billetes de AVE.** eDreams es vuelos y
 > hoteles; los otros dos son cupones de ocio local. Por eso no aparecen aquí.
