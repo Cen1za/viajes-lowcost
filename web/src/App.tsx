@@ -2,7 +2,9 @@ import { useMemo, useState, type ReactNode } from 'react'
 // (useState lo usan también los filtros plegables)
 import { COMPANIAS, compania, companiasPresentes } from './companias'
 import {
+  BotonActualizar,
   CabeceraDia,
+  CabeceraFinde,
   Cargando,
   Chip,
   Iconos,
@@ -11,7 +13,14 @@ import {
   TarjetaTren,
   Vacio,
 } from './componentes'
-import { agruparPorDia, desde, euros, fechaLarga, useDatos } from './datos'
+import {
+  agruparPorDia,
+  agruparPorFinde,
+  desde,
+  euros,
+  fechaLarga,
+  useDatos,
+} from './datos'
 import { destino } from './destinos'
 import { useInstalacion } from './instalacion'
 import {
@@ -42,9 +51,12 @@ export default function App() {
   return (
     <div className="app">
       <header className="cabecera">
-        <h1>
-          <span aria-hidden>🚄</span> Madrid ⇄ Elche
-        </h1>
+        <div className="titulo-app">
+          <h1>
+            <span aria-hidden>🚄</span> Madrid ⇄ Elche
+          </h1>
+          <BotonActualizar />
+        </div>
         <p className="sub">El precio más bajo de todas las webs, en un sitio.</p>
       </header>
 
@@ -214,16 +226,33 @@ function diasDe(trenes: { fecha: string }[]): number[] {
 
 /* --- Ofertas -------------------------------------------------------------- */
 
+/**
+ * Pantalla principal: todos los precios, ordenados por finde.
+ *
+ * Antes solo enseñaba las gangas, y con una sola ganga la app parecía vacía
+ * aunque hubiera cientos de precios recogidos. Ahora las gangas se destacan
+ * arriba y debajo va todo, agrupado por el finde al que corresponde cada
+ * viaje: es la unidad en la que se decide ir o no ir.
+ */
 function VistaOfertas(prefs: Prefs) {
-  const { datos, error, cargando } = useDatos<Gangas>('gangas')
+  const { datos, error, cargando } = useDatos<Latest>('latest')
+  const { datos: gangas } = useDatos<Gangas>('gangas')
 
-  const todas = datos?.ofertas ?? []
+  const todos = datos?.trenes ?? []
   const companias = useMemo(
-    () => companiasPresentes(todas.map((o) => o.operador)),
-    [todas],
+    () => companiasPresentes(todos.map((t) => t.operador)),
+    [todos],
   )
-  const filtradas = useMemo(() => filtrar(todas, prefs.prefs), [todas, prefs.prefs])
-  const porDia = useMemo(() => agruparPorDia(filtradas), [filtradas])
+  const filtrados = useMemo(() => filtrar(todos, prefs.prefs), [todos, prefs.prefs])
+  const findes = useMemo(() => agruparPorFinde(filtrados), [filtrados])
+
+  // Las gangas siguen mandando: son el motivo de que exista la app. Van
+  // arriba, con su motivo, y aparte de la lista completa.
+  const destacadas = useMemo(
+    () => filtrar(gangas?.ofertas ?? [], prefs.prefs),
+    [gangas, prefs.prefs],
+  )
+  const sinHistorico = destacadas.every((o) => o.caida_pct == null)
 
   if (cargando) return <Cargando />
   if (error || !datos)
@@ -233,56 +262,66 @@ function VistaOfertas(prefs: Prefs) {
       </Vacio>
     )
 
-  if (!todas.length)
+  if (!todos.length)
     return (
-      <Vacio icono="🔍" titulo="Ninguna oferta destacada ahora mismo">
-        Se revisan los precios cada hora. Cuando algo baje de forma llamativa
-        aparecerá aquí y te llegará un aviso.
+      <Vacio icono="🔍" titulo="Todavía no hay precios recogidos">
+        Se revisan los precios cada hora. En cuanto entre la primera búsqueda
+        aparecerán aquí.
       </Vacio>
     )
-
-  const sinHistorico = todas.every((o) => o.caida_pct == null)
 
   return (
     <>
       <ProgresoActualizacion actualizado={datos.actualizado} />
-      <Filtros {...prefs} companias={companias} diasPresentes={diasDe(todas)} />
+      <Filtros {...prefs} companias={companias} diasPresentes={diasDe(todos)} />
 
-      <Seccion titulo={`${filtradas.length} ofertas en ${porDia.length} días`} />
-
-      {sinHistorico && (
-        <div className="nota">
-          <strong>Todavía estamos aprendiendo.</strong> Hasta tener unos días de
-          histórico se avisa de todo lo que baje de 25 €. Después se comparará
-          con el precio habitual de cada viaje y solo saltarán las bajadas de
-          verdad.
-        </div>
+      {destacadas.length > 0 && (
+        <>
+          <Seccion
+            titulo={destacadas.length === 1 ? 'Chollo del momento' : 'Chollos del momento'}
+            apunte={sinHistorico ? 'por debajo de 25 €' : 'muy por debajo de lo normal'}
+          />
+          <div className="lista">
+            {destacadas.map((o, i) => (
+              <TarjetaTren
+                key={i}
+                tren={o}
+                destacado
+                motivo={sinHistorico ? undefined : o.motivo}
+                rebajaPct={o.caida_pct}
+              />
+            ))}
+          </div>
+        </>
       )}
 
-      {porDia.length ? (
-        porDia.map((grupo) => (
-          <section key={grupo.fecha} className="grupo">
-            <CabeceraDia
-              fecha={grupo.fecha}
-              minimo={grupo.minimo}
-              cuantos={grupo.elementos.length}
-            />
-            <div className="lista">
-              {grupo.elementos.map((o, i) => (
-                <TarjetaTren
-                  key={i}
-                  tren={o}
-                  destacado={o.caida_pct != null}
-                  motivo={sinHistorico ? undefined : o.motivo}
-                  rebajaPct={o.caida_pct}
-                  mostrarFecha={false}
+      <Seccion
+        titulo={`Todos los precios · ${filtrados.length}`}
+        apunte={`${findes.length} ${findes.length === 1 ? 'finde' : 'findes'}`}
+      />
+
+      {findes.length ? (
+        findes.map((finde) => (
+          <section key={finde.desde} className="grupo">
+            <CabeceraFinde {...finde} />
+            {finde.dias.map((dia) => (
+              <div key={dia.fecha} className="dentro-del-finde">
+                <CabeceraDia
+                  fecha={dia.fecha}
+                  minimo={dia.minimo}
+                  cuantos={dia.elementos.length}
                 />
-              ))}
-            </div>
+                <div className="lista">
+                  {dia.elementos.map((t, i) => (
+                    <TarjetaTren key={i} tren={t} mostrarFecha={false} />
+                  ))}
+                </div>
+              </div>
+            ))}
           </section>
         ))
       ) : (
-        <Vacio icono="🎚️" titulo="Ninguna oferta pasa los filtros">
+        <Vacio icono="🎚️" titulo="Ningún tren pasa los filtros">
           Prueba a quitar algún día, franja horaria o compañía.
         </Vacio>
       )}
@@ -577,6 +616,16 @@ function VistaAjustes({ prefs, cambiar, alternar, alternarDia, limpiar }: Prefs)
 
   return (
     <div className="ajustes">
+      <div className="portada">
+        <span className="emblema">{Iconos.ajustes}</span>
+        <div>
+          <h2>Tus ajustes</h2>
+          <p>
+            Elige cuándo viajas y qué quieres ver. Se guarda solo en este móvil.
+          </p>
+        </div>
+      </div>
+
       <Seccion titulo="Tus viajes" />
 
       <Ficha icono={Iconos.calendario} titulo="Días de viaje" valor="Madrid ⇄ Elche">

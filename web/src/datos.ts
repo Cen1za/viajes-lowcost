@@ -1,4 +1,42 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useSyncExternalStore } from 'react'
+
+/* --- Recarga a petición ---------------------------------------------------- */
+
+/**
+ * El botón de actualizar vuelve a pedir los JSON a la red.
+ *
+ * No dispara una búsqueda nueva —eso lo hace el cron cada hora en el servidor—:
+ * lo que hace es tirar de la última foto publicada sin esperar a que el
+ * navegador decida refrescar su copia.
+ */
+let version = 0
+let enVuelo = 0
+const oyentes = new Set<() => void>()
+
+function avisar() {
+  for (const oyente of oyentes) oyente()
+}
+
+function suscribir(oyente: () => void) {
+  oyentes.add(oyente)
+  return () => {
+    oyentes.delete(oyente)
+  }
+}
+
+export function recargarDatos() {
+  version += 1
+  avisar()
+}
+
+/** ¿Queda alguna descarga en curso? Para animar el botón mientras dura. */
+export function useActualizando(): boolean {
+  return useSyncExternalStore(
+    suscribir,
+    () => enVuelo > 0,
+    () => false,
+  )
+}
 
 /**
  * Carga uno de los JSON de data/. El service worker se encarga de que, sin
@@ -8,24 +46,39 @@ export function useDatos<T>(nombre: string) {
   const [datos, setDatos] = useState<T | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [cargando, setCargando] = useState(true)
+  const vuelta = useSyncExternalStore(
+    suscribir,
+    () => version,
+    () => version,
+  )
 
   useEffect(() => {
     let vigente = true
     setCargando(true)
+    enVuelo += 1
+    avisar()
 
     fetch(`./data/${nombre}.json`, { cache: 'no-cache' })
       .then((r) => {
         if (!r.ok) throw new Error(`No se pudo leer ${nombre}.json (${r.status})`)
         return r.json() as Promise<T>
       })
-      .then((d) => vigente && setDatos(d))
+      .then((d) => {
+        if (!vigente) return
+        setDatos(d)
+        setError(null)
+      })
       .catch((e: Error) => vigente && setError(e.message))
-      .finally(() => vigente && setCargando(false))
+      .finally(() => {
+        enVuelo -= 1
+        avisar()
+        if (vigente) setCargando(false)
+      })
 
     return () => {
       vigente = false
     }
-  }, [nombre])
+  }, [nombre, vuelta])
 
   return { datos, error, cargando }
 }
@@ -82,6 +135,87 @@ export function agruparPorDia<T extends { fecha: string; precio: number }>(
       const ordenados = [...lista].sort((a, b) => a.precio - b.precio)
       return { fecha, minimo: ordenados[0].precio, elementos: ordenados }
     })
+}
+
+/* --- Agrupación por fin de semana ----------------------------------------- */
+
+/** Días enteros desde una referencia fija, sin que el horario de verano moleste. */
+function enDias(f: Date): number {
+  return Math.floor(Date.UTC(f.getFullYear(), f.getMonth(), f.getDate()) / 86400000)
+}
+
+/** El lunes de la semana de esa fecha. */
+function lunesDe(f: Date): Date {
+  const l = new Date(f)
+  l.setDate(l.getDate() - ((l.getDay() + 6) % 7))
+  return l
+}
+
+export interface Finde<T> {
+  /** Semanas desde la actual: 0 este finde, 1 el que viene. */
+  semanas: number
+  desde: string
+  hasta: string
+  minimo: number
+  cuantos: number
+  dias: { fecha: string; minimo: number; elementos: T[] }[]
+}
+
+/**
+ * Agrupa por fin de semana de viaje.
+ *
+ * Un finde no cabe dentro de una semana natural: se sale el jueves o el viernes
+ * y se vuelve el lunes, que ya cuenta como semana siguiente. Restando tres días
+ * antes de mirar de qué semana es, la vuelta del lunes cae en el mismo grupo
+ * que su ida, que es como se piensa un viaje.
+ */
+export function agruparPorFinde<T extends { fecha: string; precio: number }>(
+  elementos: T[],
+): Finde<T>[] {
+  const grupos = new Map<number, T[]>()
+
+  for (const e of elementos) {
+    const f = aFecha(e.fecha)
+    f.setDate(f.getDate() - 3)
+    const clave = enDias(lunesDe(f))
+    const lista = grupos.get(clave)
+    if (lista) lista.push(e)
+    else grupos.set(clave, [e])
+  }
+
+  const estaSemana = enDias(lunesDe(new Date()))
+
+  return [...grupos.entries()]
+    .sort(([a], [b]) => a - b)
+    .map(([clave, lista]) => {
+      const dias = agruparPorDia(lista)
+      return {
+        semanas: Math.round((clave - estaSemana) / 7),
+        desde: dias[0].fecha,
+        hasta: dias[dias.length - 1].fecha,
+        minimo: Math.min(...dias.map((d) => d.minimo)),
+        cuantos: lista.length,
+        dias,
+      }
+    })
+}
+
+/** 'Este finde', 'El finde que viene', 'Dentro de 3 semanas'. */
+export function nombreFinde(semanas: number): string {
+  if (semanas <= 0) return 'Este finde'
+  if (semanas === 1) return 'El finde que viene'
+  return `Dentro de ${semanas} semanas`
+}
+
+/** '11 – 14 sep', o '28 sep – 4 oct' si el finde cambia de mes. */
+export function rangoCorto(desde: string, hasta: string): string {
+  const a = aFecha(desde)
+  const b = aFecha(hasta)
+  const mesA = MESES[a.getMonth()]
+  const mesB = MESES[b.getMonth()]
+  if (desde === hasta) return `${a.getDate()} ${mesA}`
+  const inicio = mesA === mesB ? `${a.getDate()}` : `${a.getDate()} ${mesA}`
+  return `${inicio} – ${b.getDate()} ${mesB}`
 }
 
 /** 181 -> '3h01' */

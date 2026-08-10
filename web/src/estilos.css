@@ -1,7 +1,14 @@
 ﻿/* ---------------------------------------------------------------------------
-   Sistema visual: claro, mucho blanco y el color reservado a las compañías.
-   El único acento cromático fuerte que aparece en la interfaz es el de cada
-   operador, para que el color signifique siempre lo mismo.
+   Sistema visual: claro, mucho blanco y tres colores con significado fijo.
+
+   - --marca (rosa) es el acento de la interfaz: lo que has elegido tú. Barra
+     inferior, días marcados, chips activos, interruptores.
+   - --ahorro (verde) significa siempre "esto es barato": precios destacados,
+     rebajas y fuentes que responden. No se usa nunca de adorno.
+   - El color de cada compañía y de cada destino es su identidad, y no se toca.
+
+   Separar el acento del ahorro es lo que permite que el verde siga queriendo
+   decir algo: si todo fuera verde, no destacaría nada.
 --------------------------------------------------------------------------- */
 
 :root {
@@ -14,9 +21,14 @@
   --tinta-media: #4b5563;
   --tinta-suave: #6b7280;
 
-  --marca: #0f766e;
-  --marca-suave: #ecfdf5;
+  /* Rosa del Real Madrid, oscurecido hasta 6.5:1 sobre blanco: el tono de
+     camiseta es demasiado claro para poner texto encima. */
+  --marca: #b3126b;
+  --marca-suave: #fdf0f6;
+  --marca-clara: #f7d7e7;
+  --marca-degradado: linear-gradient(135deg, #c2157a 0%, #b3126b 55%, #8f0f57 100%);
   --ahorro: #047857;
+  --ahorro-suave: #ecfdf5;
   --alerta: #b45309;
   --error: #b91c1c;
 
@@ -92,6 +104,50 @@ button {
   margin: 2px 0 0;
   font-size: 0.78rem;
   color: var(--tinta-suave);
+}
+
+.titulo-app {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.actualizar {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--borde);
+  border-radius: 50%;
+  background: var(--superficie);
+  color: var(--marca);
+  transition: background 0.15s;
+}
+
+.actualizar svg {
+  width: 17px;
+  height: 17px;
+  stroke-width: 2;
+}
+
+.actualizar:active {
+  background: var(--marca-suave);
+}
+
+.actualizar.girando {
+  color: var(--tinta-suave);
+}
+
+.actualizar.girando svg {
+  animation: girar 0.9s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 main {
@@ -399,7 +455,7 @@ main {
   margin-left: 7px;
   padding: 2px 7px;
   border-radius: 6px;
-  background: var(--marca-suave);
+  background: var(--ahorro-suave);
   color: var(--ahorro);
   font-size: 0.72rem;
   font-weight: 800;
@@ -499,7 +555,7 @@ main {
   margin-top: 9px;
   padding: 9px 11px;
   border-radius: var(--r-s);
-  background: var(--marca-suave);
+  background: var(--ahorro-suave);
   color: #065f46;
   font-size: 0.78rem;
   line-height: 1.45;
@@ -531,6 +587,70 @@ main {
 .seccion .apunte {
   font-size: 0.74rem;
   color: var(--tinta-suave);
+}
+
+/* En Ajustes los rótulos separan bloques dentro de una pantalla tranquila:
+   en rosa acompañan, en gris parecían un aviso del sistema. */
+.ajustes .seccion {
+  margin: 14px 0 2px;
+}
+
+.ajustes .seccion h2 {
+  color: var(--marca);
+}
+
+/* --- Agrupación por finde ------------------------------------------------- */
+
+/* La cabecera del finde dice *cuándo* es sin obligar a calcular fechas: "el
+   finde que viene" se entiende de un vistazo; "18 – 21 sep", no. Los dos
+   findes más cercanos van en rosa porque son los únicos sobre los que aún se
+   puede decidir algo. */
+.finde {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  margin-bottom: 10px;
+  padding: 10px 13px;
+  border: 1px solid var(--borde);
+  border-radius: var(--r-m);
+  background: var(--superficie);
+  box-shadow: var(--sombra);
+}
+
+.finde .cuando {
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.finde .fechas {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--tinta-suave);
+  white-space: nowrap;
+}
+
+.finde .desde-precio {
+  margin-left: auto;
+  font-size: 0.73rem;
+  color: var(--tinta-suave);
+  white-space: nowrap;
+}
+
+.finde.proximo {
+  background: var(--marca);
+  border-color: var(--marca);
+  color: #fff;
+}
+
+.finde.proximo .fechas,
+.finde.proximo .desde-precio {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.dentro-del-finde + .dentro-del-finde {
+  margin-top: 14px;
 }
 
 /* --- Agrupación por día --------------------------------------------------- */
@@ -584,7 +704,7 @@ main {
 
 .dia-tarjeta.barato {
   border-color: #a7f3d0;
-  background: linear-gradient(180deg, var(--marca-suave) 0%, var(--superficie) 62%);
+  background: linear-gradient(180deg, var(--ahorro-suave) 0%, var(--superficie) 62%);
 }
 
 .dia-tarjeta-alto {
@@ -798,64 +918,112 @@ main {
 .ajustes {
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 11px;
+}
+
+/* Portada de la pantalla: un poco de color y una frase que diga para qué
+   sirve todo lo de abajo. Sin ella, Ajustes empezaba en frío. */
+.portada {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 16px 17px;
+  border-radius: var(--r-l);
+  background: linear-gradient(135deg, #fde9f3 0%, #fdf0f6 55%, #fff6fa 100%);
+  border: 1px solid var(--marca-clara);
+}
+
+.portada .emblema {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--marca-degradado);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(179, 18, 107, 0.28);
+}
+
+.portada .emblema svg {
+  width: 21px;
+  height: 21px;
+  stroke-width: 1.9;
+}
+
+.portada h2 {
+  margin: 0 0 2px;
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #7a0d49;
+}
+
+.portada p {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #9b4470;
 }
 
 .ficha {
   background: var(--superficie);
   border: 1px solid var(--borde);
-  border-radius: var(--r-m);
-  padding: 13px 14px;
-  box-shadow: var(--sombra);
+  border-radius: var(--r-l);
+  padding: 15px 16px;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.03), 0 4px 14px rgba(16, 24, 40, 0.05);
 }
 
 .ficha-cabeza {
   display: flex;
   align-items: center;
-  gap: 9px;
-  margin-bottom: 11px;
+  gap: 11px;
+  margin-bottom: 13px;
 }
 
 .ficha-icono {
   flex: 0 0 auto;
   display: grid;
   place-items: center;
-  width: 29px;
-  height: 29px;
-  border-radius: 9px;
-  background: var(--marca-suave);
-  color: var(--marca);
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  background: var(--marca-degradado);
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(179, 18, 107, 0.22);
 }
 
 .ficha-icono svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   stroke-width: 1.9;
 }
 
 .ficha-cabeza h3 {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.96rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 /* Resumen del estado: dice cómo está el ajuste sin tener que mirarlo. */
 .ficha-valor {
   margin-left: auto;
-  padding-left: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--marca-suave);
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--tinta-suave);
+  color: var(--marca);
   text-align: right;
-  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .aclaracion {
-  margin: 11px 0 0;
-  font-size: 0.72rem;
-  line-height: 1.5;
-  color: var(--tinta-suave);
+  margin: 13px 0 0;
+  font-size: 0.76rem;
+  line-height: 1.55;
+  color: var(--tinta-media);
 }
 
 /* Ficha que solo lleva texto: no hace falta el doble hueco bajo la cabecera. */
@@ -883,37 +1051,38 @@ main {
 }
 
 .semana .rotulo {
-  flex: 0 0 46px;
-  font-size: 0.64rem;
+  flex: 0 0 52px;
+  font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--tinta-suave);
 }
 
 .semana .dias {
   display: flex;
-  gap: 4px;
+  gap: 5px;
   flex: 1;
 }
 
 .dia-boton {
   flex: 1 1 0;
   min-width: 0;
-  height: 30px;
+  height: 35px;
   padding: 0;
   border: 0;
-  border-radius: 8px;
+  border-radius: 999px;
   background: var(--fondo);
   color: var(--tinta-media);
-  font-size: 0.74rem;
+  font-size: 0.79rem;
   font-weight: 700;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
 }
 
 .dia-boton.activo {
-  background: var(--marca);
+  background: var(--marca-degradado);
   color: #fff;
+  box-shadow: 0 3px 8px rgba(179, 18, 107, 0.26);
 }
 
 /* Día que el buscador no está recopilando: se puede marcar, pero no traerá
@@ -935,34 +1104,35 @@ main {
 .elecciones {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 7px;
 }
 
 .eleccion {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 6px 11px;
+  gap: 6px;
+  padding: 8px 13px;
   border: 0;
   border-radius: 999px;
   background: var(--fondo);
   color: var(--tinta-media);
-  font-size: 0.78rem;
+  font-size: 0.81rem;
   font-weight: 700;
   white-space: nowrap;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
 }
 
 .eleccion .detalle {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 600;
   opacity: 0.62;
   font-variant-numeric: tabular-nums;
 }
 
 .eleccion[aria-pressed='true'] {
-  background: var(--marca);
+  background: var(--marca-degradado);
   color: #fff;
+  box-shadow: 0 3px 8px rgba(179, 18, 107, 0.24);
 }
 
 /* Compañías: el color es el mismo que llevan sus tarjetas, así que la propia
@@ -989,7 +1159,7 @@ main {
 .interruptor {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
   width: 100%;
   color: inherit;
   text-align: left;
@@ -998,27 +1168,27 @@ main {
 .interruptor-texto {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
   min-width: 0;
 }
 
 .interruptor-texto strong {
-  font-size: 0.9rem;
+  font-size: 0.96rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 .interruptor-texto span {
-  font-size: 0.72rem;
-  line-height: 1.4;
-  color: var(--tinta-suave);
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: var(--tinta-media);
 }
 
 .interruptor .palanca {
   flex: 0 0 auto;
   margin-left: auto;
-  width: 40px;
-  height: 24px;
+  width: 46px;
+  height: 28px;
   border-radius: 999px;
   background: var(--borde-fuerte);
   padding: 3px;
@@ -1027,8 +1197,8 @@ main {
 
 .interruptor .palanca span {
   display: block;
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: #fff;
   box-shadow: var(--sombra);
@@ -1036,58 +1206,67 @@ main {
 }
 
 .interruptor[aria-pressed='true'] .palanca {
-  background: var(--marca);
+  background: var(--marca-degradado);
 }
 
 .interruptor[aria-pressed='true'] .palanca span {
-  transform: translateX(16px);
+  transform: translateX(18px);
 }
 
 /* --- Destinos ------------------------------------------------------------- */
 
 .destinos {
   display: flex;
-  flex-wrap: wrap;
-  gap: 7px 16px;
-  font-size: 0.78rem;
-  color: var(--tinta-suave);
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.82rem;
 }
 
 .destinos .destino {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 9px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  background: var(--fondo);
+  color: var(--tinta-media);
 }
 
 .destinos .punto {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
+  flex: 0 0 auto;
+}
+
+.destinos .destino strong {
+  font-weight: 700;
 }
 
 /* --- Acciones sueltas ----------------------------------------------------- */
 
 .boton-suave {
   width: 100%;
-  margin-top: 11px;
-  padding: 10px;
+  margin-top: 13px;
+  padding: 12px;
   border: 0;
-  border-radius: var(--r-s);
-  background: var(--marca);
+  border-radius: 999px;
+  background: var(--marca-degradado);
   color: #fff;
-  font-size: 0.84rem;
+  font-size: 0.86rem;
   font-weight: 700;
+  box-shadow: 0 4px 10px rgba(179, 18, 107, 0.26);
 }
 
 .restablecer {
   width: 100%;
-  padding: 11px;
+  padding: 13px;
   margin-top: 2px;
-  border: 1px dashed var(--borde-fuerte);
-  border-radius: var(--r-m);
-  background: none;
-  color: var(--tinta-suave);
-  font-size: 0.78rem;
+  border: 1px solid var(--marca-clara);
+  border-radius: var(--r-l);
+  background: var(--marca-suave);
+  color: var(--marca);
+  font-size: 0.8rem;
   font-weight: 700;
 }
 
@@ -1096,10 +1275,10 @@ main {
 .fuente {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 8px 0;
+  gap: 10px;
+  padding: 10px 0;
   border-bottom: 1px solid var(--borde);
-  font-size: 0.81rem;
+  font-size: 0.84rem;
 }
 
 /* La última fuente no es el último hijo: debajo va la aclaración. */
@@ -1117,7 +1296,7 @@ main {
 
 .fuente .luz.ok {
   background: var(--ahorro);
-  box-shadow: 0 0 0 3px var(--marca-suave);
+  box-shadow: 0 0 0 3px var(--ahorro-suave);
 }
 
 .fuente .luz.ko {

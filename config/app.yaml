@@ -81,6 +81,9 @@ fuentes:
   renfe: true      # navegador real (AVE y Avlo), la más lenta y frágil
   # Navegador real. Ojo: solo aporta Madrid ⇄ Alicante, no llega a Elche.
   iryo: true
+  # Agencia: navegador real. Agrega AVE, Avlo, Alvia y Ouigo de una vez.
+  # Sus precios pueden llevar comisión, por eso se guardan como fuente aparte.
+  edreams: true
   trainline: false
   omio: false
   trenes_com: false

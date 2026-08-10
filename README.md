@@ -26,7 +26,7 @@ GitHub Actions (cron)
 | **Ouigo** | funcionando | API JSON propia. Rápida (~1 s por consulta). |
 | **Renfe** (AVE y Avlo) | funcionando | Navegador real con Playwright. Lenta (~30 s por consulta). |
 | **iryo** | funcionando | Navegador real, pero con **Chrome de verdad**: detecta el Chromium de Playwright y devuelve la página en blanco. Solo llega a Alicante, no a Elche. |
-| eDreams | pendiente | Sí vende trenes. Ver el diagnóstico más abajo. |
+| **eDreams** | funcionando | Navegador real sobre su URL de resultados. Agrega **AVE, Avlo, Alvia y Ouigo de una vez**, y llega tanto a Elche AV como a Alicante. |
 | Trainline | pendiente | Su búsqueda está protegida con DataDome (403 y captcha). Su API de estaciones sí responde sin problema. |
 | Omio, trenes.com, promociones | pendiente | Omio carga sin bloqueo, es la siguiente candidata razonable. |
 
@@ -35,18 +35,31 @@ GitHub Actions (cron)
 > Rumbo, del mismo grupo. Groupon y Oferplan sí siguen siendo cupones de ocio
 > y no venden billetes de tren.
 
-### Diagnóstico de eDreams (para quien lo retome)
+### Lo que costó sacar de eDreams
 
-- Tiene buscador de trenes propio en `https://www.edreams.es/trenes/`, con
-  campos "¿Desde dónde sales?", "¿A dónde vas?" y botón "Buscar trenes".
-- Su backend es **GraphQL**: `POST /frontend-api/service/graphql`. Ahí es donde
-  hay que mirar, interceptando la petición de una búsqueda real.
-- Dos obstáculos encontrados: un modal de login (`[data-testid=modal-backdrop]`)
-  tapa el formulario al cargar —se quita con `Escape`— y el desplegable del
-  autocompletado no aparece bajo `li` ni `[role=option]`, así que hay que
-  localizar su contenedor real.
-- **No tiene URLs de resultados**: `/trenes/madrid-elche/` da 404 y el patrón
-  `#/results/...` de sus vuelos no vale para trenes.
+1. **Sí tiene URL de resultados, pero no donde se buscó primero.**
+   `/trenes/madrid-elche/` da 404; lo que funciona es
+   `…/travel/trains/?step=departure#results/type=O;from=…;to=…;dep=…`, con los
+   parámetros en el *hash* y separados por `;`. Cambiar ese hash relanza la
+   búsqueda sin recargar. Es la **única fuente de todas que permite enlazar a
+   una búsqueda concreta**, así que su enlace sí lleva a la ruta y el día.
+2. **Hay que entrar directo a los resultados.** Por la portada aparece un modal
+   de login que tapa el formulario y el autocompletado; yendo a la URL de
+   resultados no hay formulario que rellenar y el problema no existe.
+3. **Publica dos precios y solo uno es real.** Junto al precio normal enseña,
+   más grande y en color, una "tarifa Prime" bastante más barata que exige
+   suscripción (29,99 €/trimestre tras 15 días de prueba). Es justo el número
+   que un extractor descuidado cogería. El adaptador toma siempre el **"Precio
+   sin descuento"**, y hay un test que lo vigila.
+
+Su GraphQL (`POST /frontend-api/service/graphql`) no hizo falta: se intentó
+interceptar y la petición no pasa por `fetch` ni por `XMLHttpRequest` parcheables
+desde fuera. Leer el DOM de los resultados es más simple y no depende de
+descubrir el esquema.
+
+Al ser agencia, sus precios **pueden llevar comisión** sobre lo que cobra el
+operador. Por eso se guardan como fuente aparte y la app enseña siempre de dónde
+sale cada precio.
 
 ### Lo que costó sacar de iryo
 
@@ -75,8 +88,8 @@ TrainPal; para "Renfe", clases de defensa personal y una cata de ron. Oferplan
 (Las Provincias, grupo Vocento) son cupones de comercios locales y no tiene
 transporte. No es que estén bloqueados: es que no tienen el dato.
 
-> **eDreams, Groupon y Oferplan no venden billetes de AVE.** eDreams es vuelos y
-> hoteles; los otros dos son cupones de ocio local. Por eso no aparecen aquí.
+> **Groupon y Oferplan no venden billetes de tren**, son cupones de ocio local.
+> eDreams sí, y está integrada.
 
 Ouigo sale de **Madrid Chamartín** en esta ruta; Renfe también opera desde
 **Atocha**. La app consulta ambas y además compara **Elche AV** con **Alicante

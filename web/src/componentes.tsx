@@ -1,6 +1,16 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { compania } from './companias'
-import { desde, duracion, euros, fechaCorta, fechaLarga } from './datos'
+import {
+  desde,
+  duracion,
+  euros,
+  fechaCorta,
+  fechaLarga,
+  nombreFinde,
+  rangoCorto,
+  recargarDatos,
+  useActualizando,
+} from './datos'
 import { destinoDelViaje } from './destinos'
 import type { Tren } from './tipos'
 
@@ -67,6 +77,12 @@ export const Iconos = {
       <path d="M10.5 18.5h3" />
     </svg>
   ),
+  recargar: (
+    <svg viewBox="0 0 24 24" {...trazo}>
+      <path d="M20 12a8 8 0 1 1-2.6-5.9" />
+      <path d="M20 3.5V8h-4.5" />
+    </svg>
+  ),
 }
 
 /* --- Piezas sueltas ------------------------------------------------------- */
@@ -111,6 +127,55 @@ export function ProgresoActualizacion({ actualizado }: { actualizado: string }) 
         <span className="siguiente">
           {faltan <= 1 ? 'buscando ahora' : `siguiente en ${faltan} min`}
         </span>
+      </span>
+    </div>
+  )
+}
+
+/**
+ * Vuelve a pedir los precios publicados.
+ *
+ * No lanza una búsqueda nueva: eso lo hace el cron en el servidor. Sirve para
+ * no tener que esperar a que el navegador refresque su copia, y para saber en
+ * el momento si ya ha entrado la búsqueda de la hora en curso.
+ */
+export function BotonActualizar() {
+  const actualizando = useActualizando()
+
+  return (
+    <button
+      className={`actualizar${actualizando ? ' girando' : ''}`}
+      onClick={recargarDatos}
+      disabled={actualizando}
+      title="Volver a leer los últimos precios publicados"
+      aria-label="Actualizar precios"
+    >
+      {Iconos.recargar}
+    </button>
+  )
+}
+
+/** Cabecera de un fin de semana: cuándo es, qué días cubre y desde cuánto. */
+export function CabeceraFinde({
+  semanas,
+  desde: inicio,
+  hasta,
+  minimo,
+  cuantos,
+}: {
+  semanas: number
+  desde: string
+  hasta: string
+  minimo: number
+  cuantos: number
+}) {
+  return (
+    <div className={`finde${semanas <= 1 ? ' proximo' : ''}`}>
+      <span className="cuando">{nombreFinde(semanas)}</span>
+      <span className="fechas">{rangoCorto(inicio, hasta)}</span>
+      <span className="desde-precio">
+        {cuantos} {cuantos === 1 ? 'tren' : 'trenes'} · desde{' '}
+        <strong>{euros(minimo)}</strong>
       </span>
     </div>
   )

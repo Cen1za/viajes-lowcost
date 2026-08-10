@@ -14,6 +14,7 @@ from .base import (  # noqa: F401
     ejecutar,
     registrar,
 )
+from . import edreams  # noqa: F401 - se registra al importarse
 from . import iryo  # noqa: F401 - se registra al importarse
 from . import ouigo  # noqa: F401 - se registra al importarse
 from . import renfe  # noqa: F401 - se registra al importarse

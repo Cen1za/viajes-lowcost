@@ -35,6 +35,15 @@ export const COMPANIAS: Compania[] = [
     descripcion: 'Low cost de Renfe',
   },
   {
+    id: 'Alvia',
+    // Aparece con eDreams, que sí lista los Alvia a Alicante. Índigo para no
+    // chocar ni con el morado del AVE ni con el azul de Ouigo.
+    nombre: 'Alvia',
+    color: '#4338CA',
+    suave: '#EEEFFB',
+    descripcion: 'Larga distancia de Renfe, algo más lento',
+  },
+  {
     id: 'Renfe',
     // Neutro a propósito: es el comodín para cuando Renfe no dice si el tren
     // es AVE o Avlo. Antes compartía el morado del AVE y no había forma de
