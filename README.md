@@ -57,9 +57,36 @@ interceptar y la petición no pasa por `fetch` ni por `XMLHttpRequest` parcheabl
 desde fuera. Leer el DOM de los resultados es más simple y no depende de
 descubrir el esquema.
 
-Al ser agencia, sus precios **pueden llevar comisión** sobre lo que cobra el
-operador. Por eso se guardan como fuente aparte y la app enseña siempre de dónde
-sale cada precio.
+### Comprobado: eDreams es más cara que comprar en el operador
+
+No es una sospecha, está medido contra los datos ya recogidos. Mismo tren, mismo
+día, mismo horario:
+
+| Comparación | Casos | eDreams frente al operador |
+|---|---|---|
+| Ouigo | 20 | **+10,85 €** de media (entre +10 y +14) |
+| AVE (Atocha → Elche AV, 11/09) | 2 | +11,75 € y +33,50 € |
+
+**En 22 de 22 comparaciones eDreams sale más cara.** Nunca ha empatado.
+
+Entonces, ¿para qué sirve? No para comprar, sino por **cobertura y velocidad**:
+
+- Trae AVE, Avlo, Alvia y Ouigo **en una sola consulta**, y llega a Elche AV y a
+  Alicante. Es la única fuente que cubre las dos estaciones y los cuatro
+  operadores a la vez.
+- 96 ofertas en 145 s, frente a las 164 de Renfe en 578 s. Por oferta es más
+  del doble de rápida.
+- Sirve de red de seguridad: si Renfe u Ouigo se rompen —y se rompen—, sigue
+  habiendo precios de esos operadores.
+
+Sus precios **no estropean la detección de gangas**: la mediana de referencia se
+calcula sobre los *mínimos* diarios, y eDreams nunca es la más barata, así que
+no entra en el cálculo. Aun así se guardan como fuente aparte y la app enseña
+siempre de dónde sale cada precio.
+
+Su "tarifa Prime" (unos 20 € menos por billete) sí bajaría de lo que cobra el
+operador, pero exige suscripción: 29,99 €/trimestre, unos 120 € al año. No se
+registra en el histórico porque no es un precio que se pueda pagar sin más.
 
 ### Lo que costó sacar de iryo
 
