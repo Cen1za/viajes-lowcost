@@ -10,24 +10,15 @@ Dos cosas que costaron encontrar y conviene no volver a perder:
    no está en su código. Se intentó y es un callejón sin salida; el camino
    bueno es rellenar el buscador, como haría una persona.
 
-A cambio, su formulario es de los más limpios: las fechas son `input[type=date]`
-nativos, así que se rellenan directamente sin pelearse con ningún calendario.
-
-ESTADO: casi listo, y por eso está desactivado en config/app.yaml.
-
-Resuelto ya: cargar la web con Chrome real, rechazar cookies, marcar "solo
-ida", elegir origen y destino en sus desplegables (las opciones son
-`.menu__item` dentro de `[data-qa="…-menu"]`, identificado por data-qa y no
-por id, que es lo que costó encontrar) y fijar la fecha por JS.
-
-Lo único que falta: **el botón BUSCAR se queda deshabilitado**. Angular no da
-el formulario por válido, probablemente porque el valor de la fecha se le
-inyecta por JS y su modelo interno no se entera. Caminos a probar: abrir su
-calendario y hacer clic real en el día, como hubo que hacer con Renfe, o
-rellenar además el input visible `.ilsa-datepicker__button-input`.
+3. **La fecha hay que picarla en su calendario.** Los `input[type=date]` que
+   hay detrás son de solo lectura para nosotros: escribirles el valor por JS
+   los deja con la fecha puesta pero Angular no se entera, el formulario nunca
+   se da por válido y el botón BUSCAR se queda deshabilitado. Igual que en
+   Renfe, hay que abrir el calendario y hacer un clic REAL de ratón sobre la
+   celda del día. Ver `_fijar_fecha`.
 
 Y ojo antes de invertir más: **iryo no llega a Elche ni a Murcia**. Sus 15
-estaciones incluyen Alicante Terminal, así que aquí solo aportaría precios de
+estaciones incluyen Alicante Terminal, así que aquí solo aporta precios de
 Madrid ⇄ Alicante, con los 25 minutos de traslado hasta Elche.
 """
 
@@ -56,6 +47,34 @@ BUSQUEDAS: dict[str, str] = {
 ORIGEN = "#ilsa-main-search-select-route-dropdown-origin"
 DESTINO = "#ilsa-main-search-select-route-dropdown-destination"
 SOLO_IDA = "#ilsa-main-search-radio-outbound"
+
+#: Calendario de la fecha de ida: el input visible que lo abre y la flecha
+#: que avanza al mes siguiente. Ambos se localizan por data-qa.
+FECHA_IDA = '[data-qa="ilsa-main-search-datepicker__button-tmpStartDateRef"]'
+MES_SIGUIENTE = '[data-qa="ilsa-main-search-datepicker__right-arrow"]'
+
+#: Marca la celda del día pedido con un atributo propio y devuelve qué pasó.
+#: No hace clic: el clic tiene que ser un evento real de ratón de Playwright,
+#: porque un .click() desde JS no actualiza el modelo de Angular.
+#: Las celdas no llevan ninguna fecha en el DOM, así que hay que cruzar el
+#: mes del encabezado (data-qa con el mes en base 0) con el número del día.
+JS_MARCAR_DIA = """
+([anio, mes, dia]) => {
+  for (const previa of document.querySelectorAll('[data-dia-objetivo]'))
+    previa.removeAttribute('data-dia-objetivo');
+  const calendario = [...document.querySelectorAll('.ilsa-datepicker__calendar')].find(c => {
+    const cabecera = c.querySelector('.ilsa-datepicker__label');
+    return cabecera && (cabecera.dataset.qa || '').includes(`month:${mes - 1}__year:${anio}`);
+  });
+  if (!calendario) return 'mes-no-visible';
+  const celda = [...calendario.querySelectorAll('.ilsa-datepicker__monthdays-item--filled')]
+    .filter(c => !c.className.includes('--disabled'))
+    .find(c => (c.textContent || '').trim() === String(dia));
+  if (!celda) return 'dia-no-disponible';
+  celda.setAttribute('data-dia-objetivo', '1');
+  return 'ok';
+}
+"""
 
 #: Las opciones del desplegable. El contenedor se identifica por data-qa, no
 #: por id: cuesta un rato darse cuenta porque el atributo se llama igual.
@@ -215,10 +234,8 @@ class AdaptadorIryo(AdaptadorBase):
             self._preparar(pagina)
 
             # Solo ida: si no, pide también fecha de vuelta y no busca.
-            try:
-                pagina.locator(f"label[for='{SOLO_IDA.lstrip('#')}']").first.click(timeout=8000)
-            except Exception:
-                pagina.locator(SOLO_IDA).first.check(timeout=8000, force=True)
+            # El radio está tapado por su decoración, de ahí el force.
+            pagina.locator(SOLO_IDA).first.click(timeout=10000, force=True)
             pagina.wait_for_timeout(1500)
 
             if not self._elegir_estacion(pagina, ORIGEN, consulta.origen):
@@ -236,33 +253,38 @@ class AdaptadorIryo(AdaptadorBase):
             pagina.close()
 
     def _fijar_fecha(self, pagina, fecha: date) -> None:
-        """Rellena la fecha de ida.
+        """Elige la fecha de ida picándola en el calendario de iryo.
 
-        El `input[type=date]` está oculto detrás del calendario propio de iryo,
-        así que Playwright no puede escribir en él. Se le pone el valor por JS
-        y se disparan los eventos que Angular escucha; si no, el formulario se
-        queda con la fecha vieja y busca otro día.
+        Inyectar el valor en el `input[type=date]` por JS no vale: el campo se
+        queda con la fecha bien puesta, pero Angular no lo registra y el botón
+        BUSCAR nunca se habilita. Como en Renfe, hace falta un clic real de
+        ratón sobre la celda del día.
         """
-        aplicada = pagina.evaluate(
-            """
-            (iso) => {
-              const campo = document.querySelector('input[type=date]');
-              if (!campo) return null;
-              const setter = Object.getOwnPropertyDescriptor(
-                window.HTMLInputElement.prototype, 'value').set;
-              setter.call(campo, iso);
-              campo.dispatchEvent(new Event('input', {bubbles: true}));
-              campo.dispatchEvent(new Event('change', {bubbles: true}));
-              return campo.value;
-            }
-            """,
-            fecha.isoformat(),
-        )
-        if aplicada != fecha.isoformat():
+        pagina.locator(FECHA_IDA).first.click(timeout=20000)
+        pagina.wait_for_timeout(2500)
+
+        # El calendario abre en el mes actual y solo enseña uno cada vez.
+        estado = "mes-no-visible"
+        for _ in range(14):
+            estado = pagina.evaluate(JS_MARCAR_DIA, [fecha.year, fecha.month, fecha.day])
+            if estado != "mes-no-visible":
+                break
+            pagina.locator(MES_SIGUIENTE).first.click(timeout=10000)
+            pagina.wait_for_timeout(900)
+
+        if estado != "ok":
+            raise ErrorAdaptador(f"iryo: el calendario no ofrece el día {fecha} ({estado})")
+
+        pagina.locator("[data-dia-objetivo]").first.click(timeout=10000)
+        pagina.wait_for_timeout(2500)
+
+        # Comprobamos lo que ha recogido el formulario antes de buscar, para no
+        # guardar nunca precios de un día que no es el pedido.
+        aplicada = pagina.locator(FECHA_IDA).first.input_value()
+        if aplicada != f"{fecha:%d/%m/%Y}":
             raise ErrorAdaptador(
-                f"iryo: la fecha no se aplicó (formulario={aplicada!r}, pedida={fecha})"
+                f"iryo: la fecha no se aplicó (formulario={aplicada!r}, pedida={fecha:%d/%m/%Y})"
             )
-        pagina.wait_for_timeout(1500)
 
     # -- Normalización ------------------------------------------------------
 
