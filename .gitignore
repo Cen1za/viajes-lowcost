@@ -17,3 +17,6 @@ web/public/data/
 
 # Caché de peticiones
 .cache/
+
+.vercel
+.env*

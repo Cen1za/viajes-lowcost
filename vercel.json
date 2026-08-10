@@ -6,14 +6,12 @@
   "outputDirectory": "web/dist",
   "headers": [
     {
-      "comment": "Los precios cambian en cada ejecución del cron: nunca se cachean.",
       "source": "/data/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
     },
     {
-      "comment": "El service worker tiene que poder actualizarse siempre.",
       "source": "/sw.js",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
