@@ -25,7 +25,7 @@ GitHub Actions (cron)
 |---|---|---|
 | **Ouigo** | funcionando | API JSON propia. Rápida (~1 s por consulta). |
 | **Renfe** (AVE y Avlo) | funcionando | Navegador real con Playwright. Lenta (~30 s por consulta). |
-| **iryo** | funcionando | Navegador real, pero con **Chrome de verdad**: detecta el Chromium de Playwright y devuelve la página en blanco. Solo llega a Alicante, no a Elche. |
+| **iryo** | solo en local | Funciona desde casa, pero Cloudflare le pone un CAPTCHA a las IPs de centro de datos, así que en la nube no trae nada. Apagada en `app.yaml`; ver abajo. |
 | **eDreams** | funcionando | Navegador real sobre su URL de resultados. Agrega **AVE, Avlo, Alvia y Ouigo de una vez**, y llega tanto a Elche AV como a Alicante. |
 | Trainline | pendiente | Su búsqueda está protegida con DataDome (403 y captcha). Su API de estaciones sí responde sin problema. |
 | Omio, trenes.com, promociones | pendiente | Omio carga sin bloqueo, es la siguiente candidata razonable. |
@@ -77,8 +77,28 @@ Tres cosas, por si alguna vuelve a romperse:
    Azure API Management que la web resuelve en tiempo de ejecución y no está en
    su código. Se intentó y es un callejón sin salida.
 
-Y una limitación que no tiene arreglo: **iryo no llega a Elche ni a Murcia**.
-De sus 15 estaciones solo Alicante Terminal sirve para esta ruta.
+Y dos limitaciones que no tienen arreglo:
+
+- **iryo no llega a Elche ni a Murcia.** De sus 15 estaciones solo Alicante
+  Terminal sirve para esta ruta.
+- **Desde la nube no se le puede consultar.** Funcionaba en local y devolvía
+  cero en GitHub Actions. `scripts/diagnostico_iryo.py` lo aclaró: Cloudflare
+  sirve a esas IPs una pantalla de *"completa este puzzle de seguridad para
+  confirmar que no eres un robot"*. No es cosa del navegador —se probaron
+  Chrome real, el Chromium de Playwright y Chrome con pantalla vía xvfb, y los
+  tres reciben lo mismo—, es la IP. Resolver CAPTCHAs no se contempla, y pagar
+  un proxy residencial no tiene sentido para vigilar billetes de 15-30 €.
+
+Por eso está apagada en `config/app.yaml`. Para usarla desde casa:
+
+```bash
+python -m buscador buscar --fuentes iryo --guardar
+```
+
+Si algún día vuelve a fallar, el adaptador ahora lo dice en una línea en vez de
+agotar el tiempo: distingue "la página llega en blanco" de "hay contenido pero
+no es el formulario", y en cuanto lo detecta deja de reintentar las demás
+consultas, que antes costaban seis minutos y medio para nada.
 
 ### Groupon y Oferplan: comprobado que no venden trenes
 

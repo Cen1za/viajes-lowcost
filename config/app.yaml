@@ -79,8 +79,17 @@ fuentes:
   # Verificadas y funcionando:
   ouigo: true      # API JSON propia, rápida
   renfe: true      # navegador real (AVE y Avlo), la más lenta y frágil
-  # Navegador real. Ojo: solo aporta Madrid ⇄ Alicante, no llega a Elche.
-  iryo: true
+  # Apagada a propósito, y no por estar rota: el adaptador funciona, pero
+  # Cloudflare responde con un CAPTCHA a las IPs de centro de datos, que es
+  # desde donde corre la vigilancia. Comprobado con los tres navegadores
+  # posibles: los tres reciben la misma pantalla de "confirma que no eres un
+  # robot". Desde un ordenador de casa sí funciona:
+  #
+  #     python -m buscador buscar --fuentes iryo --guardar
+  #
+  # Activarla aquí solo gastaría minutos para no traer ni un precio. Además
+  # iryo únicamente llega a Alicante, no a Elche, así que se pierde poco.
+  iryo: false
   # Agencia: navegador real. Agrega AVE, Avlo, Alvia y Ouigo de una vez.
   # Sus precios pueden llevar comisión, por eso se guardan como fuente aparte.
   edreams: true

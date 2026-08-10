@@ -50,6 +50,10 @@ SOLO_IDA = "#ilsa-main-search-radio-outbound"
 
 #: Calendario de la fecha de ida: el input visible que lo abre y la flecha
 #: que avanza al mes siguiente. Ambos se localizan por data-qa.
+#: Cuánto se espera a que aparezca el formulario. Antes eran 9 segundos fijos:
+#: de más cuando la web va fina y de menos cuando va lenta.
+ESPERA_FORMULARIO_MS = 30000
+
 FECHA_IDA = '[data-qa="ilsa-main-search-datepicker__button-tmpStartDateRef"]'
 MES_SIGUIENTE = '[data-qa="ilsa-main-search-datepicker__right-arrow"]'
 
@@ -135,6 +139,9 @@ class AdaptadorIryo(AdaptadorBase):
         self._pw = None
         self._navegador = None
         self._contexto = None
+        #: Motivo por el que iryo no sirve la página aquí, si se ha demostrado.
+        #: Se rellena en la primera consulta que falle y corta las siguientes.
+        self._inservible: str | None = None
 
     # -- Navegador ----------------------------------------------------------
 
@@ -190,7 +197,17 @@ class AdaptadorIryo(AdaptadorBase):
 
     def _preparar(self, pagina) -> None:
         pagina.goto(INICIO, timeout=90000, wait_until="domcontentloaded")
-        pagina.wait_for_timeout(9000)
+
+        # Esperar a que exista el formulario, en vez de contar 9 segundos a
+        # ciegas: así no se penaliza cuando carga rápido ni se da por perdida
+        # una carga lenta. Si no aparece, la página no es la que esperamos y no
+        # tiene sentido seguir; ver la nota de `_inservible`.
+        try:
+            pagina.wait_for_selector(SOLO_IDA, timeout=ESPERA_FORMULARIO_MS, state="attached")
+        except Exception as error:  # noqa: BLE001
+            self._inservible = self._porque_no_carga(pagina)
+            raise ErrorAdaptador(f"iryo: {self._inservible}") from error
+
         for selector in ("button:has-text('RECHAZAR TODAS')", "button:has-text('Rechazar')"):
             try:
                 boton = pagina.locator(selector)
@@ -200,6 +217,22 @@ class AdaptadorIryo(AdaptadorBase):
                     return
             except Exception:
                 continue
+
+    @staticmethod
+    def _porque_no_carga(pagina) -> str:
+        """Describe en una línea qué se recibió, para no depurar a ciegas."""
+        try:
+            texto = pagina.inner_text("body").strip()
+        except Exception:  # noqa: BLE001
+            texto = ""
+        if not texto:
+            return (
+                "la página llega en blanco. Es lo que hace iryo cuando no le "
+                "convence el navegador; hace falta Chrome de verdad "
+                "(playwright install chrome), y aun así puede rechazar "
+                "servidores. Ver scripts/diagnostico_iryo.py"
+            )
+        return f"no aparece el formulario, pero sí {len(texto)} caracteres de texto"
 
     def _elegir_estacion(self, pagina, selector: str, estacion: Estacion) -> str | None:
         patron = BUSQUEDAS.get(estacion.id)
@@ -229,6 +262,12 @@ class AdaptadorIryo(AdaptadorBase):
         return None
 
     def buscar(self, consulta: Consulta) -> list[Oferta]:
+        # Si la primera consulta demostró que aquí iryo no sirve la página, las
+        # siguientes van a fallar igual. Reintentarlas costaba seis minutos y
+        # medio por ejecución, cuatro veces al día, para nada.
+        if self._inservible:
+            raise ErrorAdaptador(f"iryo: {self._inservible} (no se reintenta)")
+
         pagina = self._pagina()
         try:
             self._preparar(pagina)
