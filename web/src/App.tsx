@@ -754,7 +754,8 @@ function VistaAjustes({ prefs, cambiar, alternar, alternarDia, limpiar }: Prefs)
             <span className={`luz ${f.ok ? 'ok' : 'ko'}`} />
             <span className="nombre">{f.fuente}</span>
             <span className="dato">
-              {f.ofertas} precios · {f.duracion_s.toFixed(0)} s
+              {f.ofertas} {f.ofertas === 1 ? 'precio' : 'precios'} ·{' '}
+              {f.duracion_s.toFixed(0)} s
               {f.descartadas > 0 && (
                 <strong style={{ color: 'var(--error)' }}>
                   {' '}
