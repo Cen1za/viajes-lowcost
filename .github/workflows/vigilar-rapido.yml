@@ -1,22 +1,23 @@
-name: Vigilar precios
+name: Vigilar precios (rápido)
 
-# Cada 4 horas revisa dos cosas con TODAS las fuentes (incluida Renfe, que va
-# por navegador y es lenta):
-#   1. los viajes fijos de config/vigilancias.yaml
-#   2. los días más baratos que encontró el barrido de calendario
-# Si algo baja de forma llamativa, llega un aviso a Telegram.
+# Cada hora, solo con las fuentes de API. Una consulta a Ouigo tarda ~1 s, así
+# que revisar los viajes vigilados y los días baratos cuesta un par de minutos
+# y no supone apenas carga para nadie.
+#
+# Renfe NO entra aquí: va por navegador, tarda ~30 s por consulta y hacerlo
+# cada hora sería machacar su web sin ganar nada. Está en vigilar-completo.yml.
 
 on:
   schedule:
-    - cron: "15 */4 * * *"
+    - cron: "5 * * * *"
   workflow_dispatch:
     inputs:
       top_dias:
         description: "Cuántos días baratos revisar por ruta"
-        default: "6"
+        default: "8"
 
 concurrency:
-  group: datos
+  group: datos            # nunca dos workflows escribiendo data/ a la vez
   cancel-in-progress: false
 
 permissions:
@@ -25,11 +26,11 @@ permissions:
 jobs:
   vigilar:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 25
     env:
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-      TOP_DIAS: ${{ inputs.top_dias || '6' }}
+      TOP_DIAS: ${{ inputs.top_dias || '8' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -41,14 +42,11 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
-      - name: Instalar el navegador para Renfe
-        run: playwright install --with-deps chromium
-
       - name: Revisar los viajes vigilados
-        run: python -m buscador vigilar --guardar --avisar
+        run: python -m buscador vigilar --fuentes ouigo --guardar --avisar
 
       - name: Profundizar en los días más baratos
-        run: python -m buscador buscar --top-dias "$TOP_DIAS" --guardar --avisar
+        run: python -m buscador buscar --top-dias "$TOP_DIAS" --fuentes ouigo --guardar --avisar
 
       - name: Guardar los datos en el repositorio
         run: |
@@ -59,6 +57,6 @@ jobs:
             echo "Sin cambios en los precios."
             exit 0
           fi
-          git commit -m "datos: vigilancia $(date -u +'%Y-%m-%d %H:%M')"
+          git commit -m "datos: vigilancia rápida $(date -u +'%Y-%m-%d %H:%M')"
           git pull --rebase --autostash
           git push

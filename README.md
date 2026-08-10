@@ -6,7 +6,7 @@ oferta que se sale de lo normal.
 
 No hay servidores ni base de datos: **el repositorio es la infraestructura**.
 GitHub Actions ejecuta las búsquedas por cron, comitea los precios en `data/`
-y GitHub Pages sirve una PWA que lee esos ficheros.
+y Vercel redespliega la PWA al detectar ese commit.
 
 ```
 GitHub Actions (cron)
@@ -14,7 +14,7 @@ GitHub Actions (cron)
   ├─ data/historico/*.jsonl   histórico acumulado
   ├─ data/*.json              lo que lee la app
   ├─ Telegram                 avisos de ofertas
-  └─ commit → GitHub Pages    publica la PWA
+  └─ commit  →  Vercel redespliega la PWA
 ```
 
 ## Fuentes
@@ -139,15 +139,17 @@ No se repite el mismo aviso dentro de 24 horas (`data/alertas_enviadas.json`).
 ## La app del móvil
 
 ```bash
-cd web
-npm install
-mkdir -p public/data && cp ../data/*.json public/data/
-npm run dev
+npm --prefix web install
+node scripts/preparar-datos.mjs   # copia data/*.json dentro de la web
+npm --prefix web run dev
 ```
 
-En producción se publica sola en GitHub Pages. Ábrela en Chrome desde el móvil
-y usa *Añadir a pantalla de inicio*: se instala como app y funciona sin
-cobertura mostrando los últimos datos descargados.
+En producción está en **Vercel**. Ábrela en Chrome desde el móvil y usa
+*Añadir a pantalla de inicio*: se instala como app y funciona sin cobertura
+mostrando los últimos datos descargados.
+
+El despliegue lo define `vercel.json` en la raíz: compila `web/` después de
+copiar los precios, y publica `web/dist`.
 
 Cuatro vistas: **Ofertas** destacadas, **Calendario** con mapa de calor de
 precios, **Trenes** ordenados por precio y **Fuentes** con el estado de cada web.
@@ -156,13 +158,28 @@ precios, **Trenes** ordenados por precio y **Fuentes** con el estado de cada web
 
 | Workflow | Cuándo | Qué hace |
 |---|---|---|
-| `calendario.yml` | diario, 06:30 | Barrido del horizonte completo con Ouigo. |
-| `vigilar.yml` | cada 4 h | Vigilancias + los 6 días más baratos, con todas las fuentes. |
-| `desplegar.yml` | al cambiar `web/` o `data/` | Compila y publica la PWA. |
+| `vigilar-rapido.yml` | **cada hora** | Vigilancias + 8 días más baratos, solo con Ouigo (API). |
+| `vigilar-completo.yml` | **cada 6 h** | Lo mismo pero con todas las fuentes, incluida Renfe. |
+| `calendario.yml` | diario, 06:30 | Barrido de los 90 días con Ouigo. |
 | `tests.yml` | al cambiar el código | Ejecuta los tests. |
 
-Los dos primeros comparten el grupo de concurrencia `datos` para no pisarse al
-comitear.
+Los tres primeros comparten el grupo de concurrencia `datos` para no pisarse al
+comitear. El despliegue no necesita workflow: Vercel está conectado al
+repositorio y redespliega solo cuando cambian los datos.
+
+### Por qué dos cadencias distintas
+
+No tiene sentido que todas las fuentes vayan al mismo ritmo:
+
+- **Ouigo cuesta ~1 s por consulta** (API JSON). Mirar cada hora es barato para
+  ellos y para nosotros, y te pilla las bajadas casi al momento.
+- **Renfe cuesta ~30 s por consulta** porque hay que abrir un navegador de
+  verdad. Consultarla cada hora sería machacar su web para nada: las tarifas no
+  cambian tan rápido.
+
+Si algún día quieres cambiarlo, es el `cron` de cada workflow. Ten en cuenta
+que el histórico crece: con la vigilancia horaria son unos **4 MB al mes** en
+`data/historico/`.
 
 ## Tests
 
