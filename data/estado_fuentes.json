@@ -1,12 +1,36 @@
 {
-  "actualizado": "2026-08-10T20:57:05+00:00",
+  "actualizado": "2026-08-10T21:39:50+00:00",
   "fuentes": [
     {
       "fuente": "ouigo",
       "ok": true,
-      "ofertas": 66,
+      "ofertas": 48,
       "descartadas": 0,
-      "duracion_s": 66.2,
+      "duracion_s": 48.18,
+      "error": null
+    },
+    {
+      "fuente": "renfe",
+      "ok": true,
+      "ofertas": 164,
+      "descartadas": 0,
+      "duracion_s": 578.38,
+      "error": null
+    },
+    {
+      "fuente": "iryo",
+      "ok": false,
+      "ofertas": 0,
+      "descartadas": 0,
+      "duracion_s": 314.59,
+      "error": "TimeoutError: Locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for locator(\"#ilsa-main-search-radio-outbound\").first\n | TimeoutError: Locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for locator(\"#ilsa-main-search-radio-outbound\").first\n | TimeoutError: Locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for locator(\"#ilsa-main-search-radio-outbound\").first\n"
+    },
+    {
+      "fuente": "edreams",
+      "ok": true,
+      "ofertas": 96,
+      "descartadas": 0,
+      "duracion_s": 144.73,
       "error": null
     }
   ]
