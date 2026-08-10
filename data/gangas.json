@@ -1,10 +1,31 @@
 {
-  "actualizado": "2026-08-10T19:54:42+00:00",
+  "actualizado": "2026-08-10T20:29:08+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
     "elche_av": 0,
     "alicante": 25
   },
-  "ofertas": []
+  "ofertas": [
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-11",
+      "salida": "06:15",
+      "llegada": "08:48",
+      "duracion_min": 153,
+      "precio": 15.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://www.renfe.com/es/es",
+      "motivo": "Por debajo de 25 €. (Aún sin histórico suficiente para comparar: 1 de 10 días.)",
+      "mediana": null,
+      "caida_pct": null
+    }
+  ]
 }

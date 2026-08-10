@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-10T19:54:42+00:00",
+  "actualizado": "2026-08-10T20:29:08+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
@@ -210,6 +210,23 @@
       "tarifa": "Precio desde",
       "plazas": null,
       "url": "https://www.renfe.com/es/es"
+    },
+    {
+      "fuente": "iryo",
+      "operador": "iryo",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-11",
+      "salida": "16:45",
+      "llegada": "19:10",
+      "duracion_min": 145,
+      "precio": 42.2,
+      "tarifa": "Inicial",
+      "plazas": null,
+      "url": "https://iryo.eu/es/home"
     },
     {
       "fuente": "renfe",

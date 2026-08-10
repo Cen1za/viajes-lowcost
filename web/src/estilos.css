@@ -780,63 +780,6 @@ main {
   flex: 1;
 }
 
-/* --- Días de viaje (Ajustes) ---------------------------------------------- */
-
-.bloque-dias + .bloque-dias {
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid var(--borde);
-}
-
-.cabecera-dias {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.cabecera-dias strong {
-  font-size: 0.88rem;
-}
-
-.cabecera-dias span {
-  font-size: 0.76rem;
-  color: var(--tinta-suave);
-}
-
-.dia-boton {
-  flex: 0 0 auto;
-  width: 38px;
-  height: 38px;
-  padding: 0;
-  border: 1.5px solid var(--borde-fuerte);
-  border-radius: 10px;
-  background: var(--superficie);
-  color: var(--tinta-media);
-  font-size: 0.85rem;
-  font-weight: 800;
-}
-
-.dia-boton.activo {
-  background: var(--marca);
-  border-color: var(--marca);
-  color: #fff;
-}
-
-/* Día que el buscador no está recopilando: se puede marcar, pero no traerá
-   nada hasta que se añada también a config/app.yaml. */
-.dia-boton.vacio {
-  opacity: 0.4;
-  border-style: dashed;
-}
-
-.panel code {
-  padding: 1px 5px;
-  border-radius: 4px;
-  background: var(--fondo);
-  font-size: 0.92em;
-}
-
 .etiqueta-filtro {
   flex: 0 0 62px;
   font-size: 0.7rem;
@@ -848,52 +791,234 @@ main {
 
 /* --- Ajustes -------------------------------------------------------------- */
 
-.panel {
+/* Todos los ajustes tienen la misma forma —icono, título y resumen— para que
+   la pantalla se recorra mirando, sin leer. El texto explicativo va en letra
+   pequeña y al final: hace falta una vez, no cada vez que entras. */
+
+.ajustes {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.ficha {
   background: var(--superficie);
   border: 1px solid var(--borde);
   border-radius: var(--r-m);
-  padding: 15px;
+  padding: 13px 14px;
   box-shadow: var(--sombra);
-  margin-bottom: 12px;
 }
 
-.panel h3 {
-  margin: 0 0 4px;
-  font-size: 0.95rem;
+.ficha-cabeza {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 11px;
+}
+
+.ficha-icono {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  border-radius: 9px;
+  background: var(--marca-suave);
+  color: var(--marca);
+}
+
+.ficha-icono svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.9;
+}
+
+.ficha-cabeza h3 {
+  margin: 0;
+  font-size: 0.9rem;
   font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
-.panel p {
-  margin: 0 0 12px;
-  font-size: 0.8rem;
+/* Resumen del estado: dice cómo está el ajuste sin tener que mirarlo. */
+.ficha-valor {
+  margin-left: auto;
+  padding-left: 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
   color: var(--tinta-suave);
-  line-height: 1.5;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
-.opciones {
+.aclaracion {
+  margin: 11px 0 0;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--tinta-suave);
+}
+
+/* Ficha que solo lleva texto: no hace falta el doble hueco bajo la cabecera. */
+.ficha-cabeza + .aclaracion {
+  margin-top: 0;
+}
+
+.aclaracion code {
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: var(--fondo);
+  font-size: 0.94em;
+}
+
+/* --- Días de viaje -------------------------------------------------------- */
+
+.semana {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.semana + .semana {
+  margin-top: 7px;
+}
+
+.semana .rotulo {
+  flex: 0 0 46px;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+
+.semana .dias {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.dia-boton {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: var(--fondo);
+  color: var(--tinta-media);
+  font-size: 0.74rem;
+  font-weight: 700;
+  transition: background 0.15s, color 0.15s;
+}
+
+.dia-boton.activo {
+  background: var(--marca);
+  color: #fff;
+}
+
+/* Día que el buscador no está recopilando: se puede marcar, pero no traerá
+   nada hasta que se añada también a config/app.yaml. */
+.dia-boton.sin-datos {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--borde);
+  color: var(--tinta-suave);
+}
+
+.dia-boton.sin-datos.activo {
+  background: var(--marca);
+  color: #fff;
+  opacity: 0.45;
+}
+
+/* --- Opciones (horario, compañías) ---------------------------------------- */
+
+.elecciones {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 7px;
+  gap: 6px;
 }
+
+.eleccion {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--fondo);
+  color: var(--tinta-media);
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+
+.eleccion .detalle {
+  font-size: 0.68rem;
+  font-weight: 600;
+  opacity: 0.62;
+  font-variant-numeric: tabular-nums;
+}
+
+.eleccion[aria-pressed='true'] {
+  background: var(--marca);
+  color: #fff;
+}
+
+/* Compañías: el color es el mismo que llevan sus tarjetas, así que la propia
+   opción hace de leyenda. */
+.eleccion.color .punto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tono);
+}
+
+.eleccion.color[aria-pressed='true'] {
+  background: var(--tono-suave);
+  color: var(--tono);
+  box-shadow: inset 0 0 0 1.5px var(--tono);
+}
+
+.eleccion.color[aria-pressed='true'] .punto {
+  background: currentColor;
+}
+
+/* --- Interruptor ---------------------------------------------------------- */
 
 .interruptor {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
-  padding: 0;
-  border: 0;
-  background: none;
   color: inherit;
   text-align: left;
 }
 
+.interruptor-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.interruptor-texto strong {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.interruptor-texto span {
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--tinta-suave);
+}
+
 .interruptor .palanca {
   flex: 0 0 auto;
-  width: 44px;
-  height: 26px;
+  margin-left: auto;
+  width: 40px;
+  height: 24px;
   border-radius: 999px;
   background: var(--borde-fuerte);
   padding: 3px;
@@ -902,8 +1027,8 @@ main {
 
 .interruptor .palanca span {
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: #fff;
   box-shadow: var(--sombra);
@@ -915,36 +1040,55 @@ main {
 }
 
 .interruptor[aria-pressed='true'] .palanca span {
-  transform: translateX(18px);
+  transform: translateX(16px);
 }
 
-.leyenda {
+/* --- Destinos ------------------------------------------------------------- */
+
+.destinos {
   display: flex;
-  flex-direction: column;
-  gap: 9px;
+  flex-wrap: wrap;
+  gap: 7px 16px;
+  font-size: 0.78rem;
+  color: var(--tinta-suave);
 }
 
-.leyenda .entrada {
-  display: flex;
+.destinos .destino {
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
+}
+
+.destinos .punto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* --- Acciones sueltas ----------------------------------------------------- */
+
+.boton-suave {
+  width: 100%;
+  margin-top: 11px;
+  padding: 10px;
+  border: 0;
+  border-radius: var(--r-s);
+  background: var(--marca);
+  color: #fff;
   font-size: 0.84rem;
-}
-
-.leyenda .muestra {
-  width: 5px;
-  height: 26px;
-  border-radius: 3px;
-  flex: 0 0 auto;
-}
-
-.leyenda .quien {
   font-weight: 700;
 }
 
-.leyenda .que {
+.restablecer {
+  width: 100%;
+  padding: 11px;
+  margin-top: 2px;
+  border: 1px dashed var(--borde-fuerte);
+  border-radius: var(--r-m);
+  background: none;
   color: var(--tinta-suave);
   font-size: 0.78rem;
+  font-weight: 700;
 }
 
 /* --- Estado de fuentes ---------------------------------------------------- */
@@ -952,14 +1096,16 @@ main {
 .fuente {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 0;
+  gap: 9px;
+  padding: 8px 0;
   border-bottom: 1px solid var(--borde);
-  font-size: 0.85rem;
+  font-size: 0.81rem;
 }
 
-.fuente:last-child {
+/* La última fuente no es el último hijo: debajo va la aclaración. */
+.fuente:last-of-type {
   border-bottom: 0;
+  padding-bottom: 0;
 }
 
 .fuente .luz {

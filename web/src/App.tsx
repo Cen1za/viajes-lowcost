@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, type ReactNode } from 'react'
 // (useState lo usan también los filtros plegables)
 import { COMPANIAS, compania, companiasPresentes } from './companias'
 import {
@@ -482,52 +482,74 @@ function PanelInstalacion() {
 
   if (estado === 'instalada')
     return (
-      <div className="panel">
-        <h3>Ya está instalada ✓</h3>
-        <p style={{ marginBottom: 0 }}>
-          Estás usando la app instalada. Guarda los últimos precios, así que
-          puedes consultarlos sin cobertura.
+      <Ficha icono={Iconos.movil} titulo="App instalada" valor="✓">
+        <p className="aclaracion">
+          Guarda los últimos precios, así que puedes consultarlos sin cobertura.
         </p>
-      </div>
+      </Ficha>
     )
 
   if (estado === 'disponible')
     return (
-      <div className="panel">
-        <h3>Instalar la app</h3>
-        <p>
-          Se abre a pantalla completa, arranca más rápido y guarda los últimos
-          precios para verlos sin cobertura.
+      <Ficha icono={Iconos.movil} titulo="Instalar la app">
+        <p className="aclaracion">
+          Pantalla completa, arranque más rápido y precios sin cobertura.
         </p>
-        <button className="boton principal grande" onClick={instalar}>
+        <button className="boton-suave" onClick={instalar}>
           Instalar en este dispositivo
         </button>
-      </div>
+      </Ficha>
     )
 
   return (
-    <div className="panel">
-      <h3>Instalar la app</h3>
-      <p style={{ marginBottom: 0 }}>
+    <Ficha icono={Iconos.movil} titulo="Instalar la app">
+      <p className="aclaracion">
         {esApple ? (
           <>
-            En iPhone: pulsa <strong>Compartir</strong> y luego{' '}
+            Pulsa <strong>Compartir</strong> y luego{' '}
             <strong>Añadir a pantalla de inicio</strong>.
           </>
         ) : (
           <>
-            Abre el menú <strong>⋮</strong> del navegador y elige{' '}
-            <strong>Instalar aplicación</strong> o{' '}
-            <strong>Añadir a pantalla de inicio</strong>. Si no lo ves, es que
-            ya la tienes instalada.
+            Menú <strong>⋮</strong> del navegador →{' '}
+            <strong>Instalar aplicación</strong>. Si no aparece, ya la tienes.
           </>
         )}
       </p>
-    </div>
+    </Ficha>
   )
 }
 
 /* --- Ajustes -------------------------------------------------------------- */
+
+/**
+ * Tarjeta de ajuste: icono, título, resumen a la derecha y el control debajo.
+ *
+ * Todos los ajustes tienen la misma forma para que la pantalla se lea de un
+ * vistazo: el resumen de la derecha dice cómo está cada cosa sin abrir nada.
+ */
+function Ficha({
+  icono,
+  titulo,
+  valor,
+  children,
+}: {
+  icono: JSX.Element
+  titulo: string
+  valor?: ReactNode
+  children?: ReactNode
+}) {
+  return (
+    <section className="ficha">
+      <header className="ficha-cabeza">
+        <span className="ficha-icono">{icono}</span>
+        <h3>{titulo}</h3>
+        {valor && <span className="ficha-valor">{valor}</span>}
+      </header>
+      {children}
+    </section>
+  )
+}
 
 function VistaAjustes({ prefs, cambiar, alternar, alternarDia, limpiar }: Prefs) {
   const { datos } = useDatos<EstadoFuentes>('estado_fuentes')
@@ -545,39 +567,38 @@ function VistaAjustes({ prefs, cambiar, alternar, alternarDia, limpiar }: Prefs)
     return { ida, vuelta }
   }, [precios])
 
-  return (
-    <>
-      <Seccion titulo="Días de viaje" />
-      <div className="panel">
-        <h3>¿Cuándo sueles ir y volver?</h3>
-        <p>
-          Por defecto, ida el viernes y vuelta el lunes. Los días en gris no se
-          están buscando: para incluirlos hay que añadirlos también a{' '}
-          <code>dias_ida</code> o <code>dias_vuelta</code> en{' '}
-          <code>config/app.yaml</code>, porque si no, nunca llegan a consultarse.
-        </p>
+  const horario = prefs.franjas.length
+    ? FRANJAS.filter((f) => prefs.franjas.includes(f.id))
+        .map((f) => f.nombre)
+        .join(' · ')
+    : 'Cualquier hora'
 
+  const fuentesOk = datos?.fuentes.filter((f) => f.ok).length ?? 0
+
+  return (
+    <div className="ajustes">
+      <Seccion titulo="Tus viajes" />
+
+      <Ficha icono={Iconos.calendario} titulo="Días de viaje" valor="Madrid ⇄ Elche">
         {(
           [
-            ['diasIda', 'Ida', 'Madrid → Elche/Alicante', recopilados.ida],
-            ['diasVuelta', 'Vuelta', 'Elche/Alicante → Madrid', recopilados.vuelta],
+            ['diasIda', 'Ida', recopilados.ida],
+            ['diasVuelta', 'Vuelta', recopilados.vuelta],
           ] as const
-        ).map(([campo, titulo, subtitulo, disponibles]) => (
-          <div key={campo} className="bloque-dias">
-            <div className="cabecera-dias">
-              <strong>{titulo}</strong>
-              <span>{subtitulo}</span>
-            </div>
-            <div className="opciones">
+        ).map(([campo, rotulo, disponibles]) => (
+          <div key={campo} className="semana">
+            <span className="rotulo">{rotulo}</span>
+            <div className="dias">
               {DIAS_SEMANA.map((d) => {
                 const hay = disponibles.has(d.dia)
                 return (
                   <button
                     key={d.dia}
                     className={`dia-boton${prefs[campo].includes(d.dia) ? ' activo' : ''}${
-                      hay ? '' : ' vacio'
+                      hay ? '' : ' sin-datos'
                     }`}
                     aria-pressed={prefs[campo].includes(d.dia)}
+                    aria-label={d.nombre}
                     title={hay ? d.nombre : `${d.nombre} — no se está buscando`}
                     onClick={() => alternarDia(campo, d.dia)}
                   >
@@ -588,111 +609,97 @@ function VistaAjustes({ prefs, cambiar, alternar, alternarDia, limpiar }: Prefs)
             </div>
           </div>
         ))}
-      </div>
-
-      <Seccion titulo="Tu horario preferido" />
-      <div className="panel">
-        <h3>¿A qué hora te gusta viajar?</h3>
-        <p>
-          Los trenes fuera de estas franjas dejan de aparecer en las listas. Si
-          no eliges ninguna, se muestran todos.
+        <p className="aclaracion">
+          Los días apagados aún no se buscan: hay que añadirlos a{' '}
+          <code>dias_ida</code> o <code>dias_vuelta</code> en{' '}
+          <code>config/app.yaml</code>.
         </p>
-        <div className="opciones">
+      </Ficha>
+
+      <Ficha icono={Iconos.reloj} titulo="Horario" valor={horario}>
+        <div className="elecciones">
           {FRANJAS.map((f) => (
-            <Chip
+            <button
               key={f.id}
-              neutro
-              activo={prefs.franjas.includes(f.id)}
+              className="eleccion"
+              aria-pressed={prefs.franjas.includes(f.id)}
               onClick={() => alternar('franjas', f.id)}
             >
-              {f.nombre}{' '}
-              <span style={{ opacity: 0.6, fontWeight: 500 }}>{horasFranja(f)}</span>
-            </Chip>
+              {f.nombre}
+              <span className="detalle">{horasFranja(f)}</span>
+            </button>
           ))}
         </div>
-      </div>
+      </Ficha>
 
-      <div className="panel">
-        <button
-          className="interruptor"
-          aria-pressed={prefs.soloDirectos}
-          onClick={() => cambiar('soloDirectos', !prefs.soloDirectos)}
-        >
-          <span>
-            <h3>Solo Elche AV</h3>
-            <p style={{ margin: 0 }}>
-              Oculta los trenes por Alicante, que obligan a 25 min más de traslado.
-            </p>
-          </span>
-          <span className="palanca">
-            <span />
-          </span>
-        </button>
-      </div>
+      <button
+        className="ficha interruptor"
+        aria-pressed={prefs.soloDirectos}
+        onClick={() => cambiar('soloDirectos', !prefs.soloDirectos)}
+      >
+        <span className="ficha-icono">{Iconos.trenes}</span>
+        <span className="interruptor-texto">
+          <strong>Solo Elche AV</strong>
+          <span>Oculta los trenes por Alicante, con 25 min de traslado.</span>
+        </span>
+        <span className="palanca">
+          <span />
+        </span>
+      </button>
 
-      <Seccion titulo="Compañías" />
-      <div className="panel">
-        <p>Cada tarjeta lleva el borde y el sello de quien vende el billete.</p>
-        <div className="leyenda">
+      <Ficha
+        icono={Iconos.billete}
+        titulo="Compañías"
+        valor={
+          prefs.companias.length
+            ? `${prefs.companias.length} de ${COMPANIAS.length}`
+            : 'Todas'
+        }
+      >
+        <div className="elecciones">
           {COMPANIAS.map((c) => (
-            <div key={c.id} className="entrada">
-              <span className="muestra" style={{ background: c.color }} />
-              <span>
-                <span className="quien" style={{ color: c.color }}>
-                  {c.nombre}
-                </span>
-                <br />
-                <span className="que">{c.descripcion}</span>
-              </span>
-              <button
-                className="chip"
-                style={{ marginLeft: 'auto' }}
-                aria-pressed={prefs.companias.includes(c.id)}
-                onClick={() => alternar('companias', c.id)}
-              >
-                {prefs.companias.includes(c.id) ? 'Filtrando' : 'Filtrar'}
-              </button>
-            </div>
+            <button
+              key={c.id}
+              className="eleccion color"
+              style={{ ['--tono' as string]: c.color, ['--tono-suave' as string]: c.suave }}
+              aria-pressed={prefs.companias.includes(c.id)}
+              title={c.descripcion}
+              onClick={() => alternar('companias', c.id)}
+            >
+              <span className="punto" />
+              {c.nombre}
+            </button>
           ))}
         </div>
-      </div>
+      </Ficha>
 
-      <Seccion titulo="Destinos" />
-      <div className="panel">
-        <p>
-          El segundo sello dice a dónde llegas de verdad. Alicante suele salir
-          más barato, pero deja 25 minutos de traslado hasta Elche.
-        </p>
-        <div className="leyenda">
+      <Ficha icono={Iconos.mapa} titulo="A dónde llegas">
+        <div className="destinos">
           {['elche_av', 'alicante'].map((id) => {
             const d = destino(id)
             return (
-              <div key={id} className="entrada">
-                <span className="muestra" style={{ background: d.color }} />
-                <span>
-                  <span className="quien" style={{ color: d.color }}>
-                    {d.nombre}
-                  </span>
-                  <br />
-                  <span className="que">
-                    {d.traslado
-                      ? `${d.traslado} min extra hasta Elche`
-                      : 'Sin traslados: la estación de Elche'}
-                  </span>
-                </span>
-              </div>
+              <span key={id} className="destino">
+                <span className="punto" style={{ background: d.color }} />
+                <strong style={{ color: d.color }}>{d.nombre}</strong>
+                {d.traslado ? `+${d.traslado} min hasta Elche` : 'sin traslados'}
+              </span>
             )
           })}
         </div>
-      </div>
+      </Ficha>
 
-      <Seccion titulo="Estado de las webs" />
-      <div className="panel">
-        <p>
-          De dónde salen los precios. Cada dato pasa un control de credibilidad
-          antes de publicarse: si una web cambia y el lector empieza a sacar
-          cifras raras, se descartan y la fuente se pone en rojo.
-        </p>
+      <Seccion titulo="La app" />
+
+      <Ficha
+        icono={Iconos.senal}
+        titulo="Estado de las webs"
+        valor={
+          datos &&
+          (datos.fuentes.length
+            ? `${fuentesOk}/${datos.fuentes.length} ok · ${desde(datos.actualizado)}`
+            : desde(datos.actualizado))
+        }
+      >
         {datos?.fuentes.map((f) => (
           <div key={f.fuente} className="fuente">
             <span className={`luz ${f.ok ? 'ok' : 'ko'}`} />
@@ -708,21 +715,17 @@ function VistaAjustes({ prefs, cambiar, alternar, alternarDia, limpiar }: Prefs)
             </span>
           </div>
         ))}
-        {datos && (
-          <p style={{ margin: '12px 0 0' }}>
-            Última comprobación {desde(datos.actualizado)}.
-          </p>
-        )}
-      </div>
+        <p className="aclaracion">
+          Cada precio pasa un control de credibilidad: si una web devuelve cifras
+          raras, se descartan y la fuente se pone en rojo.
+        </p>
+      </Ficha>
 
-      <Seccion titulo="Instalar en el móvil" />
       <PanelInstalacion />
 
-      <div className="panel">
-        <button className="chip neutro" onClick={limpiar}>
-          Restablecer todos los filtros
-        </button>
-      </div>
-    </>
+      <button className="restablecer" onClick={limpiar}>
+        Restablecer todos los ajustes
+      </button>
+    </div>
   )
 }

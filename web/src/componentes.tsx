@@ -38,6 +38,35 @@ export const Iconos = {
       <circle cx="10" cy="17" r="2.4" />
     </svg>
   ),
+  reloj: (
+    <svg viewBox="0 0 24 24" {...trazo}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5.2l3.4 2" />
+    </svg>
+  ),
+  billete: (
+    <svg viewBox="0 0 24 24" {...trazo}>
+      <path d="M3 9.5V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2.5a2.5 2.5 0 0 0 0 5V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2.5a2.5 2.5 0 0 0 0-5Z" />
+      <path d="M14 5v2M14 11v2M14 17v2" />
+    </svg>
+  ),
+  mapa: (
+    <svg viewBox="0 0 24 24" {...trazo}>
+      <path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z" />
+      <circle cx="12" cy="10" r="2.6" />
+    </svg>
+  ),
+  senal: (
+    <svg viewBox="0 0 24 24" {...trazo}>
+      <path d="M3 13h4l2.5-7 4 14 2.5-7h5" />
+    </svg>
+  ),
+  movil: (
+    <svg viewBox="0 0 24 24" {...trazo}>
+      <rect x="6" y="2.5" width="12" height="19" rx="2.5" />
+      <path d="M10.5 18.5h3" />
+    </svg>
+  ),
 }
 
 /* --- Piezas sueltas ------------------------------------------------------- */
