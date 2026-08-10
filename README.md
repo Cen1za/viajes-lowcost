@@ -142,11 +142,17 @@ por consulta, así que un barrido completo llevaría horas. El reparto es:
   ritmo de peticiones y qué fuentes están activas.
   También los **días de ida y de vuelta**, que van por separado a propósito:
   ```yaml
-  dias_ida: [viernes, sabado]
-  dias_vuelta: [domingo, lunes]   # añade martes, miércoles… para alargar
+  dias_ida: [viernes]      # Madrid → Elche/Alicante
+  dias_vuelta: [lunes]     # Elche/Alicante → Madrid
   ```
   Con una sola lista no habría forma de decir "salgo viernes y vuelvo lunes".
   Deja cualquiera de las dos vacía para buscar todos los días.
+
+  **Estos dos valores deciden qué se busca**, así que son los que ahorran o
+  gastan consultas. En la app, dentro de *Ajustes → Días de viaje*, puedes
+  filtrar lo que se **muestra** sin tocar el YAML; los días que no se están
+  recopilando aparecen en gris, porque marcarlos ahí no hará aparecer precios
+  que nunca llegaron a consultarse.
 - **`config/vigilancias.yaml`** — viajes con fechas ya decididas que quieres
   vigilar en cada ejecución.
 - **`config/estaciones_codigos.yaml`** — generado por `python -m buscador

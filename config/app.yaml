@@ -14,12 +14,16 @@ busqueda:
   # Buscar también el trayecto de regreso (Elche/Alicante → Madrid).
   incluir_vuelta: true
 
-  # Días en los que sueles SALIR. Vacío = todos los días.
-  dias_ida: [viernes, sabado]
+  # Días en los que sueles SALIR (Madrid → Elche/Alicante). Vacío = todos.
+  dias_ida: [viernes]
 
-  # Días en los que sueles VOLVER. Alarga la escapada añadiendo martes,
-  # miércoles… El domingo y el lunes cubren el fin de semana normal.
-  dias_vuelta: [domingo, lunes]
+  # Días en los que sueles VOLVER (Elche/Alicante → Madrid).
+  dias_vuelta: [lunes]
+
+  # Estos dos valores deciden QUÉ SE BUSCA, así que son los que ahorran o
+  # gastan consultas. En la app, dentro de Ajustes, puedes filtrar lo que se
+  # MUESTRA sin tocar esto; pero para ver días que aquí no aparecen hay que
+  # añadirlos primero, porque nunca llegaron a consultarse.
 
   # Filtro duro de horarios en la búsqueda (formato HH:MM). null = sin filtro.
   # Para elegir tu franja preferida usa mejor el selector de la propia app:

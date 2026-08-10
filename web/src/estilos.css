@@ -642,13 +642,142 @@ main {
   font-variant-numeric: tabular-nums;
 }
 
-.etiqueta-filtro {
-  flex: 0 0 auto;
-  align-self: center;
-  padding-right: 2px;
-  font-size: 0.72rem;
+/* --- Filtros compactos ---------------------------------------------------- */
+
+.filtros {
+  margin-bottom: 4px;
+}
+
+.chips.linea {
+  padding-bottom: 8px;
+}
+
+.chip.mas {
+  gap: 5px;
+}
+
+.chip.mas .contador {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--marca);
+  color: #fff;
+  font-size: 0.66rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
+}
+
+.chip.mas .punta {
+  font-size: 0.7rem;
+  opacity: 0.6;
+  transition: transform 0.15s;
+}
+
+.chip.mas.abierto {
+  background: var(--tinta);
+  border-color: var(--tinta);
+  color: #fff;
+}
+
+.chip.mas.abierto .punta {
+  transform: rotate(180deg);
+}
+
+.chip.limpiar {
+  padding: 7px 11px;
+  color: var(--tinta-suave);
+}
+
+.desplegable {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 13px;
+  margin-bottom: 10px;
+  border: 1px solid var(--borde);
+  border-radius: var(--r-m);
+  background: var(--superficie);
+  box-shadow: var(--sombra);
+}
+
+.grupo-filtro {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.grupo-filtro .opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 1;
+}
+
+/* --- Días de viaje (Ajustes) ---------------------------------------------- */
+
+.bloque-dias + .bloque-dias {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--borde);
+}
+
+.cabecera-dias {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.cabecera-dias strong {
+  font-size: 0.88rem;
+}
+
+.cabecera-dias span {
+  font-size: 0.76rem;
+  color: var(--tinta-suave);
+}
+
+.dia-boton {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1.5px solid var(--borde-fuerte);
+  border-radius: 10px;
+  background: var(--superficie);
+  color: var(--tinta-media);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.dia-boton.activo {
+  background: var(--marca);
+  border-color: var(--marca);
+  color: #fff;
+}
+
+/* Día que el buscador no está recopilando: se puede marcar, pero no traerá
+   nada hasta que se añada también a config/app.yaml. */
+.dia-boton.vacio {
+  opacity: 0.4;
+  border-style: dashed;
+}
+
+.panel code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--fondo);
+  font-size: 0.92em;
+}
+
+.etiqueta-filtro {
+  flex: 0 0 62px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--tinta-suave);
 }
@@ -680,6 +809,7 @@ main {
 .opciones {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 7px;
 }
 

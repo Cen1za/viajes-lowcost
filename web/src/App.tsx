@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+// (useState lo usan también los filtros plegables)
 import { COMPANIAS, compania, companiasPresentes } from './companias'
 import {
   CabeceraDia,
@@ -15,6 +16,7 @@ import { useInstalacion } from './instalacion'
 import {
   DIAS_SEMANA,
   FRANJAS,
+  diasDelSentido,
   enDia,
   enFranja,
   horasFranja,
@@ -72,8 +74,11 @@ export default function App() {
 /* --- Filtros compartidos -------------------------------------------------- */
 
 /**
- * Barra de filtros común a las tres listas. Están arriba y no escondidos en
- * Ajustes porque son la forma natural de recorrer los resultados.
+ * Filtros en una sola línea.
+ *
+ * Solo se ve lo que más se toca —el sentido del viaje— y un botón que despliega
+ * el resto. Tres filas de chips fijas comían un tercio de la pantalla del móvil
+ * antes de enseñar un solo precio, que es justo lo que se viene a ver.
  */
 function Filtros({
   prefs,
@@ -89,18 +94,21 @@ function Filtros({
   diasPresentes: number[]
   conHorario?: boolean
 }) {
-  const hayFiltros =
-    prefs.companias.length > 0 ||
-    prefs.franjas.length > 0 ||
-    prefs.dias.length > 0 ||
-    prefs.sentido !== 'todo' ||
-    prefs.soloDirectos
+  const [abierto, setAbierto] = useState(false)
 
-  const dias = DIAS_SEMANA.filter((d) => diasPresentes.includes(d.dia))
+  // Los días de viaje se configuran en Ajustes, no aquí: son una preferencia
+  // estable (voy los viernes) y no algo que se toque en cada consulta.
+  const activos =
+    prefs.companias.length +
+    prefs.franjas.length +
+    (prefs.sentido !== 'todo' ? 1 : 0) +
+    (prefs.soloDirectos ? 1 : 0)
+
+  const hayMas = companias.length > 1 || conHorario
 
   return (
-    <>
-      <div className="chips">
+    <div className="filtros">
+      <div className="chips linea">
         {(['todo', 'ida', 'vuelta'] as const).map((s) => (
           <Chip
             key={s}
@@ -108,68 +116,71 @@ function Filtros({
             activo={prefs.sentido === s}
             onClick={() => cambiar('sentido', s)}
           >
-            {s === 'todo' ? 'Todo' : s === 'ida' ? '→ Ida' : '← Vuelta'}
+            {s === 'todo' ? 'Todo' : s === 'ida' ? 'Ida' : 'Vuelta'}
           </Chip>
         ))}
-        {companias.length > 1 && <span className="separador" />}
-        {companias.length > 1 &&
-          companias.map((c) => (
-            <Chip
-              key={c.id}
-              activo={prefs.companias.includes(c.id)}
-              color={c.color}
-              onClick={() => alternar('companias', c.id)}
-            >
-              {c.nombre}
-            </Chip>
-          ))}
+
+        {hayMas && (
+          <button
+            className={`chip mas${abierto ? ' abierto' : ''}`}
+            aria-expanded={abierto}
+            onClick={() => setAbierto((v) => !v)}
+          >
+            Filtros
+            {activos > 0 && <span className="contador">{activos}</span>}
+            <span className="punta" aria-hidden>
+              ▾
+            </span>
+          </button>
+        )}
+
+        {activos > 0 && (
+          <button className="chip limpiar" onClick={limpiar} aria-label="Quitar filtros">
+            ✕
+          </button>
+        )}
       </div>
 
-      {dias.length > 1 && (
-        <div className="chips">
-          <span className="etiqueta-filtro">Días</span>
-          {dias.map((d) => (
-            <Chip
-              key={d.dia}
-              neutro
-              activo={prefs.dias.includes(d.dia)}
-              onClick={() => alternarDia(d.dia)}
-            >
-              {d.nombre}
-            </Chip>
-          ))}
-        </div>
-      )}
+      {abierto && hayMas && (
+        <div className="desplegable">
+          {companias.length > 1 && (
+            <div className="grupo-filtro">
+              <span className="etiqueta-filtro">Compañía</span>
+              <div className="opciones">
+                {companias.map((c) => (
+                  <Chip
+                    key={c.id}
+                    activo={prefs.companias.includes(c.id)}
+                    color={c.color}
+                    onClick={() => alternar('companias', c.id)}
+                  >
+                    {c.nombre}
+                  </Chip>
+                ))}
+              </div>
+            </div>
+          )}
 
-      {conHorario && (
-        <div className="chips">
-          <span className="etiqueta-filtro">Hora</span>
-          {FRANJAS.map((f) => (
-            <Chip
-              key={f.id}
-              neutro
-              activo={prefs.franjas.includes(f.id)}
-              onClick={() => alternar('franjas', f.id)}
-            >
-              {f.nombre}
-            </Chip>
-          ))}
-          {hayFiltros && (
-            <Chip neutro activo={false} onClick={limpiar}>
-              ✕ Quitar filtros
-            </Chip>
+          {conHorario && (
+            <div className="grupo-filtro">
+              <span className="etiqueta-filtro">Hora</span>
+              <div className="opciones">
+                {FRANJAS.map((f) => (
+                  <Chip
+                    key={f.id}
+                    neutro
+                    activo={prefs.franjas.includes(f.id)}
+                    onClick={() => alternar('franjas', f.id)}
+                  >
+                    {f.nombre}
+                  </Chip>
+                ))}
+              </div>
+            </div>
           )}
         </div>
       )}
-
-      {!conHorario && hayFiltros && (
-        <div className="chips">
-          <Chip neutro activo={false} onClick={limpiar}>
-            ✕ Quitar filtros
-          </Chip>
-        </div>
-      )}
-    </>
+    </div>
   )
 }
 
@@ -182,7 +193,8 @@ function filtrar<T extends Tren>(trenes: T[], prefs: Prefs['prefs']): T[] {
       (t) => !prefs.companias.length || prefs.companias.includes(compania(t.operador).id),
     )
     .filter((t) => enFranja(t.salida, prefs.franjas))
-    .filter((t) => enDia(t.fecha, prefs.dias))
+    // Los días se filtran por sentido: sales el viernes y vuelves el lunes.
+    .filter((t) => enDia(t.fecha, diasDelSentido(prefs, t.sentido)))
     .filter(
       (t) =>
         !prefs.soloDirectos ||
@@ -328,11 +340,12 @@ function VistaCalendario(prefs: Prefs) {
   }, [datos])
 
   const visibles = dias
-    .filter((d) => enDia(d.fecha, prefs.prefs.dias))
     .map((d) => ({
       ...d,
       casillas: d.casillas.filter(
-        (c) => prefs.prefs.sentido === 'todo' || c.sentido === prefs.prefs.sentido,
+        (c) =>
+          (prefs.prefs.sentido === 'todo' || c.sentido === prefs.prefs.sentido) &&
+          enDia(d.fecha, diasDelSentido(prefs.prefs, c.sentido)),
       ),
     }))
     .filter((d) => d.casillas.length)
@@ -516,11 +529,67 @@ function PanelInstalacion() {
 
 /* --- Ajustes -------------------------------------------------------------- */
 
-function VistaAjustes({ prefs, cambiar, alternar, limpiar }: Prefs) {
+function VistaAjustes({ prefs, cambiar, alternar, alternarDia, limpiar }: Prefs) {
   const { datos } = useDatos<EstadoFuentes>('estado_fuentes')
+  const { datos: precios } = useDatos<Latest>('latest')
+
+  // Días que el buscador está recopilando de verdad. Elegir uno que no esté
+  // aquí no haría aparecer nada, así que conviene decirlo.
+  const recopilados = useMemo(() => {
+    const ida = new Set<number>()
+    const vuelta = new Set<number>()
+    for (const t of precios?.trenes ?? []) {
+      const [a, m, d] = t.fecha.split('-').map(Number)
+      ;(t.sentido === 'vuelta' ? vuelta : ida).add(new Date(a, m - 1, d).getDay())
+    }
+    return { ida, vuelta }
+  }, [precios])
 
   return (
     <>
+      <Seccion titulo="Días de viaje" />
+      <div className="panel">
+        <h3>¿Cuándo sueles ir y volver?</h3>
+        <p>
+          Por defecto, ida el viernes y vuelta el lunes. Los días en gris no se
+          están buscando: para incluirlos hay que añadirlos también a{' '}
+          <code>dias_ida</code> o <code>dias_vuelta</code> en{' '}
+          <code>config/app.yaml</code>, porque si no, nunca llegan a consultarse.
+        </p>
+
+        {(
+          [
+            ['diasIda', 'Ida', 'Madrid → Elche/Alicante', recopilados.ida],
+            ['diasVuelta', 'Vuelta', 'Elche/Alicante → Madrid', recopilados.vuelta],
+          ] as const
+        ).map(([campo, titulo, subtitulo, disponibles]) => (
+          <div key={campo} className="bloque-dias">
+            <div className="cabecera-dias">
+              <strong>{titulo}</strong>
+              <span>{subtitulo}</span>
+            </div>
+            <div className="opciones">
+              {DIAS_SEMANA.map((d) => {
+                const hay = disponibles.has(d.dia)
+                return (
+                  <button
+                    key={d.dia}
+                    className={`dia-boton${prefs[campo].includes(d.dia) ? ' activo' : ''}${
+                      hay ? '' : ' vacio'
+                    }`}
+                    aria-pressed={prefs[campo].includes(d.dia)}
+                    title={hay ? d.nombre : `${d.nombre} — no se está buscando`}
+                    onClick={() => alternarDia(campo, d.dia)}
+                  >
+                    {d.corto}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+
       <Seccion titulo="Tu horario preferido" />
       <div className="panel">
         <h3>¿A qué hora te gusta viajar?</h3>

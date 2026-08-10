@@ -46,8 +46,14 @@ export interface Preferencias {
   franjas: string[]
   /** Ids de compañía. Vacío = todas. */
   companias: string[]
-  /** Índices de Date.getDay(). Vacío = todos los días. */
-  dias: number[]
+  /**
+   * Días en los que quieres SALIR e índices de Date.getDay().
+   * Por defecto viernes (ida) y lunes (vuelta): la escapada de fin de semana.
+   * Vacío = cualquier día de los recopilados.
+   */
+  diasIda: number[]
+  /** Días en los que quieres VOLVER. */
+  diasVuelta: number[]
   /** 'todo' | 'ida' | 'vuelta' */
   sentido: string
   /** Ocultar los trenes que llegan a Alicante y obligan a un traslado. */
@@ -57,7 +63,8 @@ export interface Preferencias {
 const POR_DEFECTO: Preferencias = {
   franjas: [],
   companias: [],
-  dias: [],
+  diasIda: [5], // viernes
+  diasVuelta: [1], // lunes
   sentido: 'todo',
   soloDirectos: false,
 }
@@ -103,12 +110,12 @@ export function usePreferencias() {
   )
 
   const alternarDia = useCallback(
-    (dia: number) =>
+    (campo: 'diasIda' | 'diasVuelta', dia: number) =>
       setPrefs((p) => ({
         ...p,
-        dias: p.dias.includes(dia)
-          ? p.dias.filter((d) => d !== dia)
-          : [...p.dias, dia],
+        [campo]: p[campo].includes(dia)
+          ? p[campo].filter((d) => d !== dia)
+          : [...p[campo], dia],
       })),
     [],
   )
@@ -123,6 +130,15 @@ export function enDia(fechaIso: string, dias: number[]): boolean {
   if (!dias.length) return true
   const [a, m, d] = fechaIso.split('-').map(Number)
   return dias.includes(new Date(a, m - 1, d).getDay())
+}
+
+/** Los días que aplican a un viaje según vaya o vuelva. */
+export function diasDelSentido(prefs: Preferencias, sentido: string): number[] {
+  return sentido === 'vuelta' ? prefs.diasVuelta : prefs.diasIda
+}
+
+export function nombreDia(dia: number): string {
+  return DIAS_SEMANA.find((d) => d.dia === dia)?.nombre ?? ''
 }
 
 /** ¿Encaja una hora 'HH:MM' en alguna de las franjas elegidas? */
