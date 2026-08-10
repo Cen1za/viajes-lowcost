@@ -47,8 +47,8 @@ export interface Preferencias {
   /** Ids de compañía. Vacío = todas. */
   companias: string[]
   /**
-   * Días en los que quieres SALIR e índices de Date.getDay().
-   * Por defecto viernes (ida) y lunes (vuelta): la escapada de fin de semana.
+   * Días en los que quieres SALIR, índices de Date.getDay().
+   * Por defecto jueves y viernes (ida), lunes y martes (vuelta).
    * Vacío = cualquier día de los recopilados.
    */
   diasIda: number[]
@@ -63,8 +63,8 @@ export interface Preferencias {
 const POR_DEFECTO: Preferencias = {
   franjas: [],
   companias: [],
-  diasIda: [5], // viernes
-  diasVuelta: [1], // lunes
+  diasIda: [4, 5], // jueves y viernes
+  diasVuelta: [1, 2], // lunes y martes
   sentido: 'todo',
   soloDirectos: false,
 }

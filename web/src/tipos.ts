@@ -38,6 +38,8 @@ export interface Calendario {
   sentidos: Record<string, string>
   /** Qué operador pone el precio más bajo cada día. */
   operadores: Record<string, Record<string, string>>
+  /** Horario de ese tren más barato, 'HH:MM–HH:MM'. */
+  horarios: Record<string, Record<string, string>>
   rutas: Record<string, Record<string, number>>
 }
 

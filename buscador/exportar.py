@@ -114,14 +114,19 @@ def _calendario(ofertas: list[Oferta]) -> dict:
     nombres: dict[str, str] = {}
     sentidos: dict[str, str] = {}
     operadores: dict[str, dict[str, str]] = defaultdict(dict)
+    horarios: dict[str, dict[str, str]] = defaultdict(dict)
 
     for oferta in ofertas:
         dia = oferta.fecha_salida.isoformat()
         actual = minimos[oferta.ruta].get(dia)
         if actual is None or oferta.precio_eur < actual:
             minimos[oferta.ruta][dia] = round(oferta.precio_eur, 2)
-            # Quién pone el precio más bajo ese día: la app colorea con esto.
+            # Quién y a qué hora pone el precio más bajo de ese día: un
+            # calendario sin hora no dice si el barato sale a las 6 o a las 21.
             operadores[oferta.ruta][dia] = oferta.operador
+            horarios[oferta.ruta][dia] = (
+                f"{oferta.hora_salida:%H:%M}–{oferta.hora_llegada:%H:%M}"
+            )
         nombres[oferta.ruta] = f"{oferta.origen_nombre} → {oferta.destino_nombre}"
         sentidos[oferta.ruta] = oferta.sentido
 
@@ -130,6 +135,7 @@ def _calendario(ofertas: list[Oferta]) -> dict:
         "nombres": nombres,
         "sentidos": sentidos,
         "operadores": {r: dict(sorted(d.items())) for r, d in operadores.items()},
+        "horarios": {r: dict(sorted(d.items())) for r, d in horarios.items()},
         "rutas": {r: dict(sorted(d.items())) for r, d in minimos.items()},
     }
 

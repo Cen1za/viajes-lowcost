@@ -300,6 +300,7 @@ interface CasillaDia {
   destinoId: string
   precio: number
   operador: string
+  horario: string
 }
 
 function VistaCalendario(prefs: Prefs) {
@@ -323,6 +324,7 @@ function VistaCalendario(prefs: Prefs) {
           destinoId: extremo,
           precio,
           operador: datos.operadores?.[ruta]?.[fecha] ?? '',
+          horario: datos.horarios?.[ruta]?.[fecha] ?? '',
         }
         const lista = porFecha.get(fecha)
         if (lista) lista.push(casilla)
@@ -405,6 +407,7 @@ function VistaCalendario(prefs: Prefs) {
                 <span className="quien" style={{ color: marca.color }}>
                   {marca.nombre}
                 </span>
+                {c.horario && <span className="horas">{c.horario}</span>}
                 <span className="importe">{euros(c.precio)}</span>
               </div>
             )
@@ -432,7 +435,9 @@ function VistaTrenes(prefs: Prefs) {
     [todos],
   )
   const filtrados = useMemo(() => filtrar(todos, prefs.prefs), [todos, prefs.prefs])
-  const porDia = useMemo(() => agruparPorDia(filtrados).slice(0, 30), [filtrados])
+  // Sin recortes: si has filtrado por unos días o una franja, quieres ver
+  // todos los billetes que quedan dentro, no una muestra.
+  const porDia = useMemo(() => agruparPorDia(filtrados), [filtrados])
 
   if (cargando) return <Cargando />
   if (error || !datos)

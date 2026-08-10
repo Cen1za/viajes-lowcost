@@ -15,10 +15,10 @@ busqueda:
   incluir_vuelta: true
 
   # Días en los que sueles SALIR (Madrid → Elche/Alicante). Vacío = todos.
-  dias_ida: [viernes]
+  dias_ida: [jueves, viernes]
 
   # Días en los que sueles VOLVER (Elche/Alicante → Madrid).
-  dias_vuelta: [lunes]
+  dias_vuelta: [lunes, martes]
 
   # Estos dos valores deciden QUÉ SE BUSCA, así que son los que ahorran o
   # gastan consultas. En la app, dentro de Ajustes, puedes filtrar lo que se
@@ -79,8 +79,8 @@ fuentes:
   # Verificadas y funcionando:
   ouigo: true      # API JSON propia, rápida
   renfe: true      # navegador real (AVE y Avlo), la más lenta y frágil
-  # Pendientes: sus webs bloquean las peticiones directas y necesitan
-  # navegador real, igual que Renfe. Actívalas cuando estén implementadas.
+  # A medias: ya carga con Chrome real y abre su buscador, pero falta dar con
+  # el selector de las opciones del desplegable de estaciones. Ver iryo.py.
   iryo: false
   trainline: false
   omio: false

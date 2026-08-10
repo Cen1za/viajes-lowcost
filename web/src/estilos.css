@@ -636,6 +636,13 @@ main {
   font-size: 0.78rem;
 }
 
+.dia-linea .horas {
+  color: var(--tinta-suave);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
 .dia-linea .importe {
   margin-left: auto;
   font-weight: 800;
@@ -645,35 +652,49 @@ main {
 /* --- Filtros compactos ---------------------------------------------------- */
 
 .filtros {
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
+/* La línea de filtros es un control secundario: se ve, se usa y se olvida.
+   Compite con los precios por la parte alta de la pantalla, así que va en
+   tipografía menor y con menos aire que el resto. */
 .chips.linea {
-  padding-bottom: 8px;
+  padding-bottom: 6px;
+  gap: 5px;
+}
+
+.chips.linea .chip {
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 
 .chip.mas {
-  gap: 5px;
+  gap: 4px;
 }
 
 .chip.mas .contador {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 17px;
-  height: 17px;
-  padding: 0 4px;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
   border-radius: 999px;
   background: var(--marca);
   color: #fff;
-  font-size: 0.66rem;
+  font-size: 0.6rem;
   font-weight: 800;
 }
 
 .chip.mas .punta {
-  font-size: 0.7rem;
+  font-size: 0.62rem;
   opacity: 0.6;
   transition: transform 0.15s;
+}
+
+.chips.linea .chip.limpiar {
+  padding: 4px 8px;
 }
 
 .chip.mas.abierto {
