@@ -109,6 +109,8 @@ class ResultadoFuente(BaseModel):
     fuente: str
     ok: bool
     ofertas: int = 0
+    #: Datos que la fuente devolvió pero no pasaron el control de credibilidad.
+    descartadas: int = 0
     error: str | None = None
     duracion_s: float = 0.0
     ejecutado_en: datetime = Field(

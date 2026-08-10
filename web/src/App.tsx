@@ -619,13 +619,23 @@ function VistaAjustes({ prefs, cambiar, alternar, limpiar }: Prefs) {
 
       <Seccion titulo="Estado de las webs" />
       <div className="panel">
-        <p>De dónde salen los precios. Si alguna falla, las demás siguen.</p>
+        <p>
+          De dónde salen los precios. Cada dato pasa un control de credibilidad
+          antes de publicarse: si una web cambia y el lector empieza a sacar
+          cifras raras, se descartan y la fuente se pone en rojo.
+        </p>
         {datos?.fuentes.map((f) => (
           <div key={f.fuente} className="fuente">
             <span className={`luz ${f.ok ? 'ok' : 'ko'}`} />
             <span className="nombre">{f.fuente}</span>
             <span className="dato">
               {f.ofertas} precios · {f.duracion_s.toFixed(0)} s
+              {f.descartadas > 0 && (
+                <strong style={{ color: 'var(--error)' }}>
+                  {' '}
+                  · {f.descartadas} descartados
+                </strong>
+              )}
             </span>
           </div>
         ))}

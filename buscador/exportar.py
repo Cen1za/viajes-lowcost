@@ -142,6 +142,7 @@ def _estado(resultados: list[ResultadoFuente]) -> dict:
                 "fuente": r.fuente,
                 "ok": r.ok,
                 "ofertas": r.ofertas,
+                "descartadas": r.descartadas,
                 "duracion_s": r.duracion_s,
                 "error": r.error,
             }

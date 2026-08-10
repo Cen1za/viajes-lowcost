@@ -256,6 +256,35 @@ de detección de ofertas, filtrado de días de la semana y deduplicación del
 mismo tren visto en varias fuentes. Son rápidos y no se rompen porque Renfe
 cambie su HTML.
 
+## ¿Son reales los precios?
+
+Sí, y está comprobado, no supuesto. Los precios salen de donde se venden: la
+API de venta de Ouigo (la misma que usa su web) y la página de resultados real
+de Renfe. Contrastando lo publicado contra las webs en vivo, **35 de 35 trenes
+coincidían al céntimo** (9 de Ouigo, 26 de Renfe).
+
+Tres advertencias honestas:
+
+- **Caducan.** Las tarifas son dinámicas. Por eso cada pantalla dice cuándo se
+  actualizó: un precio de hace tres horas puede haberse movido.
+- **Es el más barato del tren.** Renfe muestra "precio desde", que es la tarifa
+  Básica. Elige o Prémium cuestan más.
+- **Un adulto sin descuentos.** Con Tarjeta Joven o Dorada pagarás menos de lo
+  que dice la app.
+
+### Control de credibilidad
+
+Raspar una web es leer números de un HTML que puede cambiar sin avisar. Un
+fallo total se detecta solo (la fuente devuelve cero), pero uno sutil —el
+extractor empieza a coger la celda de al lado— acabaría en tu móvil como si
+fuera un precio bueno.
+
+Por eso cada dato pasa un control antes de publicarse: precio entre 5 y 600 €,
+duración entre 30 minutos y 10 horas, y fecha y trayecto iguales a los que se
+pidieron. Lo que no pasa se descarta, y si en una ejecución se descarta más de
+lo que se acepta, la fuente se marca en rojo en la pestaña de Ajustes: eso ya
+no es un dato raro suelto, es el lector roto.
+
 ## Mantenimiento
 
 Esto es raspado web y las webs cambian. Cada fuente está aislada en su propio

@@ -122,6 +122,30 @@ class AdaptadorBase:
         return codigo
 
 
+#: Límites de lo que es un precio y un viaje creíbles en esta ruta. No son
+#: un capricho: raspar una web es leer números de un HTML que puede cambiar
+#: sin avisar, y un extractor que empieza a coger la celda equivocada
+#: devolvería basura con toda naturalidad. Un fallo total se ve enseguida
+#: (cero ofertas); uno sutil, no. Esto lo caza.
+PRECIO_MINIMO = 5.0
+PRECIO_MAXIMO = 600.0
+DURACION_MINIMA = 30      # minutos
+DURACION_MAXIMA = 10 * 60
+
+
+def validar(oferta: Oferta, consulta: Consulta) -> str | None:
+    """Devuelve el motivo por el que una oferta no es creíble, o None si lo es."""
+    if not PRECIO_MINIMO <= oferta.precio_eur <= PRECIO_MAXIMO:
+        return f"precio fuera de rango: {oferta.precio_eur} €"
+    if not DURACION_MINIMA <= oferta.duracion_min <= DURACION_MAXIMA:
+        return f"duración imposible: {oferta.duracion_min} min"
+    if oferta.fecha_salida != consulta.fecha:
+        return f"fecha equivocada: pedida {consulta.fecha}, devuelta {oferta.fecha_salida}"
+    if oferta.origen_id != consulta.origen.id or oferta.destino_id != consulta.destino.id:
+        return "trayecto distinto del consultado"
+    return None
+
+
 def ejecutar(
     adaptador: Adaptador, consultas: list[Consulta]
 ) -> tuple[list[Oferta], ResultadoFuente]:
@@ -129,6 +153,7 @@ def ejecutar(
     inicio = _time.monotonic()
     ofertas: list[Oferta] = []
     errores: list[str] = []
+    descartadas = 0
 
     for consulta in consultas:
         try:
@@ -140,17 +165,36 @@ def ejecutar(
             errores.append(f"{type(error).__name__}: {error}")
             log.exception("%s: fallo inesperado en %s", adaptador.nombre, consulta)
         else:
-            ofertas.extend(encontradas)
-            log.info("%s: %d ofertas en %s", adaptador.nombre, len(encontradas), consulta)
+            creibles = []
+            for oferta in encontradas:
+                motivo = validar(oferta, consulta)
+                if motivo:
+                    descartadas += 1
+                    log.warning("%s: descartada (%s) en %s", adaptador.nombre, motivo, consulta)
+                    if len(errores) < 3:
+                        errores.append(f"dato descartado: {motivo}")
+                else:
+                    creibles.append(oferta)
+            ofertas.extend(creibles)
+            log.info("%s: %d ofertas en %s", adaptador.nombre, len(creibles), consulta)
 
     duracion = _time.monotonic() - inicio
     # La fuente se considera sana si ha devuelto algo, aunque alguna consulta
-    # suelta haya fallado. Solo se marca en rojo si no ha traído nada.
-    ok = bool(ofertas) or not errores
+    # suelta haya fallado. Solo se marca en rojo si no ha traído nada, o si ha
+    # descartado más de lo que ha aceptado: eso significa que el extractor está
+    # leyendo mal y no hay que fiarse de lo poco que haya salvado.
+    ok = bool(ofertas) and descartadas <= len(ofertas)
+    if not ofertas and not errores:
+        ok = True  # simplemente no hay trenes ese día
+
+    if descartadas:
+        errores.append(f"{descartadas} datos no creíbles descartados")
+
     resultado = ResultadoFuente(
         fuente=adaptador.nombre,
         ok=ok,
         ofertas=len(ofertas),
+        descartadas=descartadas,
         error=" | ".join(errores[:3]) if errores else None,
         duracion_s=round(duracion, 2),
     )

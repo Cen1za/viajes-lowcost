@@ -45,6 +45,8 @@ export interface Fuente {
   fuente: string
   ok: boolean
   ofertas: number
+  /** Datos que la web devolvió pero no pasaron el control de credibilidad. */
+  descartadas: number
   duracion_s: number
   error: string | null
 }
