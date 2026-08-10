@@ -11,13 +11,15 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'Trenes Madrid → Elche',
+        name: 'Trenes Madrid ⇄ Elche',
         short_name: 'Trenes Elche',
         description: 'Los precios más bajos de tren entre Madrid y Elche.',
-        theme_color: '#0f172a',
-        background_color: '#0f172a',
+        lang: 'es',
+        theme_color: '#ffffff',
+        background_color: '#f6f7f9',
         display: 'standalone',
         orientation: 'portrait',
+        categories: ['travel', 'utilities'],
         // Un único SVG escalable: evita arrastrar Pillow o binarios solo para
         // generar dos PNG. Chrome lo acepta para instalar la app en el móvil.
         icons: [

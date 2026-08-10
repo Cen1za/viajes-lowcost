@@ -14,10 +14,18 @@ ELCHE = Estacion(id="elche_av", nombre="Elche AV")
 ALICANTE = Estacion(id="alicante", nombre="Alicante Terminal", traslado_min=25)
 
 
-def config(dias_semana: list[str] | None = None) -> Config:
+def config(
+    dias_ida: list[str] | None = None,
+    dias_vuelta: list[str] | None = None,
+    incluir_vuelta: bool = False,
+) -> Config:
     return Config(
         estaciones=Estaciones(origen=[ATOCHA], destino=[ELCHE, ALICANTE]),
-        busqueda=Busqueda(dias_semana=dias_semana or []),
+        busqueda=Busqueda(
+            dias_ida=dias_ida or [],
+            dias_vuelta=dias_vuelta or [],
+            incluir_vuelta=incluir_vuelta,
+        ),
     )
 
 
@@ -51,6 +59,60 @@ def test_plan_combina_origenes_destinos_y_dias():
     plan = plan_calendario(config(), date(2026, 9, 1), date(2026, 9, 2))
     assert len(plan) == 2 * 1 * 2  # 2 días × 1 origen × 2 destinos
     assert {c.destino.id for c in plan} == {"elche_av", "alicante"}
+    assert {c.sentido for c in plan} == {"ida"}
+
+
+# -- Vueltas ---------------------------------------------------------------
+
+
+def test_la_vuelta_invierte_origen_y_destino():
+    plan = plan_calendario(
+        config(incluir_vuelta=True), date(2026, 9, 1), date(2026, 9, 1)
+    )
+    vueltas = [c for c in plan if c.sentido == "vuelta"]
+    assert len(vueltas) == 2
+    assert {c.origen.id for c in vueltas} == {"elche_av", "alicante"}
+    assert {c.destino.id for c in vueltas} == {"madrid_atocha"}
+
+
+def test_ida_y_vuelta_usan_dias_de_semana_distintos():
+    """Sales viernes o sábado y vuelves domingo o lunes."""
+    plan = plan_calendario(
+        config(dias_ida=["viernes", "sabado"], dias_vuelta=["domingo", "lunes"],
+               incluir_vuelta=True),
+        date(2026, 9, 1),
+        date(2026, 9, 30),
+    )
+    idas = {c.fecha.weekday() for c in plan if c.sentido == "ida"}
+    vueltas = {c.fecha.weekday() for c in plan if c.sentido == "vuelta"}
+    assert idas == {4, 5}      # viernes, sábado
+    assert vueltas == {6, 0}   # domingo, lunes
+
+
+def test_ampliar_los_dias_de_vuelta_anade_fechas():
+    """Añadir martes a dias_vuelta alarga la escapada, sin tocar la ida."""
+    rango = (date(2026, 9, 1), date(2026, 9, 30))
+    corto = plan_calendario(
+        config(dias_ida=["viernes"], dias_vuelta=["domingo"], incluir_vuelta=True), *rango
+    )
+    largo = plan_calendario(
+        config(dias_ida=["viernes"], dias_vuelta=["domingo", "lunes", "martes"],
+               incluir_vuelta=True),
+        *rango,
+    )
+    idas_corto = [c for c in corto if c.sentido == "ida"]
+    idas_largo = [c for c in largo if c.sentido == "ida"]
+    assert len(idas_corto) == len(idas_largo)
+    assert len([c for c in largo if c.sentido == "vuelta"]) > len(
+        [c for c in corto if c.sentido == "vuelta"]
+    )
+
+
+def test_se_puede_desactivar_la_vuelta():
+    plan = plan_calendario(
+        config(incluir_vuelta=False), date(2026, 9, 1), date(2026, 9, 2)
+    )
+    assert all(c.sentido == "ida" for c in plan)
 
 
 # -- Deduplicación entre fuentes -------------------------------------------

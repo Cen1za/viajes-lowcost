@@ -8,12 +8,14 @@ from .config import Config
 from .modelos import Consulta, Estacion
 
 
-def rango_fechas(desde: date, hasta: date, config: Config) -> list[date]:
-    """Días entre dos fechas, filtrados por los días de la semana configurados."""
+def rango_fechas(
+    desde: date, hasta: date, config: Config, sentido: str = "ida"
+) -> list[date]:
+    """Días entre dos fechas, filtrados por los días configurados de ese sentido."""
     if hasta < desde:
         raise ValueError(f"La fecha final ({hasta}) es anterior a la inicial ({desde}).")
 
-    permitidos = config.busqueda.indices_dias_semana()
+    permitidos = config.busqueda.indices_dias_semana(sentido)
     dias = []
     actual = desde
     while actual <= hasta:
@@ -30,22 +32,43 @@ def plan_calendario(
     origenes: list[Estacion] | None = None,
     destinos: list[Estacion] | None = None,
 ) -> list[Consulta]:
-    """Todas las combinaciones origen x destino x día del rango."""
+    """Ida y, si está activada, vuelta, en todos los días que correspondan.
+
+    Ida y vuelta se planifican por separado porque tienen días distintos: se
+    sale viernes o sábado y se vuelve domingo o lunes. Con una sola lista de
+    días no habría manera de expresarlo.
+    """
     origenes = origenes or config.estaciones.origen
     destinos = destinos or config.estaciones.destino
-    dias = rango_fechas(desde, hasta, config)
 
-    return [
+    consultas = [
         Consulta(
             origen=origen,
             destino=destino,
             fecha=dia,
             adultos=config.pasajeros.adultos,
+            sentido="ida",
         )
-        for dia in dias
+        for dia in rango_fechas(desde, hasta, config, "ida")
         for origen in origenes
         for destino in destinos
     ]
+
+    if config.busqueda.incluir_vuelta:
+        consultas += [
+            Consulta(
+                origen=destino,      # la vuelta sale del destino…
+                destino=origen,      # …y llega al origen
+                fecha=dia,
+                adultos=config.pasajeros.adultos,
+                sentido="vuelta",
+            )
+            for dia in rango_fechas(desde, hasta, config, "vuelta")
+            for origen in origenes
+            for destino in destinos
+        ]
+
+    return consultas
 
 
 def plan_top_dias(config: Config, cuantos: int) -> list[Consulta]:
@@ -73,6 +96,7 @@ def plan_top_dias(config: Config, cuantos: int) -> list[Consulta]:
         calendario = json.load(fichero)
 
     hoy = date.today()
+    ids_destino = {e.id for e in config.estaciones.destino}
     consultas: list[Consulta] = []
     for clave, por_dia in (calendario.get("rutas") or {}).items():
         origen_id, _, destino_id = clave.partition("->")
@@ -87,6 +111,9 @@ def plan_top_dias(config: Config, cuantos: int) -> list[Consulta]:
             for dia, precio in por_dia.items()
             if date.fromisoformat(dia) > hoy
         ]
+        # La vuelta sale de una estación de destino: lo deducimos de la ruta.
+        sentido = "vuelta" if origen_id in ids_destino else "ida"
+
         for _, dia in sorted(futuros)[:cuantos]:
             consultas.append(
                 Consulta(
@@ -94,6 +121,7 @@ def plan_top_dias(config: Config, cuantos: int) -> list[Consulta]:
                     destino=destino,
                     fecha=dia,
                     adultos=config.pasajeros.adultos,
+                    sentido=sentido,
                 )
             )
     return consultas
@@ -113,6 +141,7 @@ def plan_vigilancias(config: Config) -> list[Consulta]:
                 destino=destino,
                 fecha=vigilancia.ida,
                 adultos=config.pasajeros.adultos,
+                sentido="ida",
             )
         )
         if vigilancia.vuelta:
@@ -122,6 +151,7 @@ def plan_vigilancias(config: Config) -> list[Consulta]:
                     destino=origen,
                     fecha=vigilancia.vuelta,
                     adultos=config.pasajeros.adultos,
+                    sentido="vuelta",
                 )
             )
     return consultas

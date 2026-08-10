@@ -10,9 +10,20 @@ pasajeros:
 busqueda:
   # Cuántos días hacia delante barre el modo calendario.
   horizonte_dias: 90
-  # Si lo dejas vacío busca todos los días. Ejemplo: [viernes, sabado, domingo]
-  dias_semana: []
-  # Filtro de horarios (formato HH:MM). null = sin filtro.
+
+  # Buscar también el trayecto de regreso (Elche/Alicante → Madrid).
+  incluir_vuelta: true
+
+  # Días en los que sueles SALIR. Vacío = todos los días.
+  dias_ida: [viernes, sabado]
+
+  # Días en los que sueles VOLVER. Alarga la escapada añadiendo martes,
+  # miércoles… El domingo y el lunes cubren el fin de semana normal.
+  dias_vuelta: [domingo, lunes]
+
+  # Filtro duro de horarios en la búsqueda (formato HH:MM). null = sin filtro.
+  # Para elegir tu franja preferida usa mejor el selector de la propia app:
+  # así puedes cambiarlo desde el móvil sin tocar este fichero.
   hora_min: null
   hora_max: null
 

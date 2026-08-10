@@ -121,6 +121,13 @@ por consulta, así que un barrido completo llevaría horas. El reparto es:
 
 - **`config/app.yaml`** — estaciones, pasajeros, horizonte, umbrales de oferta,
   ritmo de peticiones y qué fuentes están activas.
+  También los **días de ida y de vuelta**, que van por separado a propósito:
+  ```yaml
+  dias_ida: [viernes, sabado]
+  dias_vuelta: [domingo, lunes]   # añade martes, miércoles… para alargar
+  ```
+  Con una sola lista no habría forma de decir "salgo viernes y vuelvo lunes".
+  Deja cualquiera de las dos vacía para buscar todos los días.
 - **`config/vigilancias.yaml`** — viajes con fechas ya decididas que quieres
   vigilar en cada ejecución.
 - **`config/estaciones_codigos.yaml`** — generado por `python -m buscador
@@ -153,8 +160,25 @@ mostrando los últimos datos descargados.
 El despliegue lo define `vercel.json` en la raíz: compila `web/` después de
 copiar los precios, y publica `web/dist`.
 
-Cuatro vistas: **Ofertas** destacadas, **Calendario** con mapa de calor de
-precios, **Trenes** ordenados por precio y **Fuentes** con el estado de cada web.
+Cuatro pestañas en una barra inferior, pensada para el pulgar:
+
+- **Ofertas** — lo que ha bajado de forma llamativa.
+- **Calendario** — precio más bajo por día, ida y vuelta por separado.
+- **Trenes** — todo, ordenado por precio y filtrable.
+- **Ajustes** — tu horario preferido, el índice de compañías y el estado de
+  cada web.
+
+**El color identifica siempre a la compañía**, y es el único acento cromático
+fuerte de la interfaz: AVE morado, Avlo magenta, Ouigo azul, iryo rojo. Cada
+tarjeta lleva el borde de quien vende ese billete.
+
+### Filtros y horario preferido
+
+Se guardan en el propio móvil (`localStorage`), no en el repositorio: son tuyos,
+cambian a menudo y quieres tocarlos desde el teléfono sin esperar a un
+despliegue. Puedes filtrar por sentido, compañía y franja horaria
+(madrugada / mañana / tarde / noche), y ocultar los trenes a Alicante que
+obligan a un traslado.
 
 ## Automatización
 

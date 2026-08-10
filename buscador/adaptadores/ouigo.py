@@ -160,6 +160,7 @@ class AdaptadorOuigo(AdaptadorBase):
             origen_nombre=consulta.origen.nombre,
             destino_id=consulta.destino.id,
             destino_nombre=consulta.destino.nombre,
+            sentido=consulta.sentido,
             fecha_salida=hora_salida.date(),
             hora_salida=hora_salida.time(),
             hora_llegada=hora_llegada.time(),

@@ -36,6 +36,8 @@ class Consulta(BaseModel):
     destino: Estacion
     fecha: date
     adultos: int = 1
+    #: "ida" (Madrid → Elche) o "vuelta" (Elche → Madrid).
+    sentido: str = "ida"
 
     def __str__(self) -> str:
         return f"{self.origen.nombre} → {self.destino.nombre} el {self.fecha:%d/%m/%Y}"
@@ -51,6 +53,8 @@ class Oferta(BaseModel):
     origen_nombre: str
     destino_id: str
     destino_nombre: str
+    #: "ida" o "vuelta". Permite que la app las presente por separado.
+    sentido: str = "ida"
 
     fecha_salida: date
     hora_salida: time

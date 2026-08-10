@@ -29,6 +29,7 @@ def _oferta_json(oferta: Oferta) -> dict:
     return {
         "fuente": oferta.fuente,
         "operador": oferta.operador,
+        "sentido": oferta.sentido,
         "origen": oferta.origen_nombre,
         "destino": oferta.destino_nombre,
         "origen_id": oferta.origen_id,
@@ -60,7 +61,7 @@ def exportar_todo(
     escribir_json(DIR_DATOS / "latest.json", _latest(vigentes, config))
     escribir_json(DIR_DATOS / "calendario.json", _calendario(vigentes))
     escribir_json(DIR_DATOS / "estado_fuentes.json", _estado(resultados))
-    escribir_json(DIR_DATOS / "gangas.json", _gangas(gangas))
+    escribir_json(DIR_DATOS / "gangas.json", _gangas(gangas, config))
 
 
 def _vigentes(recientes: list[Oferta]) -> list[Oferta]:
@@ -106,16 +107,24 @@ def _calendario(ofertas: list[Oferta]) -> dict:
     """Precio mínimo por ruta y día, para el mapa de calor de la PWA."""
     minimos: dict[str, dict[str, float]] = defaultdict(dict)
     nombres: dict[str, str] = {}
+    sentidos: dict[str, str] = {}
+    operadores: dict[str, dict[str, str]] = defaultdict(dict)
+
     for oferta in ofertas:
         dia = oferta.fecha_salida.isoformat()
         actual = minimos[oferta.ruta].get(dia)
         if actual is None or oferta.precio_eur < actual:
             minimos[oferta.ruta][dia] = round(oferta.precio_eur, 2)
+            # Quién pone el precio más bajo ese día: la app colorea con esto.
+            operadores[oferta.ruta][dia] = oferta.operador
         nombres[oferta.ruta] = f"{oferta.origen_nombre} → {oferta.destino_nombre}"
+        sentidos[oferta.ruta] = oferta.sentido
 
     return {
         "actualizado": _ahora(),
         "nombres": nombres,
+        "sentidos": sentidos,
+        "operadores": {r: dict(sorted(d.items())) for r, d in operadores.items()},
         "rutas": {r: dict(sorted(d.items())) for r, d in minimos.items()},
     }
 
@@ -136,9 +145,12 @@ def _estado(resultados: list[ResultadoFuente]) -> dict:
     }
 
 
-def _gangas(gangas: list[Ganga]) -> dict:
+def _gangas(gangas: list[Ganga], config: Config) -> dict:
     return {
         "actualizado": _ahora(),
+        # Mismo mapa que en latest.json: la app necesita saber si el viaje
+        # obliga a un traslado desde Alicante también aquí.
+        "traslado_min": {e.id: e.traslado_min for e in config.estaciones.todas()},
         "ofertas": [
             {
                 **_oferta_json(g.oferta),

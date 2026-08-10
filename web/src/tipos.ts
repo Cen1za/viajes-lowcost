@@ -3,6 +3,8 @@
 export interface Tren {
   fuente: string
   operador: string
+  /** 'ida' (Madrid → Elche) o 'vuelta' (Elche → Madrid). */
+  sentido: string
   origen: string
   destino: string
   origen_id: string
@@ -27,6 +29,10 @@ export interface Calendario {
   actualizado: string
   /** Nombre legible de cada ruta, p. ej. 'Madrid Chamartín → Elche AV'. */
   nombres: Record<string, string>
+  /** 'ida' o 'vuelta' por ruta. */
+  sentidos: Record<string, string>
+  /** Qué operador pone el precio más bajo cada día. */
+  operadores: Record<string, Record<string, string>>
   rutas: Record<string, Record<string, number>>
 }
 
@@ -51,5 +57,6 @@ export interface Ganga extends Tren {
 
 export interface Gangas {
   actualizado: string
+  traslado_min: Record<string, number>
   ofertas: Ganga[]
 }

@@ -1,218 +1,457 @@
 import { useMemo, useState } from 'react'
-import { desde, duracion, euros, fechaCorta, useDatos } from './datos'
+import { COMPANIAS, compania, companiasPresentes } from './companias'
+import { Cargando, Chip, Iconos, Seccion, TarjetaTren, Vacio } from './componentes'
+import { desde, euros, fechaCorta, useDatos } from './datos'
+import {
+  FRANJAS,
+  enFranja,
+  horasFranja,
+  usePreferencias,
+  type Preferencias,
+} from './preferencias'
 import type { Calendario, EstadoFuentes, Gangas, Latest, Tren } from './tipos'
 
-type Vista = 'ofertas' | 'calendario' | 'trenes' | 'fuentes'
+type Vista = 'ofertas' | 'calendario' | 'trenes' | 'ajustes'
+
+const PESTANAS: { id: Vista; nombre: string; icono: JSX.Element }[] = [
+  { id: 'ofertas', nombre: 'Ofertas', icono: Iconos.ofertas },
+  { id: 'calendario', nombre: 'Calendario', icono: Iconos.calendario },
+  { id: 'trenes', nombre: 'Trenes', icono: Iconos.trenes },
+  { id: 'ajustes', nombre: 'Ajustes', icono: Iconos.ajustes },
+]
 
 export default function App() {
   const [vista, setVista] = useState<Vista>('ofertas')
+  const preferencias = usePreferencias()
 
   return (
     <div className="app">
-      <header>
-        <h1>Madrid → Elche</h1>
-        <p>Los precios más bajos, de todas las webs a la vez.</p>
+      <header className="cabecera">
+        <h1>
+          <span aria-hidden>🚄</span> Madrid ⇄ Elche
+        </h1>
+        <p className="sub">El precio más bajo de todas las webs, en un sitio.</p>
       </header>
-
-      <nav>
-        {(
-          [
-            ['ofertas', 'Ofertas'],
-            ['calendario', 'Calendario'],
-            ['trenes', 'Trenes'],
-            ['fuentes', 'Fuentes'],
-          ] as [Vista, string][]
-        ).map(([id, etiqueta]) => (
-          <button
-            key={id}
-            className={vista === id ? 'activo' : ''}
-            onClick={() => setVista(id)}
-          >
-            {etiqueta}
-          </button>
-        ))}
-      </nav>
 
       <main>
         {vista === 'ofertas' && <VistaOfertas />}
-        {vista === 'calendario' && <VistaCalendario />}
-        {vista === 'trenes' && <VistaTrenes />}
-        {vista === 'fuentes' && <VistaFuentes />}
+        {vista === 'calendario' && <VistaCalendario prefs={preferencias.prefs} />}
+        {vista === 'trenes' && <VistaTrenes {...preferencias} />}
+        {vista === 'ajustes' && <VistaAjustes {...preferencias} />}
       </main>
+
+      <nav className="barra">
+        {PESTANAS.map((p) => (
+          <button
+            key={p.id}
+            className={vista === p.id ? 'activo' : ''}
+            aria-current={vista === p.id ? 'page' : undefined}
+            onClick={() => setVista(p.id)}
+          >
+            {p.icono}
+            {p.nombre}
+          </button>
+        ))}
+      </nav>
     </div>
   )
 }
 
-function Estado({ cargando, error }: { cargando: boolean; error: string | null }) {
-  if (cargando) return <p className="aviso">Cargando…</p>
-  if (error) return <p className="aviso error">{error}</p>
-  return null
-}
+/* --- Ofertas -------------------------------------------------------------- */
 
 function VistaOfertas() {
   const { datos, error, cargando } = useDatos<Gangas>('gangas')
-  if (!datos) return <Estado cargando={cargando} error={error} />
 
-  if (!datos.ofertas.length) {
+  if (cargando) return <Cargando />
+  if (error || !datos)
     return (
-      <p className="aviso">
-        Ahora mismo no hay ninguna oferta destacada. Seguimos vigilando cada 4 horas.
-      </p>
+      <Vacio icono="📡" titulo="No se han podido cargar los precios">
+        {error ?? 'Inténtalo de nuevo en un momento.'}
+      </Vacio>
     )
-  }
+
+  if (!datos.ofertas.length)
+    return (
+      <Vacio icono="🔍" titulo="Ninguna oferta destacada ahora mismo">
+        Se revisan los precios cada hora. Cuando algo baje de forma llamativa
+        aparecerá aquí y te llegará un aviso.
+      </Vacio>
+    )
+
+  // Mientras no haya histórico, todas las ofertas comparten el mismo motivo.
+  // Repetirlo en cada tarjeta es ruido: se dice una vez y ya.
+  const sinHistorico = datos.ofertas.every((o) => o.caida_pct == null)
 
   return (
     <>
-      <p className="marca">Actualizado {desde(datos.actualizado)}</p>
-      {datos.ofertas.map((o, i) => (
-        <a key={i} className="tarjeta destacada" href={o.url} target="_blank" rel="noreferrer">
-          <div className="fila">
-            <span className="precio">{euros(o.precio)}</span>
-            {o.caida_pct != null && <span className="caida">−{Math.round(o.caida_pct)}%</span>}
-          </div>
-          <div className="ruta">
-            {o.origen} → {o.destino}
-          </div>
-          <div className="detalle">
-            {fechaCorta(o.fecha)} · {o.salida}–{o.llegada} ({duracion(o.duracion_min)}) ·{' '}
-            {o.operador}
-          </div>
-          <div className="motivo">{o.motivo}</div>
-        </a>
-      ))}
+      <Seccion
+        titulo={`${datos.ofertas.length} ofertas destacadas`}
+        apunte={desde(datos.actualizado)}
+      />
+
+      {sinHistorico && (
+        <div className="nota">
+          <strong>Todavía estamos aprendiendo.</strong> Hasta tener unos días de
+          histórico se avisa de todo lo que baje de 25 €. Después se comparará
+          con el precio habitual de cada viaje y solo saltarán las bajadas de
+          verdad.
+        </div>
+      )}
+
+      <div className="lista">
+        {datos.ofertas.map((o, i) => (
+          <TarjetaTren
+            key={i}
+            tren={o}
+            traslado={
+              datos.traslado_min?.[
+                o.sentido === 'vuelta' ? o.origen_id : o.destino_id
+              ] ?? 0
+            }
+            destacado={o.caida_pct != null}
+            motivo={sinHistorico ? undefined : o.motivo}
+            rebajaPct={o.caida_pct}
+          />
+        ))}
+      </div>
     </>
   )
 }
 
-function VistaCalendario() {
-  const { datos, error, cargando } = useDatos<Calendario>('calendario')
-  if (!datos) return <Estado cargando={cargando} error={error} />
+/* --- Calendario ----------------------------------------------------------- */
 
-  const rutas = Object.entries(datos.rutas)
-  if (!rutas.length) return <p className="aviso">Todavía no hay datos de calendario.</p>
+function VistaCalendario({ prefs }: { prefs: Preferencias }) {
+  const { datos, error, cargando } = useDatos<Calendario>('calendario')
+
+  if (cargando) return <Cargando />
+  if (error || !datos)
+    return (
+      <Vacio icono="📡" titulo="No se ha podido cargar el calendario">
+        {error ?? 'Inténtalo de nuevo en un momento.'}
+      </Vacio>
+    )
+
+  const rutas = Object.entries(datos.rutas).filter(
+    ([ruta]) =>
+      prefs.sentido === 'todo' || (datos.sentidos?.[ruta] ?? 'ida') === prefs.sentido,
+  )
+
+  if (!rutas.length)
+    return (
+      <Vacio icono="📅" titulo="Todavía no hay calendario">
+        El barrido completo se hace de madrugada. Vuelve mañana o lánzalo a mano.
+      </Vacio>
+    )
+
+  // Ida primero, vuelta después: es el orden en que se piensa un viaje.
+  const ordenadas = rutas.sort(([a], [b]) => {
+    const sa = datos.sentidos?.[a] === 'vuelta' ? 1 : 0
+    const sb = datos.sentidos?.[b] === 'vuelta' ? 1 : 0
+    return sa - sb || a.localeCompare(b)
+  })
 
   return (
     <>
-      <p className="marca">Actualizado {desde(datos.actualizado)}</p>
-      {rutas.map(([ruta, dias]) => (
+      <Seccion titulo="Precio más bajo por día" apunte={desde(datos.actualizado)} />
+      {ordenadas.map(([ruta, dias]) => (
         <MapaRuta
           key={ruta}
-          titulo={datos.nombres?.[ruta] ?? ruta.replace('->', ' → ').replace(/_/g, ' ')}
+          titulo={datos.nombres?.[ruta] ?? ruta.replace('->', ' → ')}
+          sentido={datos.sentidos?.[ruta] ?? 'ida'}
           dias={dias}
+          operadores={datos.operadores?.[ruta] ?? {}}
         />
       ))}
     </>
   )
 }
 
-function MapaRuta({ titulo, dias }: { titulo: string; dias: Record<string, number> }) {
+function MapaRuta({
+  titulo,
+  sentido,
+  dias,
+  operadores,
+}: {
+  titulo: string
+  sentido: string
+  dias: Record<string, number>
+  operadores: Record<string, string>
+}) {
   const entradas = Object.entries(dias).sort()
+  if (!entradas.length) return null
+
   const precios = entradas.map(([, p]) => p)
   const min = Math.min(...precios)
-  const max = Math.max(...precios)
-
-  /** 0 = el más barato del rango, 1 = el más caro. */
-  const intensidad = (precio: number) => (max === min ? 0 : (precio - min) / (max - min))
+  // "Barato" = dentro de un 15% del mínimo del rango. Un umbral relativo
+  // funciona igual de bien en un mes caro que en uno barato.
+  const corte = min * 1.15
 
   return (
-    <section className="mapa">
-      <h2>{titulo}</h2>
+    <section style={{ marginBottom: 22 }}>
+      <Seccion
+        titulo={`${sentido === 'vuelta' ? 'Vuelta' : 'Ida'} · ${titulo}`}
+        apunte={`desde ${euros(min)}`}
+      />
       <div className="rejilla">
-        {entradas.map(([dia, precio]) => (
-          <div
-            key={dia}
-            className="celda"
-            style={{
-              // Verde para lo barato, ámbar para lo caro.
-              background: `hsl(${145 - intensidad(precio) * 110} 65% ${
-                22 + intensidad(precio) * 12
-              }%)`,
-            }}
-          >
-            <span className="dia">{fechaCorta(dia)}</span>
-            <span className="valor">{Math.round(precio)}€</span>
-          </div>
-        ))}
+        {entradas.map(([dia, precio]) => {
+          const marca = compania(operadores[dia] ?? '')
+          return (
+            <div
+              key={dia}
+              className={`dia${precio <= corte ? ' barato' : ''}`}
+              style={{ ['--color-compania' as string]: marca.color }}
+            >
+              <span className="fecha">{fechaCorta(dia)}</span>
+              <span className="importe">{Math.round(precio)}€</span>
+              <span className="quien" style={{ color: marca.color }}>
+                {marca.nombre}
+              </span>
+            </div>
+          )
+        })}
       </div>
-      <p className="leyenda">
-        Más barato {euros(min)} · más caro {euros(max)}
-      </p>
     </section>
   )
 }
 
-function VistaTrenes() {
+/* --- Trenes --------------------------------------------------------------- */
+
+function VistaTrenes({
+  prefs,
+  cambiar,
+  alternar,
+  limpiar,
+}: ReturnType<typeof usePreferencias>) {
   const { datos, error, cargando } = useDatos<Latest>('latest')
-  const [soloDirectos, setSoloDirectos] = useState(false)
 
-  const trenes = useMemo(() => {
+  const disponibles = useMemo(
+    () => companiasPresentes((datos?.trenes ?? []).map((t) => t.operador)),
+    [datos],
+  )
+
+  /** Minutos de traslado del extremo que no es Madrid. */
+  const traslado = (t: Tren) =>
+    (datos?.traslado_min[t.sentido === 'vuelta' ? t.origen_id : t.destino_id] ?? 0)
+
+  const filtrados = useMemo(() => {
     if (!datos) return []
-    const lista = soloDirectos
-      ? datos.trenes.filter((t) => (datos.traslado_min[t.destino_id] ?? 0) === 0)
-      : datos.trenes
-    return [...lista].sort((a, b) => a.precio - b.precio).slice(0, 60)
-  }, [datos, soloDirectos])
+    return datos.trenes
+      .filter((t) => prefs.sentido === 'todo' || t.sentido === prefs.sentido)
+      .filter((t) => !prefs.companias.length || prefs.companias.includes(compania(t.operador).id))
+      .filter((t) => enFranja(t.salida, prefs.franjas))
+      .filter(
+        (t) =>
+          !prefs.soloDirectos ||
+          (datos.traslado_min[t.sentido === 'vuelta' ? t.origen_id : t.destino_id] ?? 0) === 0,
+      )
+      .sort((a, b) => a.precio - b.precio)
+  }, [datos, prefs])
 
-  if (!datos) return <Estado cargando={cargando} error={error} />
+  const trenes = filtrados.slice(0, 60)
+
+  if (cargando) return <Cargando />
+  if (error || !datos)
+    return (
+      <Vacio icono="📡" titulo="No se han podido cargar los trenes">
+        {error ?? 'Inténtalo de nuevo en un momento.'}
+      </Vacio>
+    )
+
+  const hayFiltros =
+    prefs.companias.length > 0 ||
+    prefs.franjas.length > 0 ||
+    prefs.sentido !== 'todo' ||
+    prefs.soloDirectos
 
   return (
     <>
-      <p className="marca">Actualizado {desde(datos.actualizado)}</p>
-      <label className="filtro">
-        <input
-          type="checkbox"
-          checked={soloDirectos}
-          onChange={(e) => setSoloDirectos(e.target.checked)}
-        />
-        Solo Elche AV (sin traslado desde Alicante)
-      </label>
-      {trenes.map((t, i) => (
-        <FilaTren key={i} tren={t} traslado={datos.traslado_min[t.destino_id] ?? 0} />
-      ))}
-      {!trenes.length && <p className="aviso">Sin trenes que mostrar.</p>}
+      {/* Sentido y compañía comparten fila: son las dos decisiones que
+          más se tocan y así se ven de un vistazo sin scroll vertical. */}
+      <div className="chips">
+        {(['todo', 'ida', 'vuelta'] as const).map((s) => (
+          <Chip
+            key={s}
+            neutro
+            activo={prefs.sentido === s}
+            onClick={() => cambiar('sentido', s)}
+          >
+            {s === 'todo' ? 'Todo' : s === 'ida' ? '→ Ida' : '← Vuelta'}
+          </Chip>
+        ))}
+        <span className="separador" />
+        {disponibles.map((c) => (
+          <Chip
+            key={c.id}
+            activo={prefs.companias.includes(c.id)}
+            color={c.color}
+            onClick={() => alternar('companias', c.id)}
+          >
+            {c.nombre}
+          </Chip>
+        ))}
+      </div>
+
+      <div className="chips">
+        {FRANJAS.map((f) => (
+          <Chip
+            key={f.id}
+            neutro
+            activo={prefs.franjas.includes(f.id)}
+            onClick={() => alternar('franjas', f.id)}
+          >
+            {f.nombre}
+          </Chip>
+        ))}
+        {hayFiltros && (
+          <Chip neutro activo={false} onClick={limpiar}>
+            ✕ Quitar filtros
+          </Chip>
+        )}
+      </div>
+
+      <Seccion
+        titulo={
+          filtrados.length > trenes.length
+            ? `${trenes.length} de ${filtrados.length} trenes`
+            : `${trenes.length} trenes`
+        }
+        apunte={hayFiltros ? 'filtrados' : desde(datos.actualizado)}
+      />
+
+      {trenes.length ? (
+        <div className="lista">
+          {trenes.map((t, i) => (
+            <TarjetaTren key={i} tren={t} traslado={traslado(t)} />
+          ))}
+        </div>
+      ) : (
+        <Vacio icono="🎚️" titulo="Ningún tren pasa los filtros">
+          Prueba a quitar alguna franja horaria o compañía en los botones de arriba.
+        </Vacio>
+      )}
     </>
   )
 }
 
-function FilaTren({ tren, traslado }: { tren: Tren; traslado: number }) {
-  return (
-    <a className="tarjeta" href={tren.url} target="_blank" rel="noreferrer">
-      <div className="fila">
-        <span className="precio">{euros(tren.precio)}</span>
-        <span className="operador">{tren.operador}</span>
-      </div>
-      <div className="ruta">
-        {tren.origen} → {tren.destino}
-        {traslado > 0 && <span className="traslado">+{traslado} min hasta Elche</span>}
-      </div>
-      <div className="detalle">
-        {fechaCorta(tren.fecha)} · {tren.salida}–{tren.llegada} ({duracion(tren.duracion_min)}) ·
-        vía {tren.fuente}
-        {tren.plazas != null && ` · ${tren.plazas} plazas`}
-      </div>
-    </a>
-  )
-}
+/* --- Ajustes -------------------------------------------------------------- */
 
-function VistaFuentes() {
-  const { datos, error, cargando } = useDatos<EstadoFuentes>('estado_fuentes')
-  if (!datos) return <Estado cargando={cargando} error={error} />
+function VistaAjustes({
+  prefs,
+  cambiar,
+  alternar,
+  limpiar,
+}: ReturnType<typeof usePreferencias>) {
+  const { datos } = useDatos<EstadoFuentes>('estado_fuentes')
 
   return (
     <>
-      <p className="marca">Última comprobación {desde(datos.actualizado)}</p>
-      {datos.fuentes.map((f) => (
-        <div key={f.fuente} className={`tarjeta fuente ${f.ok ? 'ok' : 'ko'}`}>
-          <div className="fila">
-            <span className="operador">{f.fuente}</span>
-            <span>{f.ok ? 'funcionando' : 'con problemas'}</span>
-          </div>
-          <div className="detalle">
-            {f.ofertas} precios en {f.duracion_s.toFixed(1)} s
-          </div>
-          {f.error && <div className="motivo">{f.error}</div>}
+      <Seccion titulo="Tu horario preferido" />
+      <div className="panel">
+        <h3>¿A qué hora te gusta viajar?</h3>
+        <p>
+          Los trenes fuera de estas franjas dejan de aparecer en la lista. Si no
+          eliges ninguna, se muestran todos.
+        </p>
+        <div className="opciones">
+          {FRANJAS.map((f) => (
+            <Chip
+              key={f.id}
+              neutro
+              activo={prefs.franjas.includes(f.id)}
+              onClick={() => alternar('franjas', f.id)}
+            >
+              {f.nombre}{' '}
+              <span style={{ opacity: 0.6, fontWeight: 500 }}>{horasFranja(f)}</span>
+            </Chip>
+          ))}
         </div>
-      ))}
+      </div>
+
+      <div className="panel">
+        <button
+          className="interruptor"
+          aria-pressed={prefs.soloDirectos}
+          onClick={() => cambiar('soloDirectos', !prefs.soloDirectos)}
+        >
+          <span>
+            <h3>Solo Elche AV</h3>
+            <p style={{ margin: 0 }}>
+              Oculta los trenes a Alicante, que obligan a 25 min más de traslado.
+            </p>
+          </span>
+          <span className="palanca">
+            <span />
+          </span>
+        </button>
+      </div>
+
+      <Seccion titulo="Compañías" />
+      <div className="panel">
+        <p>
+          Cada tarjeta lleva el color de quien vende el billete. Toca una para
+          filtrar por ella en la pestaña de trenes.
+        </p>
+        <div className="leyenda">
+          {COMPANIAS.map((c) => (
+            <div key={c.id} className="entrada">
+              <span className="muestra" style={{ background: c.color }} />
+              <span>
+                <span className="quien" style={{ color: c.color }}>
+                  {c.nombre}
+                </span>
+                <br />
+                <span className="que">{c.descripcion}</span>
+              </span>
+              <button
+                className="chip"
+                style={{ marginLeft: 'auto' }}
+                aria-pressed={prefs.companias.includes(c.id)}
+                onClick={() => alternar('companias', c.id)}
+              >
+                {prefs.companias.includes(c.id) ? 'Filtrando' : 'Filtrar'}
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <Seccion titulo="Estado de las webs" />
+      <div className="panel">
+        <p>
+          De dónde salen los precios. Si alguna falla, las demás siguen
+          funcionando.
+        </p>
+        {datos?.fuentes.map((f) => (
+          <div key={f.fuente} className="fuente">
+            <span className={`luz ${f.ok ? 'ok' : 'ko'}`} />
+            <span className="nombre">{f.fuente}</span>
+            <span className="dato">
+              {f.ofertas} precios · {f.duracion_s.toFixed(0)} s
+            </span>
+          </div>
+        ))}
+        {datos && (
+          <p style={{ margin: '12px 0 0' }}>
+            Última comprobación {desde(datos.actualizado)}.
+          </p>
+        )}
+      </div>
+
+      <Seccion titulo="Instalar en el móvil" />
+      <div className="panel">
+        <p style={{ marginBottom: 0 }}>
+          En Chrome, menú <strong>⋮ → Añadir a pantalla de inicio</strong>. En
+          iPhone, <strong>Compartir → Añadir a pantalla de inicio</strong>. Se
+          abre a pantalla completa y guarda los últimos precios para poder
+          consultarlos sin cobertura.
+        </p>
+      </div>
+
+      <div className="panel">
+        <button className="chip neutro" onClick={limpiar}>
+          Restablecer todos los filtros
+        </button>
+      </div>
     </>
   )
 }

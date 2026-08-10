@@ -298,6 +298,7 @@ class AdaptadorRenfe(AdaptadorBase):
                     origen_nombre=consulta.origen.nombre,
                     destino_id=consulta.destino.id,
                     destino_nombre=consulta.destino.nombre,
+                    sentido=consulta.sentido,
                     fecha_salida=consulta.fecha,
                     hora_salida=salida,
                     hora_llegada=llegada,

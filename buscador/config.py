@@ -38,16 +38,22 @@ class Pasajeros(BaseModel):
 
 class Busqueda(BaseModel):
     horizonte_dias: int = 90
+    incluir_vuelta: bool = True
+    dias_ida: list[str] = Field(default_factory=list)
+    dias_vuelta: list[str] = Field(default_factory=list)
+    #: Compatibilidad con configuraciones anteriores: si está puesto y no hay
+    #: dias_ida, se usa para la ida.
     dias_semana: list[str] = Field(default_factory=list)
     hora_min: time | None = None
     hora_max: time | None = None
 
-    def indices_dias_semana(self) -> set[int] | None:
-        """Devuelve los días de la semana permitidos, o None si valen todos."""
-        if not self.dias_semana:
+    @staticmethod
+    def _indices(nombres: list[str]) -> set[int] | None:
+        """Traduce nombres de días a índices de weekday(). None = todos valen."""
+        if not nombres:
             return None
         indices = set()
-        for nombre in self.dias_semana:
+        for nombre in nombres:
             clave = nombre.strip().lower()
             if clave not in DIAS_SEMANA:
                 raise ValueError(
@@ -56,6 +62,17 @@ class Busqueda(BaseModel):
                 )
             indices.add(DIAS_SEMANA[clave])
         return indices
+
+    def indices_dias_semana(self, sentido: str = "ida") -> set[int] | None:
+        """Días permitidos para ese sentido del viaje.
+
+        La ida y la vuelta se configuran por separado a propósito: si sales
+        viernes o sábado, las vueltas que te interesan son domingo y lunes, y
+        con una sola lista no habría forma de expresarlo.
+        """
+        if sentido == "vuelta":
+            return self._indices(self.dias_vuelta)
+        return self._indices(self.dias_ida or self.dias_semana)
 
 
 class Ofertas(BaseModel):
@@ -132,7 +149,8 @@ def cargar_config(ruta: Path | None = None) -> Config:
 
     # Validamos aquí los días de la semana para que un error en el YAML salte
     # al arrancar y no a mitad de un barrido de 90 días.
-    config.busqueda.indices_dias_semana()
+    config.busqueda.indices_dias_semana("ida")
+    config.busqueda.indices_dias_semana("vuelta")
     return config
 
 
