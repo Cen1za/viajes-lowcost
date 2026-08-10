@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-10T18:08:50+00:00",
+  "actualizado": "2026-08-10T18:25:55+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
@@ -7,6 +7,23 @@
     "alicante": 25
   },
   "trenes": [
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-11",
+      "salida": "06:15",
+      "llegada": "08:48",
+      "duracion_min": 153,
+      "precio": 15.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+    },
     {
       "fuente": "ouigo",
       "operador": "Ouigo",
@@ -25,6 +42,40 @@
       "url": "https://www.ouigo.com/es/"
     },
     {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-11",
+      "salida": "07:00",
+      "llegada": "09:35",
+      "duracion_min": 155,
+      "precio": 22.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-11",
+      "salida": "09:00",
+      "llegada": "11:30",
+      "duracion_min": 150,
+      "precio": 22.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+    },
+    {
       "fuente": "ouigo",
       "operador": "Ouigo",
       "sentido": "ida",
@@ -40,6 +91,23 @@
       "tarifa": "Básica",
       "plazas": null,
       "url": "https://www.ouigo.com/es/"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-11",
+      "salida": "09:45",
+      "llegada": "12:05",
+      "duracion_min": 140,
+      "precio": 26.65,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
     },
     {
       "fuente": "ouigo",
@@ -76,6 +144,40 @@
       "url": "https://www.ouigo.com/es/"
     },
     {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-11",
+      "salida": "19:45",
+      "llegada": "22:20",
+      "duracion_min": 155,
+      "precio": 35.55,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-11",
+      "salida": "20:00",
+      "llegada": "22:52",
+      "duracion_min": 172,
+      "precio": 36.4,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+    },
+    {
       "fuente": "ouigo",
       "operador": "Ouigo",
       "sentido": "ida",
@@ -91,6 +193,142 @@
       "tarifa": "Básica",
       "plazas": null,
       "url": "https://www.ouigo.com/es/"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-11",
+      "salida": "17:00",
+      "llegada": "19:34",
+      "duracion_min": 154,
+      "precio": 39.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-11",
+      "salida": "11:45",
+      "llegada": "14:45",
+      "duracion_min": 180,
+      "precio": 42.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-11",
+      "salida": "10:30",
+      "llegada": "13:31",
+      "duracion_min": 181,
+      "precio": 47.5,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-11",
+      "salida": "14:00",
+      "llegada": "16:28",
+      "duracion_min": 148,
+      "precio": 53.35,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-11",
+      "salida": "15:00",
+      "llegada": "17:17",
+      "duracion_min": 137,
+      "precio": 53.35,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-11",
+      "salida": "19:00",
+      "llegada": "21:28",
+      "duracion_min": 148,
+      "precio": 53.35,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-11",
+      "salida": "16:00",
+      "llegada": "18:34",
+      "duracion_min": 154,
+      "precio": 62.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-11",
+      "salida": "18:00",
+      "llegada": "20:23",
+      "duracion_min": 143,
+      "precio": 71.1,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
     },
     {
       "fuente": "ouigo",
@@ -124,7 +362,7 @@
       "precio": 15.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_kRhe"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
     },
     {
       "fuente": "ouigo",
@@ -192,7 +430,7 @@
       "precio": 19.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_kRhe"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
     },
     {
       "fuente": "renfe",
@@ -209,7 +447,7 @@
       "precio": 20.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AaT4"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_6jEO"
     },
     {
       "fuente": "renfe",
@@ -226,7 +464,7 @@
       "precio": 21.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_kRhe"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
     },
     {
       "fuente": "ouigo",
@@ -260,7 +498,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_kRhe"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
     },
     {
       "fuente": "renfe",
@@ -277,7 +515,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_kRhe"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
     },
     {
       "fuente": "ouigo",
@@ -311,7 +549,7 @@
       "precio": 26.65,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_kRhe"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
     },
     {
       "fuente": "renfe",
@@ -328,7 +566,7 @@
       "precio": 26.65,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_kRhe"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
     },
     {
       "fuente": "renfe",
@@ -345,7 +583,7 @@
       "precio": 27.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AaT4"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_6jEO"
     },
     {
       "fuente": "renfe",
@@ -362,7 +600,7 @@
       "precio": 29.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_kRhe"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
     },
     {
       "fuente": "ouigo",
@@ -396,7 +634,7 @@
       "precio": 35.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AaT4"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_6jEO"
     },
     {
       "fuente": "renfe",
@@ -413,7 +651,7 @@
       "precio": 35.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AaT4"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_6jEO"
     },
     {
       "fuente": "renfe",
@@ -430,7 +668,7 @@
       "precio": 35.55,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_kRhe"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
     },
     {
       "fuente": "renfe",
@@ -447,7 +685,7 @@
       "precio": 39.6,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_kRhe"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
     },
     {
       "fuente": "renfe",
@@ -464,7 +702,7 @@
       "precio": 39.9,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AaT4"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_6jEO"
     },
     {
       "fuente": "renfe",
@@ -481,7 +719,7 @@
       "precio": 56.9,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_kRhe"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
     },
     {
       "fuente": "renfe",
@@ -498,7 +736,7 @@
       "precio": 57.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AaT4"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_6jEO"
     },
     {
       "fuente": "renfe",
@@ -515,7 +753,7 @@
       "precio": 61.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_kRhe"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
     },
     {
       "fuente": "renfe",
@@ -532,7 +770,24 @@
       "precio": 66.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AaT4"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_6jEO"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "21:05",
+      "llegada": "23:38",
+      "duracion_min": 153,
+      "precio": 29.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
     },
     {
       "fuente": "ouigo",
@@ -569,6 +824,57 @@
       "url": "https://www.ouigo.com/es/"
     },
     {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Elche AV",
+      "destino": "Madrid Chamartín",
+      "origen_id": "elche_av",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "20:31",
+      "llegada": "23:38",
+      "duracion_min": 187,
+      "precio": 34.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_G1J7"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Elche AV",
+      "destino": "Madrid Chamartín",
+      "origen_id": "elche_av",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "14:21",
+      "llegada": "16:38",
+      "duracion_min": 137,
+      "precio": 35.1,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_G1J7"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "07:24",
+      "llegada": "09:52",
+      "duracion_min": 148,
+      "precio": 35.55,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+    },
+    {
       "fuente": "ouigo",
       "operador": "Ouigo",
       "sentido": "vuelta",
@@ -603,6 +909,125 @@
       "url": "https://www.ouigo.com/es/"
     },
     {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "09:40",
+      "llegada": "12:08",
+      "duracion_min": 148,
+      "precio": 44.45,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Elche AV",
+      "destino": "Madrid Chamartín",
+      "origen_id": "elche_av",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "11:03",
+      "llegada": "14:08",
+      "duracion_min": 185,
+      "precio": 45.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_G1J7"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "11:36",
+      "llegada": "14:08",
+      "duracion_min": 152,
+      "precio": 49.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "10:26",
+      "llegada": "13:23",
+      "duracion_min": 177,
+      "precio": 49.3,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Elche AV",
+      "destino": "Madrid Chamartín",
+      "origen_id": "elche_av",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "08:48",
+      "llegada": "12:08",
+      "duracion_min": 200,
+      "precio": 49.5,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_G1J7"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "12:45",
+      "llegada": "15:08",
+      "duracion_min": 143,
+      "precio": 53.35,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "14:35",
+      "llegada": "17:08",
+      "duracion_min": 153,
+      "precio": 53.35,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+    },
+    {
       "fuente": "ouigo",
       "operador": "Ouigo",
       "sentido": "vuelta",
@@ -620,6 +1045,23 @@
       "url": "https://www.ouigo.com/es/"
     },
     {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "15:26",
+      "llegada": "18:21",
+      "duracion_min": 175,
+      "precio": 58.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+    },
+    {
       "fuente": "ouigo",
       "operador": "Ouigo",
       "sentido": "vuelta",
@@ -635,6 +1077,125 @@
       "tarifa": "Básica",
       "plazas": null,
       "url": "https://www.ouigo.com/es/"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "16:05",
+      "llegada": "18:38",
+      "duracion_min": 153,
+      "precio": 62.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "17:40",
+      "llegada": "20:08",
+      "duracion_min": 148,
+      "precio": 71.1,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "18:45",
+      "llegada": "21:08",
+      "duracion_min": 143,
+      "precio": 71.1,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "19:50",
+      "llegada": "22:08",
+      "duracion_min": 138,
+      "precio": 71.1,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "20:00",
+      "llegada": "23:18",
+      "duracion_min": 198,
+      "precio": 73.4,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Elche AV",
+      "destino": "Madrid Chamartín",
+      "origen_id": "elche_av",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "19:25",
+      "llegada": "23:18",
+      "duracion_min": 233,
+      "precio": 74.1,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_G1J7"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Elche AV",
+      "destino": "Madrid Chamartín",
+      "origen_id": "elche_av",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-13",
+      "salida": "16:14",
+      "llegada": "20:08",
+      "duracion_min": 234,
+      "precio": 121.6,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_G1J7"
     },
     {
       "fuente": "ouigo",
@@ -668,7 +1229,7 @@
       "precio": 15.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_QomF"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
     },
     {
       "fuente": "ouigo",
@@ -736,7 +1297,7 @@
       "precio": 20.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PT1b"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
     },
     {
       "fuente": "renfe",
@@ -753,7 +1314,7 @@
       "precio": 21.95,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PT1b"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
     },
     {
       "fuente": "renfe",
@@ -770,7 +1331,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_QomF"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
     },
     {
       "fuente": "renfe",
@@ -787,7 +1348,7 @@
       "precio": 25.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_QomF"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
     },
     {
       "fuente": "renfe",
@@ -804,7 +1365,7 @@
       "precio": 25.7,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PT1b"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
     },
     {
       "fuente": "renfe",
@@ -821,7 +1382,7 @@
       "precio": 26.65,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_QomF"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
     },
     {
       "fuente": "renfe",
@@ -838,7 +1399,7 @@
       "precio": 26.65,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_QomF"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
     },
     {
       "fuente": "renfe",
@@ -855,7 +1416,7 @@
       "precio": 27.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PT1b"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
     },
     {
       "fuente": "renfe",
@@ -872,7 +1433,7 @@
       "precio": 29.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_QomF"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
     },
     {
       "fuente": "ouigo",
@@ -906,7 +1467,7 @@
       "precio": 35.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PT1b"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
     },
     {
       "fuente": "renfe",
@@ -923,7 +1484,7 @@
       "precio": 35.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_QomF"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
     },
     {
       "fuente": "renfe",
@@ -940,7 +1501,7 @@
       "precio": 35.55,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_QomF"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
     },
     {
       "fuente": "renfe",
@@ -957,7 +1518,7 @@
       "precio": 36.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PT1b"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
     },
     {
       "fuente": "ouigo",
@@ -991,7 +1552,7 @@
       "precio": 42.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_QomF"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
     },
     {
       "fuente": "renfe",
@@ -1008,7 +1569,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_QomF"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
     },
     {
       "fuente": "renfe",
@@ -1025,7 +1586,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_QomF"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
     },
     {
       "fuente": "renfe",
@@ -1042,7 +1603,7 @@
       "precio": 49.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PT1b"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
     },
     {
       "fuente": "renfe",
@@ -1059,7 +1620,7 @@
       "precio": 52.7,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PT1b"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
     },
     {
       "fuente": "renfe",
@@ -1076,7 +1637,7 @@
       "precio": 53.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_QomF"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
     },
     {
       "fuente": "renfe",
@@ -1093,7 +1654,7 @@
       "precio": 53.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_QomF"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
     },
     {
       "fuente": "renfe",
@@ -1110,7 +1671,24 @@
       "precio": 58.4,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PT1b"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-18",
+      "salida": "06:15",
+      "llegada": "08:48",
+      "duracion_min": 153,
+      "precio": 15.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
     },
     {
       "fuente": "ouigo",
@@ -1130,6 +1708,23 @@
       "url": "https://www.ouigo.com/es/"
     },
     {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-09-18",
+      "salida": "06:15",
+      "llegada": "09:16",
+      "duracion_min": 181,
+      "precio": 19.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_EQA4"
+    },
+    {
       "fuente": "ouigo",
       "operador": "Ouigo",
       "sentido": "ida",
@@ -1145,6 +1740,91 @@
       "tarifa": "Básica",
       "plazas": null,
       "url": "https://www.ouigo.com/es/"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-18",
+      "salida": "07:00",
+      "llegada": "09:35",
+      "duracion_min": 155,
+      "precio": 22.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-18",
+      "salida": "09:00",
+      "llegada": "11:30",
+      "duracion_min": 150,
+      "precio": 22.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-09-18",
+      "salida": "10:00",
+      "llegada": "12:14",
+      "duracion_min": 134,
+      "precio": 26.35,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_EQA4"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-18",
+      "salida": "09:45",
+      "llegada": "12:05",
+      "duracion_min": 140,
+      "precio": 26.65,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-09-18",
+      "salida": "07:00",
+      "llegada": "10:56",
+      "duracion_min": 236,
+      "precio": 27.3,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_EQA4"
     },
     {
       "fuente": "ouigo",
@@ -1181,6 +1861,40 @@
       "url": "https://www.ouigo.com/es/"
     },
     {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-18",
+      "salida": "19:45",
+      "llegada": "22:20",
+      "duracion_min": 155,
+      "precio": 35.55,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-18",
+      "salida": "20:00",
+      "llegada": "22:52",
+      "duracion_min": 172,
+      "precio": 36.4,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+    },
+    {
       "fuente": "ouigo",
       "operador": "Ouigo",
       "sentido": "ida",
@@ -1198,6 +1912,176 @@
       "url": "https://www.ouigo.com/es/"
     },
     {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-18",
+      "salida": "17:00",
+      "llegada": "19:34",
+      "duracion_min": 154,
+      "precio": 39.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-18",
+      "salida": "10:30",
+      "llegada": "13:31",
+      "duracion_min": 181,
+      "precio": 41.8,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-09-18",
+      "salida": "10:30",
+      "llegada": "14:06",
+      "duracion_min": 216,
+      "precio": 42.1,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_EQA4"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-18",
+      "salida": "11:45",
+      "llegada": "14:45",
+      "duracion_min": 180,
+      "precio": 42.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-09-18",
+      "salida": "17:00",
+      "llegada": "20:14",
+      "duracion_min": 194,
+      "precio": 44.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_EQA4"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-18",
+      "salida": "14:00",
+      "llegada": "16:28",
+      "duracion_min": 148,
+      "precio": 44.45,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-09-18",
+      "salida": "14:00",
+      "llegada": "17:21",
+      "duracion_min": 201,
+      "precio": 50.5,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_EQA4"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-18",
+      "salida": "15:00",
+      "llegada": "17:17",
+      "duracion_min": 137,
+      "precio": 52.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-18",
+      "salida": "16:00",
+      "llegada": "18:34",
+      "duracion_min": 154,
+      "precio": 53.35,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-18",
+      "salida": "19:00",
+      "llegada": "21:28",
+      "duracion_min": 148,
+      "precio": 53.35,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+    },
+    {
       "fuente": "ouigo",
       "operador": "Ouigo",
       "sentido": "ida",
@@ -1213,6 +2097,40 @@
       "tarifa": "Básica",
       "plazas": null,
       "url": "https://www.ouigo.com/es/"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-09-18",
+      "salida": "19:15",
+      "llegada": "21:35",
+      "duracion_min": 140,
+      "precio": 70.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_EQA4"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-09-18",
+      "salida": "18:00",
+      "llegada": "20:23",
+      "duracion_min": 143,
+      "precio": 71.1,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
     },
     {
       "fuente": "ouigo",
@@ -1280,7 +2198,7 @@
       "precio": 24.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_J7he"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P3JQ"
     },
     {
       "fuente": "ouigo",
@@ -1314,7 +2232,7 @@
       "precio": 27.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_J7he"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P3JQ"
     },
     {
       "fuente": "ouigo",
@@ -1348,7 +2266,7 @@
       "precio": 39.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_J7he"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P3JQ"
     },
     {
       "fuente": "ouigo",
@@ -1382,7 +2300,7 @@
       "precio": 43.9,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_J7he"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P3JQ"
     },
     {
       "fuente": "renfe",
@@ -1399,7 +2317,7 @@
       "precio": 45.2,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_J7he"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P3JQ"
     },
     {
       "fuente": "renfe",
@@ -1416,7 +2334,7 @@
       "precio": 63.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_J7he"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P3JQ"
     },
     {
       "fuente": "renfe",
@@ -1433,7 +2351,24 @@
       "precio": 67.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_J7he"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P3JQ"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "21:05",
+      "llegada": "23:38",
+      "duracion_min": 153,
+      "precio": 29.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
     },
     {
       "fuente": "ouigo",
@@ -1470,6 +2405,23 @@
       "url": "https://www.ouigo.com/es/"
     },
     {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Elche AV",
+      "destino": "Madrid Chamartín",
+      "origen_id": "elche_av",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "20:31",
+      "llegada": "23:38",
+      "duracion_min": 187,
+      "precio": 34.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_V46L"
+    },
+    {
       "fuente": "ouigo",
       "operador": "Ouigo",
       "sentido": "vuelta",
@@ -1485,6 +2437,57 @@
       "tarifa": "Básica",
       "plazas": null,
       "url": "https://www.ouigo.com/es/"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Elche AV",
+      "destino": "Madrid Chamartín",
+      "origen_id": "elche_av",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "14:21",
+      "llegada": "16:38",
+      "duracion_min": 137,
+      "precio": 35.1,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_V46L"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "07:24",
+      "llegada": "09:52",
+      "duracion_min": 148,
+      "precio": 35.55,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Elche AV",
+      "destino": "Madrid Chamartín",
+      "origen_id": "elche_av",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "11:03",
+      "llegada": "14:08",
+      "duracion_min": 185,
+      "precio": 39.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_V46L"
     },
     {
       "fuente": "ouigo",
@@ -1504,6 +2507,125 @@
       "url": "https://www.ouigo.com/es/"
     },
     {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "10:26",
+      "llegada": "13:23",
+      "duracion_min": 177,
+      "precio": 42.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "09:40",
+      "llegada": "12:08",
+      "duracion_min": 148,
+      "precio": 44.45,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "11:36",
+      "llegada": "14:08",
+      "duracion_min": 152,
+      "precio": 49.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Elche AV",
+      "destino": "Madrid Chamartín",
+      "origen_id": "elche_av",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "08:48",
+      "llegada": "12:08",
+      "duracion_min": 200,
+      "precio": 49.5,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_V46L"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "15:26",
+      "llegada": "18:21",
+      "duracion_min": 175,
+      "precio": 50.95,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "12:45",
+      "llegada": "15:08",
+      "duracion_min": 143,
+      "precio": 53.35,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "14:35",
+      "llegada": "17:08",
+      "duracion_min": 153,
+      "precio": 53.35,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+    },
+    {
       "fuente": "ouigo",
       "operador": "Ouigo",
       "sentido": "vuelta",
@@ -1521,6 +2643,23 @@
       "url": "https://www.ouigo.com/es/"
     },
     {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "16:05",
+      "llegada": "18:38",
+      "duracion_min": 153,
+      "precio": 62.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+    },
+    {
       "fuente": "ouigo",
       "operador": "Ouigo",
       "sentido": "vuelta",
@@ -1536,6 +2675,108 @@
       "tarifa": "Básica",
       "plazas": null,
       "url": "https://www.ouigo.com/es/"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "20:00",
+      "llegada": "23:18",
+      "duracion_min": 198,
+      "precio": 68.2,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Elche AV",
+      "destino": "Madrid Chamartín",
+      "origen_id": "elche_av",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "19:25",
+      "llegada": "23:18",
+      "duracion_min": 233,
+      "precio": 68.8,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_V46L"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "18:45",
+      "llegada": "21:08",
+      "duracion_min": 143,
+      "precio": 71.1,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "19:50",
+      "llegada": "22:08",
+      "duracion_min": 138,
+      "precio": 71.1,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "17:40",
+      "llegada": "20:08",
+      "duracion_min": 148,
+      "precio": 80.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "vuelta",
+      "origen": "Elche AV",
+      "destino": "Madrid Chamartín",
+      "origen_id": "elche_av",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-09-20",
+      "salida": "16:14",
+      "llegada": "20:08",
+      "duracion_min": 234,
+      "precio": 130.4,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_V46L"
     },
     {
       "fuente": "ouigo",
@@ -1569,7 +2810,7 @@
       "precio": 9.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_My4v"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
     },
     {
       "fuente": "renfe",
@@ -1586,7 +2827,7 @@
       "precio": 14.2,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P9Qo"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
     },
     {
       "fuente": "ouigo",
@@ -1654,7 +2895,7 @@
       "precio": 21.85,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_My4v"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
     },
     {
       "fuente": "renfe",
@@ -1671,7 +2912,7 @@
       "precio": 21.95,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P9Qo"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
     },
     {
       "fuente": "renfe",
@@ -1688,7 +2929,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_My4v"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
     },
     {
       "fuente": "renfe",
@@ -1705,7 +2946,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_My4v"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
     },
     {
       "fuente": "renfe",
@@ -1722,7 +2963,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_My4v"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
     },
     {
       "fuente": "ouigo",
@@ -1756,7 +2997,7 @@
       "precio": 25.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P9Qo"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
     },
     {
       "fuente": "renfe",
@@ -1773,7 +3014,7 @@
       "precio": 25.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_My4v"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
     },
     {
       "fuente": "renfe",
@@ -1790,7 +3031,7 @@
       "precio": 25.7,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P9Qo"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
     },
     {
       "fuente": "renfe",
@@ -1807,7 +3048,7 @@
       "precio": 26.65,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_My4v"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
     },
     {
       "fuente": "renfe",
@@ -1824,7 +3065,7 @@
       "precio": 27.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P9Qo"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
     },
     {
       "fuente": "renfe",
@@ -1841,7 +3082,7 @@
       "precio": 29.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_My4v"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
     },
     {
       "fuente": "renfe",
@@ -1858,7 +3099,7 @@
       "precio": 32.2,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P9Qo"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
     },
     {
       "fuente": "renfe",
@@ -1875,7 +3116,7 @@
       "precio": 35.2,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_My4v"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
     },
     {
       "fuente": "renfe",
@@ -1892,7 +3133,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_My4v"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
     },
     {
       "fuente": "renfe",
@@ -1909,7 +3150,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_My4v"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
     },
     {
       "fuente": "renfe",
@@ -1926,7 +3167,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_My4v"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
     },
     {
       "fuente": "ouigo",
@@ -1960,7 +3201,7 @@
       "precio": 49.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P9Qo"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
     },
     {
       "fuente": "renfe",
@@ -1977,7 +3218,7 @@
       "precio": 49.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P9Qo"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
     },
     {
       "fuente": "renfe",
@@ -1994,7 +3235,7 @@
       "precio": 52.7,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P9Qo"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
     },
     {
       "fuente": "renfe",
@@ -2011,7 +3252,7 @@
       "precio": 53.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_My4v"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
     },
     {
       "fuente": "renfe",
@@ -2028,7 +3269,24 @@
       "precio": 15.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_MTOu"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-02",
+      "salida": "06:15",
+      "llegada": "09:16",
+      "duracion_min": 181,
+      "precio": 15.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_hFHY"
     },
     {
       "fuente": "ouigo",
@@ -2079,7 +3337,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_MTOu"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
     },
     {
       "fuente": "renfe",
@@ -2096,7 +3354,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_MTOu"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
     },
     {
       "fuente": "renfe",
@@ -2113,7 +3371,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_MTOu"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
     },
     {
       "fuente": "ouigo",
@@ -2137,6 +3395,40 @@
       "operador": "Renfe",
       "sentido": "ida",
       "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-02",
+      "salida": "10:00",
+      "llegada": "12:14",
+      "duracion_min": 134,
+      "precio": 26.35,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_hFHY"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-02",
+      "salida": "07:00",
+      "llegada": "10:56",
+      "duracion_min": 236,
+      "precio": 27.3,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_hFHY"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
       "destino": "Alicante Terminal",
       "origen_id": "madrid_chamartin",
       "destino_id": "alicante",
@@ -2147,7 +3439,7 @@
       "precio": 28.15,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_MTOu"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
     },
     {
       "fuente": "ouigo",
@@ -2181,7 +3473,7 @@
       "precio": 29.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_MTOu"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
     },
     {
       "fuente": "ouigo",
@@ -2205,6 +3497,23 @@
       "operador": "Renfe",
       "sentido": "ida",
       "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-02",
+      "salida": "17:00",
+      "llegada": "20:14",
+      "duracion_min": 194,
+      "precio": 34.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_hFHY"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
       "destino": "Alicante Terminal",
       "origen_id": "madrid_chamartin",
       "destino_id": "alicante",
@@ -2215,7 +3524,7 @@
       "precio": 35.55,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_MTOu"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
     },
     {
       "fuente": "renfe",
@@ -2232,7 +3541,24 @@
       "precio": 36.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_MTOu"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-02",
+      "salida": "10:30",
+      "llegada": "14:06",
+      "duracion_min": 216,
+      "precio": 36.3,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_hFHY"
     },
     {
       "fuente": "renfe",
@@ -2249,7 +3575,7 @@
       "precio": 36.4,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_MTOu"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
     },
     {
       "fuente": "renfe",
@@ -2266,7 +3592,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_MTOu"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
     },
     {
       "fuente": "renfe",
@@ -2283,7 +3609,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_MTOu"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
     },
     {
       "fuente": "renfe",
@@ -2300,7 +3626,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_MTOu"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
     },
     {
       "fuente": "renfe",
@@ -2317,7 +3643,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_MTOu"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
     },
     {
       "fuente": "renfe",
@@ -2334,7 +3660,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_MTOu"
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
     },
     {
       "fuente": "ouigo",
@@ -2352,6 +3678,74 @@
       "tarifa": "Básica",
       "plazas": null,
       "url": "https://www.ouigo.com/es/"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-02",
+      "salida": "19:15",
+      "llegada": "21:35",
+      "duracion_min": 140,
+      "precio": 52.7,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_hFHY"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-02",
+      "salida": "14:00",
+      "llegada": "17:21",
+      "duracion_min": 201,
+      "precio": 72.9,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_hFHY"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-03",
+      "salida": "06:15",
+      "llegada": "09:16",
+      "duracion_min": 181,
+      "precio": 15.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_0owU"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-03",
+      "salida": "06:15",
+      "llegada": "08:48",
+      "duracion_min": 153,
+      "precio": 15.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
     },
     {
       "fuente": "ouigo",
@@ -2437,6 +3831,159 @@
       "tarifa": "Básica",
       "plazas": null,
       "url": "https://www.ouigo.com/es/"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-03",
+      "salida": "17:00",
+      "llegada": "19:34",
+      "duracion_min": 154,
+      "precio": 19.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-03",
+      "salida": "11:45",
+      "llegada": "14:45",
+      "duracion_min": 180,
+      "precio": 21.1,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-03",
+      "salida": "20:00",
+      "llegada": "22:52",
+      "duracion_min": 172,
+      "precio": 21.85,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-03",
+      "salida": "10:00",
+      "llegada": "12:14",
+      "duracion_min": 134,
+      "precio": 21.95,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_0owU"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-03",
+      "salida": "09:00",
+      "llegada": "11:30",
+      "duracion_min": 150,
+      "precio": 22.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-03",
+      "salida": "16:00",
+      "llegada": "18:34",
+      "duracion_min": 154,
+      "precio": 22.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-03",
+      "salida": "18:00",
+      "llegada": "20:23",
+      "duracion_min": 143,
+      "precio": 22.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-03",
+      "salida": "19:00",
+      "llegada": "21:28",
+      "duracion_min": 148,
+      "precio": 22.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-03",
+      "salida": "17:00",
+      "llegada": "20:14",
+      "duracion_min": 194,
+      "precio": 24.1,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_0owU"
     },
     {
       "fuente": "ouigo",
@@ -2456,6 +4003,176 @@
       "url": "https://www.ouigo.com/es/"
     },
     {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-03",
+      "salida": "12:00",
+      "llegada": "14:28",
+      "duracion_min": 148,
+      "precio": 26.65,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-03",
+      "salida": "19:00",
+      "llegada": "22:14",
+      "duracion_min": 194,
+      "precio": 27.3,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_0owU"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-03",
+      "salida": "12:00",
+      "llegada": "15:14",
+      "duracion_min": 194,
+      "precio": 31.7,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_0owU"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-03",
+      "salida": "09:45",
+      "llegada": "12:05",
+      "duracion_min": 140,
+      "precio": 44.45,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-03",
+      "salida": "10:30",
+      "llegada": "13:31",
+      "duracion_min": 181,
+      "precio": 45.5,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-03",
+      "salida": "10:30",
+      "llegada": "14:06",
+      "duracion_min": 216,
+      "precio": 45.7,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_0owU"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-03",
+      "salida": "12:30",
+      "llegada": "16:54",
+      "duracion_min": 264,
+      "precio": 53.7,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-03",
+      "salida": "12:30",
+      "llegada": "17:21",
+      "duracion_min": 291,
+      "precio": 54.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_0owU"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-04",
+      "salida": "06:15",
+      "llegada": "09:16",
+      "duracion_min": 181,
+      "precio": 15.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F8of"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-04",
+      "salida": "06:15",
+      "llegada": "08:48",
+      "duracion_min": 153,
+      "precio": 15.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+    },
+    {
       "fuente": "ouigo",
       "operador": "Ouigo",
       "sentido": "ida",
@@ -2490,6 +4207,108 @@
       "url": "https://www.ouigo.com/es/"
     },
     {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-04",
+      "salida": "10:00",
+      "llegada": "12:14",
+      "duracion_min": 134,
+      "precio": 21.95,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F8of"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-04",
+      "salida": "09:00",
+      "llegada": "11:30",
+      "duracion_min": 150,
+      "precio": 22.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-04",
+      "salida": "09:45",
+      "llegada": "12:05",
+      "duracion_min": 140,
+      "precio": 22.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-04",
+      "salida": "17:00",
+      "llegada": "19:34",
+      "duracion_min": 154,
+      "precio": 29.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-04",
+      "salida": "10:30",
+      "llegada": "13:31",
+      "duracion_min": 181,
+      "precio": 31.3,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-04",
+      "salida": "10:30",
+      "llegada": "14:06",
+      "duracion_min": 216,
+      "precio": 31.6,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F8of"
+    },
+    {
       "fuente": "ouigo",
       "operador": "Ouigo",
       "sentido": "ida",
@@ -2507,6 +4326,23 @@
       "url": "https://www.ouigo.com/es/"
     },
     {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-04",
+      "salida": "17:00",
+      "llegada": "20:14",
+      "duracion_min": 194,
+      "precio": 34.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F8of"
+    },
+    {
       "fuente": "ouigo",
       "operador": "Ouigo",
       "sentido": "ida",
@@ -2522,6 +4358,159 @@
       "tarifa": "Básica",
       "plazas": null,
       "url": "https://www.ouigo.com/es/"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-04",
+      "salida": "12:00",
+      "llegada": "14:28",
+      "duracion_min": 148,
+      "precio": 35.55,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-04",
+      "salida": "15:00",
+      "llegada": "17:17",
+      "duracion_min": 137,
+      "precio": 35.55,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-04",
+      "salida": "18:00",
+      "llegada": "20:23",
+      "duracion_min": 143,
+      "precio": 35.55,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-04",
+      "salida": "19:00",
+      "llegada": "21:28",
+      "duracion_min": 148,
+      "precio": 35.55,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-04",
+      "salida": "19:45",
+      "llegada": "22:20",
+      "duracion_min": 155,
+      "precio": 35.55,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-04",
+      "salida": "20:00",
+      "llegada": "22:52",
+      "duracion_min": 172,
+      "precio": 36.4,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-04",
+      "salida": "12:00",
+      "llegada": "15:14",
+      "duracion_min": 194,
+      "precio": 40.6,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F8of"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-04",
+      "salida": "11:45",
+      "llegada": "14:45",
+      "duracion_min": 180,
+      "precio": 42.25,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-04",
+      "salida": "16:00",
+      "llegada": "18:34",
+      "duracion_min": 154,
+      "precio": 44.45,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
     },
     {
       "fuente": "ouigo",
@@ -2556,6 +4545,57 @@
       "tarifa": "Básica",
       "plazas": null,
       "url": "https://www.ouigo.com/es/"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-04",
+      "salida": "19:15",
+      "llegada": "21:35",
+      "duracion_min": 140,
+      "precio": 52.7,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F8of"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-04",
+      "salida": "12:30",
+      "llegada": "16:54",
+      "duracion_min": 264,
+      "precio": 68.6,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+    },
+    {
+      "fuente": "renfe",
+      "operador": "Renfe",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-04",
+      "salida": "12:30",
+      "llegada": "17:21",
+      "duracion_min": 291,
+      "precio": 69.0,
+      "tarifa": "Precio desde",
+      "plazas": null,
+      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F8of"
     }
   ]
 }
