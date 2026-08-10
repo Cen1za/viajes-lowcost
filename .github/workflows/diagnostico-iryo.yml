@@ -1,0 +1,42 @@
+name: Diagnóstico de iryo
+
+# iryo funciona en un PC de casa pero devuelve cero desde GitHub: no encuentra
+# el selector de "solo ida", lo que significa que la página que le sirven aquí
+# no es la que vemos nosotros. Este workflow no busca precios: solo abre iryo
+# desde el runner y sube una captura y el HTML para poder MIRAR qué recibe.
+#
+# Se lanza a mano. Descarga los artefactos desde la pestaña Actions.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  mirar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Instalar los navegadores
+        run: playwright install --with-deps chromium chrome
+
+      - name: Abrir iryo y fotografiar lo que salga
+        # Con xvfb hay una pantalla de verdad, así que también se puede probar
+        # el navegador sin modo headless, que es la candidata a arreglarlo.
+        run: xvfb-run -a python scripts/diagnostico_iryo.py
+
+      - name: Subir las pruebas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: iryo-visto-desde-github
+          path: diagnostico/
+          if-no-files-found: warn

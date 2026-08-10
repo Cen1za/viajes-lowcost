@@ -20,3 +20,6 @@ web/public/data/
 
 .vercel
 .env*
+
+# Salida del diagnóstico de iryo (capturas y HTML, se regeneran)
+diagnostico/

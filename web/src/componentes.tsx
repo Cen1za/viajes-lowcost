@@ -265,6 +265,77 @@ export function Chip({
   )
 }
 
+/* --- Plan de finde (modo "Mejor precio") ---------------------------------- */
+
+/**
+ * Un finde resuelto en una tarjeta: la ida y la vuelta más baratas de tus días
+ * y el total del viaje.
+ *
+ * Con la lista completa hay que sumar de cabeza dos precios entre decenas de
+ * tarjetas; aquí la cuenta ya está hecha, que es la pregunta real: cuánto me
+ * cuesta ir este finde.
+ */
+export function TarjetaPlan({ ida, vuelta }: { ida?: Tren; vuelta?: Tren }) {
+  const total = (ida?.precio ?? 0) + (vuelta?.precio ?? 0)
+  const completo = Boolean(ida && vuelta)
+
+  return (
+    <article className="plan">
+      <div className="plan-total">
+        <span>{completo ? 'Ida y vuelta' : ida ? 'Solo ida' : 'Solo vuelta'}</span>
+        <strong>{euros(total)}</strong>
+      </div>
+
+      {ida && <Tramo tren={ida} />}
+      {vuelta && <Tramo tren={vuelta} />}
+
+      {!completo && (
+        <p className="plan-aviso">
+          {ida
+            ? 'Todavía no hay precios de vuelta para tu día.'
+            : 'Todavía no hay precios de ida para tu día.'}
+        </p>
+      )}
+    </article>
+  )
+}
+
+function Tramo({ tren }: { tren: Tren }) {
+  const marca = compania(tren.operador)
+  const punta = destinoDelViaje(tren.origen_id, tren.destino_id)
+  const esVuelta = tren.sentido === 'vuelta'
+
+  return (
+    <a
+      className="tramo"
+      href={tren.url}
+      target="_blank"
+      rel="noreferrer"
+      style={{ ['--color-compania' as string]: marca.color }}
+    >
+      <span className="marbete">{esVuelta ? 'Vuelta' : 'Ida'}</span>
+      <span className="detalle">
+        <span className="arriba">
+          <strong>{fechaCorta(tren.fecha)}</strong>
+          <span className="sello" style={{ background: marca.suave, color: marca.color }}>
+            {marca.nombre}
+          </span>
+          <span
+            className="sello destino"
+            style={{ background: punta.suave, color: punta.color }}
+          >
+            {punta.nombre}
+          </span>
+        </span>
+        <span className="abajo">
+          {tren.salida} → {tren.llegada} · {duracion(tren.duracion_min)}
+        </span>
+      </span>
+      <span className="importe">{euros(tren.precio)}</span>
+    </a>
+  )
+}
+
 /* --- Tarjeta de tren ------------------------------------------------------ */
 
 export function TarjetaTren({

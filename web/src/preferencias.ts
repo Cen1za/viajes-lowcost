@@ -58,15 +58,23 @@ export interface Preferencias {
   sentido: string
   /** Ocultar los trenes que llegan a Alicante y obligan a un traslado. */
   soloDirectos: boolean
+  /**
+   * Resumir cada finde en un solo plan: la ida y la vuelta más baratas de tus
+   * días, con el total. Usa los mismos días y franjas que el resto de filtros.
+   */
+  mejorPrecio: boolean
 }
 
 const POR_DEFECTO: Preferencias = {
   franjas: [],
   companias: [],
-  diasIda: [4, 5], // jueves y viernes
-  diasVuelta: [1, 2], // lunes y martes
+  //: El finde de toda la vida: se sale el viernes y se vuelve el lunes. Es el
+  //: punto de partida de "Mejor precio"; en Ajustes se añaden más días.
+  diasIda: [5],
+  diasVuelta: [1],
   sentido: 'todo',
   soloDirectos: false,
+  mejorPrecio: false,
 }
 
 const CLAVE = 'viajes-lowcost:preferencias'

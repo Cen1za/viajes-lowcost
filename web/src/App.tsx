@@ -10,6 +10,7 @@ import {
   Iconos,
   ProgresoActualizacion,
   Seccion,
+  TarjetaPlan,
   TarjetaTren,
   Vacio,
 } from './componentes'
@@ -102,10 +103,13 @@ function Filtros({
   companias,
   diasPresentes,
   conHorario = true,
+  conMejorPrecio = false,
 }: Prefs & {
   companias: ReturnType<typeof companiasPresentes>
   diasPresentes: number[]
   conHorario?: boolean
+  /** El botón solo aparece donde hay una lista que resumir. */
+  conMejorPrecio?: boolean
 }) {
   const [abierto, setAbierto] = useState(false)
 
@@ -118,20 +122,35 @@ function Filtros({
     (prefs.soloDirectos ? 1 : 0)
 
   const hayMas = companias.length > 1 || conHorario
+  const enPlan = conMejorPrecio && prefs.mejorPrecio
 
   return (
     <div className="filtros">
       <div className="chips linea">
-        {(['todo', 'ida', 'vuelta'] as const).map((s) => (
-          <Chip
-            key={s}
-            neutro
-            activo={prefs.sentido === s}
-            onClick={() => cambiar('sentido', s)}
+        {conMejorPrecio && (
+          <button
+            className="chip mejor"
+            aria-pressed={prefs.mejorPrecio}
+            onClick={() => cambiar('mejorPrecio', !prefs.mejorPrecio)}
           >
-            {s === 'todo' ? 'Todo' : s === 'ida' ? 'Ida' : 'Vuelta'}
-          </Chip>
-        ))}
+            {Iconos.ofertas}
+            Mejor precio
+          </button>
+        )}
+
+        {/* En modo plan cada finde ya lleva su ida y su vuelta: elegir sentido
+            no querría decir nada. */}
+        {!enPlan &&
+          (['todo', 'ida', 'vuelta'] as const).map((s) => (
+            <Chip
+              key={s}
+              neutro
+              activo={prefs.sentido === s}
+              onClick={() => cambiar('sentido', s)}
+            >
+              {s === 'todo' ? 'Todo' : s === 'ida' ? 'Ida' : 'Vuelta'}
+            </Chip>
+          ))}
 
         {hayMas && (
           <button
@@ -246,6 +265,21 @@ function VistaOfertas(prefs: Prefs) {
   const filtrados = useMemo(() => filtrar(todos, prefs.prefs), [todos, prefs.prefs])
   const findes = useMemo(() => agruparPorFinde(filtrados), [filtrados])
 
+  // En modo plan hacen falta los dos sentidos aunque el chip diga otra cosa:
+  // un finde sin vuelta no es un viaje.
+  const planes = useMemo(() => {
+    if (!prefs.prefs.mejorPrecio) return []
+    const ambos = filtrar(todos, { ...prefs.prefs, sentido: 'todo' })
+    return agruparPorFinde(ambos).map((finde) => {
+      const trenes = finde.dias.flatMap((d) => d.elementos)
+      const barato = (sentido: string) =>
+        trenes
+          .filter((t) => (t.sentido === 'vuelta') === (sentido === 'vuelta'))
+          .sort((a, b) => a.precio - b.precio)[0]
+      return { finde, ida: barato('ida'), vuelta: barato('vuelta') }
+    })
+  }, [todos, prefs.prefs])
+
   // Las gangas siguen mandando: son el motivo de que exista la app. Van
   // arriba, con su motivo, y aparte de la lista completa.
   const destacadas = useMemo(
@@ -273,8 +307,63 @@ function VistaOfertas(prefs: Prefs) {
   return (
     <>
       <ProgresoActualizacion actualizado={datos.actualizado} />
-      <Filtros {...prefs} companias={companias} diasPresentes={diasDe(todos)} />
+      <Filtros
+        {...prefs}
+        companias={companias}
+        diasPresentes={diasDe(todos)}
+        conMejorPrecio
+      />
 
+      {prefs.prefs.mejorPrecio ? (
+        <>
+          <Seccion titulo="Mejor precio por finde" apunte={diasDelPlan(prefs.prefs)} />
+          {planes.length ? (
+            planes.map(({ finde, ida, vuelta }) => (
+              <section key={finde.desde} className="grupo">
+                <CabeceraFinde {...finde} />
+                <TarjetaPlan ida={ida} vuelta={vuelta} />
+              </section>
+            ))
+          ) : (
+            <Vacio icono="🎚️" titulo="Ningún finde pasa los filtros">
+              Cambia los días o el horario en Ajustes, que es de donde salen.
+            </Vacio>
+          )}
+        </>
+      ) : (
+        <ListaCompleta
+          destacadas={destacadas}
+          sinHistorico={sinHistorico}
+          filtrados={filtrados}
+          findes={findes}
+        />
+      )}
+    </>
+  )
+}
+
+/** Los días que está usando el plan, para recordar de dónde salen. */
+function diasDelPlan(prefs: Prefs['prefs']): string {
+  const nombres = (dias: number[]) =>
+    dias.length
+      ? dias.map((d) => DIAS_SEMANA.find((s) => s.dia === d)?.corto).join('')
+      : 'todos'
+  return `ida ${nombres(prefs.diasIda)} · vuelta ${nombres(prefs.diasVuelta)}`
+}
+
+function ListaCompleta({
+  destacadas,
+  sinHistorico,
+  filtrados,
+  findes,
+}: {
+  destacadas: Gangas['ofertas']
+  sinHistorico: boolean
+  filtrados: Tren[]
+  findes: ReturnType<typeof agruparPorFinde<Tren>>
+}) {
+  return (
+    <>
       {destacadas.length > 0 && (
         <>
           <Seccion
@@ -627,6 +716,24 @@ function VistaAjustes({ prefs, cambiar, alternar, alternarDia, limpiar }: Prefs)
       </div>
 
       <Seccion titulo="Tus viajes" />
+
+      <button
+        className="ficha interruptor"
+        aria-pressed={prefs.mejorPrecio}
+        onClick={() => cambiar('mejorPrecio', !prefs.mejorPrecio)}
+      >
+        <span className="ficha-icono">{Iconos.ofertas}</span>
+        <span className="interruptor-texto">
+          <strong>Mejor precio</strong>
+          <span>
+            Resume cada finde en un plan: la ida y la vuelta más baratas de tus
+            días, con el total. Usa los días y el horario de aquí abajo.
+          </span>
+        </span>
+        <span className="palanca">
+          <span />
+        </span>
+      </button>
 
       <Ficha icono={Iconos.calendario} titulo="Días de viaje" valor="Madrid ⇄ Elche">
         {(

@@ -653,6 +653,109 @@ main {
   margin-top: 14px;
 }
 
+/* --- Plan de finde (modo "Mejor precio") ---------------------------------- */
+
+.plan {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--r-m);
+  box-shadow: var(--sombra);
+  overflow: hidden;
+}
+
+.plan-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 14px;
+  background: var(--marca-suave);
+  border-bottom: 1px solid var(--marca-clara);
+  color: var(--marca);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.plan-total strong {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-transform: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.tramo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border-left: 4px solid var(--color-compania, var(--borde-fuerte));
+  text-decoration: none;
+  color: inherit;
+}
+
+.tramo + .tramo {
+  border-top: 1px solid var(--borde);
+}
+
+.tramo:active {
+  background: var(--fondo);
+}
+
+.tramo .marbete {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  margin-top: 2px;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background: var(--tinta);
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.tramo .detalle {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.tramo .arriba {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 0.8rem;
+}
+
+.tramo .abajo {
+  font-size: 0.76rem;
+  color: var(--tinta-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+.tramo .importe {
+  margin-left: auto;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.plan-aviso {
+  margin: 0;
+  padding: 10px 14px;
+  border-top: 1px solid var(--borde);
+  background: #fffbeb;
+  color: var(--alerta);
+  font-size: 0.76rem;
+}
+
 /* --- Agrupación por día --------------------------------------------------- */
 
 .grupo {
@@ -830,6 +933,28 @@ main {
   padding: 4px 10px;
   font-size: 0.75rem;
   font-weight: 700;
+}
+
+/* El botón que resume el finde: es el atajo de la pantalla, así que va en
+   rosa y el primero de la fila. */
+.chip.mejor {
+  gap: 5px;
+  border-color: var(--marca-clara);
+  background: var(--marca-suave);
+  color: var(--marca);
+}
+
+.chip.mejor svg {
+  width: 13px;
+  height: 13px;
+  stroke-width: 2;
+}
+
+.chip.mejor[aria-pressed='true'] {
+  background: var(--marca-degradado);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 2px 7px rgba(179, 18, 107, 0.28);
 }
 
 .chip.mas {
