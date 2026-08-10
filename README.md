@@ -26,8 +26,27 @@ GitHub Actions (cron)
 | **Ouigo** | funcionando | API JSON propia. Rápida (~1 s por consulta). |
 | **Renfe** (AVE y Avlo) | funcionando | Navegador real con Playwright. Lenta (~30 s por consulta). |
 | iryo | pendiente | Ver el diagnóstico más abajo. |
-| Trainline | pendiente | Su búsqueda está protegida con DataDome (403). Su API de estaciones sí responde sin problema. |
-| Omio, trenes.com, promociones | pendiente | — |
+| eDreams | pendiente | Sí vende trenes. Ver el diagnóstico más abajo. |
+| Trainline | pendiente | Su búsqueda está protegida con DataDome (403 y captcha). Su API de estaciones sí responde sin problema. |
+| Omio, trenes.com, promociones | pendiente | Omio carga sin bloqueo, es la siguiente candidata razonable. |
+
+> **Corrección:** al empezar este proyecto se dio por hecho que eDreams no
+> vendía trenes. Es falso: `edreams.es/trenes` existe y vende AVE, igual que
+> Rumbo, del mismo grupo. Groupon y Oferplan sí siguen siendo cupones de ocio
+> y no venden billetes de tren.
+
+### Diagnóstico de eDreams (para quien lo retome)
+
+- Tiene buscador de trenes propio en `https://www.edreams.es/trenes/`, con
+  campos "¿Desde dónde sales?", "¿A dónde vas?" y botón "Buscar trenes".
+- Su backend es **GraphQL**: `POST /frontend-api/service/graphql`. Ahí es donde
+  hay que mirar, interceptando la petición de una búsqueda real.
+- Dos obstáculos encontrados: un modal de login (`[data-testid=modal-backdrop]`)
+  tapa el formulario al cargar —se quita con `Escape`— y el desplegable del
+  autocompletado no aparece bajo `li` ni `[role=option]`, así que hay que
+  localizar su contenedor real.
+- **No tiene URLs de resultados**: `/trenes/madrid-elche/` da 404 y el patrón
+  `#/results/...` de sus vuelos no vale para trenes.
 
 ### Diagnóstico de iryo (para quien lo retome)
 
