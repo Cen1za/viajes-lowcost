@@ -6,6 +6,7 @@ import {
   Cargando,
   Chip,
   Iconos,
+  ProgresoActualizacion,
   Seccion,
   TarjetaTren,
   Vacio,
@@ -244,12 +245,10 @@ function VistaOfertas(prefs: Prefs) {
 
   return (
     <>
+      <ProgresoActualizacion actualizado={datos.actualizado} />
       <Filtros {...prefs} companias={companias} diasPresentes={diasDe(todas)} />
 
-      <Seccion
-        titulo={`${filtradas.length} ofertas en ${porDia.length} días`}
-        apunte={desde(datos.actualizado)}
-      />
+      <Seccion titulo={`${filtradas.length} ofertas en ${porDia.length} días`} />
 
       {sinHistorico && (
         <div className="nota">
@@ -371,16 +370,14 @@ function VistaCalendario(prefs: Prefs) {
 
   return (
     <>
+      <ProgresoActualizacion actualizado={datos.actualizado} />
       <Filtros
         {...prefs}
         companias={[]}
         diasPresentes={diasDe(dias)}
         conHorario={false}
       />
-      <Seccion
-        titulo={`${visibles.length} días con precio`}
-        apunte={desde(datos.actualizado)}
-      />
+      <Seccion titulo={`${visibles.length} días con precio`} />
 
       {visibles.map((dia) => (
         <section
@@ -449,12 +446,10 @@ function VistaTrenes(prefs: Prefs) {
 
   return (
     <>
+      <ProgresoActualizacion actualizado={datos.actualizado} />
       <Filtros {...prefs} companias={companias} diasPresentes={diasDe(todos)} />
 
-      <Seccion
-        titulo={`${filtrados.length} trenes en ${porDia.length} días`}
-        apunte={desde(datos.actualizado)}
-      />
+      <Seccion titulo={`${filtrados.length} trenes en ${porDia.length} días`} />
 
       {porDia.length ? (
         porDia.map((grupo) => (

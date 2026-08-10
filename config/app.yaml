@@ -79,8 +79,9 @@ fuentes:
   # Verificadas y funcionando:
   ouigo: true      # API JSON propia, rápida
   renfe: true      # navegador real (AVE y Avlo), la más lenta y frágil
-  # A medias: ya carga con Chrome real y abre su buscador, pero falta dar con
-  # el selector de las opciones del desplegable de estaciones. Ver iryo.py.
+  # Casi listo, pero desactivado: su botón de buscar sigue deshabilitado
+  # porque Angular no da el formulario por válido. Ver iryo.py.
+  # Aunque funcione solo aportaría Madrid ⇄ Alicante: no llega a Elche.
   iryo: false
   trainline: false
   omio: false

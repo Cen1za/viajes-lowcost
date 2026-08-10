@@ -1,6 +1,6 @@
-import { useState, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { compania } from './companias'
-import { duracion, euros, fechaCorta, fechaLarga } from './datos'
+import { desde, duracion, euros, fechaCorta, fechaLarga } from './datos'
 import { destinoDelViaje } from './destinos'
 import type { Tren } from './tipos'
 
@@ -41,6 +41,51 @@ export const Iconos = {
 }
 
 /* --- Piezas sueltas ------------------------------------------------------- */
+
+/**
+ * Barra que muestra cuánto falta para la próxima búsqueda.
+ *
+ * El cron corre a los :05 de cada hora, así que el hueco es predecible y se
+ * puede dibujar: se ve de un vistazo si los precios acaban de refrescarse o
+ * si están a punto de hacerlo.
+ */
+export function ProgresoActualizacion({ actualizado }: { actualizado: string }) {
+  const [ahora, setAhora] = useState(() => Date.now())
+
+  useEffect(() => {
+    const t = setInterval(() => setAhora(Date.now()), 30_000)
+    return () => clearInterval(t)
+  }, [])
+
+  const siguiente = new Date(ahora)
+  siguiente.setMinutes(5, 0, 0)
+  if (siguiente.getTime() <= ahora) siguiente.setHours(siguiente.getHours() + 1)
+
+  const faltan = Math.max(0, Math.round((siguiente.getTime() - ahora) / 60000))
+  const transcurrido = Math.min(100, Math.max(2, ((60 - faltan) / 60) * 100))
+  const desfasado = ahora - new Date(actualizado).getTime() > 3 * 3600_000
+
+  return (
+    <div className="progreso" title={`Próxima búsqueda en ${faltan} min`}>
+      <div className="barra-progreso">
+        <span
+          className={`relleno${desfasado ? ' desfasado' : ''}`}
+          style={{ width: `${transcurrido}%` }}
+        />
+      </div>
+      <span className="leyenda-progreso">
+        {desfasado ? (
+          <strong>Datos de hace más de 3 h</strong>
+        ) : (
+          <>Actualizado {desde(actualizado)}</>
+        )}
+        <span className="siguiente">
+          {faltan <= 1 ? 'buscando ahora' : `siguiente en ${faltan} min`}
+        </span>
+      </span>
+    </div>
+  )
+}
 
 export function Seccion({ titulo, apunte }: { titulo: string; apunte?: ReactNode }) {
   return (

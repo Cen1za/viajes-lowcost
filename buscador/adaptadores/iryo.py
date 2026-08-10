@@ -13,13 +13,22 @@ Dos cosas que costaron encontrar y conviene no volver a perder:
 A cambio, su formulario es de los más limpios: las fechas son `input[type=date]`
 nativos, así que se rellenan directamente sin pelearse con ningún calendario.
 
-ESTADO: a medias, y por eso está desactivado en config/app.yaml.
+ESTADO: casi listo, y por eso está desactivado en config/app.yaml.
 
-Ya funciona: cargar la web, rechazar cookies, marcar "solo ida" y abrir el
-desplegable de estaciones. Lo que falta es **leer las opciones de ese
-desplegable**: no aparecen bajo `li`, `[role=option]` ni `.ilsa-dropdown__item`.
-El siguiente paso es abrirlo con Chrome real y volcar el HTML del contenedor
-que se despliega para ver qué etiqueta usan sus componentes `ilsa-*`.
+Resuelto ya: cargar la web con Chrome real, rechazar cookies, marcar "solo
+ida", elegir origen y destino en sus desplegables (las opciones son
+`.menu__item` dentro de `[data-qa="…-menu"]`, identificado por data-qa y no
+por id, que es lo que costó encontrar) y fijar la fecha por JS.
+
+Lo único que falta: **el botón BUSCAR se queda deshabilitado**. Angular no da
+el formulario por válido, probablemente porque el valor de la fecha se le
+inyecta por JS y su modelo interno no se entera. Caminos a probar: abrir su
+calendario y hacer clic real en el día, como hubo que hacer con Renfe, o
+rellenar además el input visible `.ilsa-datepicker__button-input`.
+
+Y ojo antes de invertir más: **iryo no llega a Elche ni a Murcia**. Sus 15
+estaciones incluyen Alicante Terminal, así que aquí solo aportaría precios de
+Madrid ⇄ Alicante, con los 25 minutos de traslado hasta Elche.
 """
 
 from __future__ import annotations
@@ -35,18 +44,24 @@ from .base import AdaptadorBase, ErrorAdaptador, registrar
 
 INICIO = "https://iryo.eu/es/home"
 
-#: Texto que se escribe en cada desplegable y patrón que debe casar la opción.
-BUSQUEDAS: dict[str, tuple[str, str]] = {
-    "madrid_atocha": ("Madrid", r"ATOCHA"),
-    "madrid_chamartin": ("Madrid", r"CHAMART"),
-    "elche_av": ("Elche", r"ELCHE|ELX"),
-    "alicante": ("Alicante", r"ALICANTE|ALACANT"),
-    "murcia": ("Murcia", r"MURCIA"),
+#: Estaciones que iryo vende, con el patrón que identifica su opción.
+#: OJO: iryo **no llega a Elche ni a Murcia**. En esta ruta solo aporta
+#: precios de Madrid ⇄ Alicante, con los 25 minutos de traslado hasta Elche.
+BUSQUEDAS: dict[str, str] = {
+    "madrid_atocha": r"MADRID ATOCHA",
+    "madrid_chamartin": r"MADRID CHAMARTIN",
+    "alicante": r"ALICANTE",
 }
 
 ORIGEN = "#ilsa-main-search-select-route-dropdown-origin"
 DESTINO = "#ilsa-main-search-select-route-dropdown-destination"
 SOLO_IDA = "#ilsa-main-search-radio-outbound"
+
+#: Las opciones del desplegable. El contenedor se identifica por data-qa, no
+#: por id: cuesta un rato darse cuenta porque el atributo se llama igual.
+def _menu(selector: str) -> str:
+    campo = selector.lstrip("#")
+    return f'[data-qa="{campo}-menu"] .menu__item'
 
 #: Extrae los trenes de la página de resultados. Igual que en Renfe, se buscan
 #: los bloques que contienen precio, dos horas y una duración, en vez de
@@ -168,32 +183,21 @@ class AdaptadorIryo(AdaptadorBase):
                 continue
 
     def _elegir_estacion(self, pagina, selector: str, estacion: Estacion) -> str | None:
-        termino, patron = BUSQUEDAS.get(
-            estacion.id, (estacion.nombre.split()[0], re.escape(_normalizar(estacion.nombre)))
-        )
-        # El input de verdad está oculto dentro de un componente desplegable:
-        # hay que abrir el contenedor visible y solo entonces se puede escribir.
-        campo = pagina.locator(selector).first
-        etiqueta = "Origen" if "origin" in selector else "Destino"
-        for abridor in (
-            lambda: pagina.get_by_text(etiqueta, exact=True).first.click(timeout=8000),
-            lambda: campo.locator("xpath=ancestor::*[self::div][1]").click(timeout=8000),
-            lambda: campo.click(timeout=8000, force=True),
-        ):
-            try:
-                abridor()
-                pagina.wait_for_timeout(1200)
-                break
-            except Exception:
-                continue
+        patron = BUSQUEDAS.get(estacion.id)
+        if patron is None:
+            raise ErrorAdaptador(
+                f"iryo no llega a {estacion.nombre}. Solo opera "
+                f"{', '.join(BUSQUEDAS)} en esta zona."
+            )
 
-        try:
-            campo.fill(termino, timeout=8000)
-        except Exception:
-            pagina.keyboard.type(termino, delay=60)
-        pagina.wait_for_timeout(2500)
+        # El input real está oculto: se abre el desplegable pinchando su
+        # contenedor y se elige de la lista, sin escribir.
+        pagina.locator(
+            f"{selector} >> xpath=ancestor::div[contains(@class,'ilsa-dropdown')][1]"
+        ).first.click(timeout=20000)
+        pagina.wait_for_timeout(2000)
 
-        opciones = pagina.locator("li, [role=option], .ilsa-dropdown__item")
+        opciones = pagina.locator(_menu(selector))
         for i in range(min(opciones.count(), 30)):
             try:
                 etiqueta = opciones.nth(i).inner_text().strip()
@@ -222,12 +226,7 @@ class AdaptadorIryo(AdaptadorBase):
             if not self._elegir_estacion(pagina, DESTINO, consulta.destino):
                 raise ErrorAdaptador(f"iryo: no encuentro el destino {consulta.destino.nombre!r}")
 
-            # Las fechas son input[type=date] nativos: se rellenan y ya.
-            fechas = pagina.locator("input[type=date]")
-            if not fechas.count():
-                raise ErrorAdaptador("iryo: no encuentro el campo de fecha")
-            fechas.first.fill(consulta.fecha.isoformat())
-            pagina.wait_for_timeout(1200)
+            self._fijar_fecha(pagina, consulta.fecha)
 
             pagina.locator("button:has-text('BUSCAR')").first.click(timeout=15000)
             pagina.wait_for_timeout(12000)
@@ -235,6 +234,35 @@ class AdaptadorIryo(AdaptadorBase):
             return self._a_ofertas(pagina.evaluate(JS_EXTRAER), consulta)
         finally:
             pagina.close()
+
+    def _fijar_fecha(self, pagina, fecha: date) -> None:
+        """Rellena la fecha de ida.
+
+        El `input[type=date]` está oculto detrás del calendario propio de iryo,
+        así que Playwright no puede escribir en él. Se le pone el valor por JS
+        y se disparan los eventos que Angular escucha; si no, el formulario se
+        queda con la fecha vieja y busca otro día.
+        """
+        aplicada = pagina.evaluate(
+            """
+            (iso) => {
+              const campo = document.querySelector('input[type=date]');
+              if (!campo) return null;
+              const setter = Object.getOwnPropertyDescriptor(
+                window.HTMLInputElement.prototype, 'value').set;
+              setter.call(campo, iso);
+              campo.dispatchEvent(new Event('input', {bubbles: true}));
+              campo.dispatchEvent(new Event('change', {bubbles: true}));
+              return campo.value;
+            }
+            """,
+            fecha.isoformat(),
+        )
+        if aplicada != fecha.isoformat():
+            raise ErrorAdaptador(
+                f"iryo: la fecha no se aplicó (formulario={aplicada!r}, pedida={fecha})"
+            )
+        pagina.wait_for_timeout(1500)
 
     # -- Normalización ------------------------------------------------------
 
