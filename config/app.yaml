@@ -1,0 +1,73 @@
+# Configuración del buscador de trenes Madrid -> Elche
+# Todos los valores se pueden cambiar sin tocar el código.
+
+pasajeros:
+  adultos: 1
+  # Descuentos que tengas (afectan al precio real en las webs de operador).
+  # Valores posibles: tarjeta_joven, tarjeta_dorada, familia_numerosa
+  descuentos: []
+
+busqueda:
+  # Cuántos días hacia delante barre el modo calendario.
+  horizonte_dias: 90
+  # Si lo dejas vacío busca todos los días. Ejemplo: [viernes, sabado, domingo]
+  dias_semana: []
+  # Filtro de horarios (formato HH:MM). null = sin filtro.
+  hora_min: null
+  hora_max: null
+
+estaciones:
+  origen:
+    - id: madrid_atocha
+      nombre: Madrid Puerta de Atocha
+      principal: true
+      traslado_min: 0
+    - id: madrid_chamartin
+      nombre: Madrid Chamartín
+      principal: false
+      traslado_min: 0
+
+  destino:
+    - id: elche_av
+      nombre: Elche AV
+      principal: true
+      traslado_min: 0
+      nota: Estación de alta velocidad, a unos 7 km del centro de Elche
+    - id: alicante
+      nombre: Alicante Terminal
+      principal: false
+      traslado_min: 25
+      nota: Cercanías C-1 o autobús hasta Elche (~25 min)
+
+ofertas:
+  # Se considera ganga si el precio cae este % o más frente a la mediana histórica.
+  caida_minima_pct: 25
+  # Ventana de histórico usada para calcular la mediana.
+  dias_historico: 30
+  # Además debe ser el mínimo visto en estos últimos días.
+  dias_minimo_reciente: 14
+  # Mientras no haya histórico suficiente se usa este umbral absoluto.
+  dias_minimos_historico: 10
+  umbral_absoluto_eur: 25.0
+  # No repetir la misma alerta dentro de esta ventana.
+  antispam_horas: 24
+
+red:
+  timeout_s: 30
+  pausa_entre_peticiones_s: 3.0
+  reintentos: 2
+  user_agent: >-
+    Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+    (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+
+fuentes:
+  # Verificadas y funcionando:
+  ouigo: true      # API JSON propia, rápida
+  renfe: true      # navegador real (AVE y Avlo), la más lenta y frágil
+  # Pendientes: sus webs bloquean las peticiones directas y necesitan
+  # navegador real, igual que Renfe. Actívalas cuando estén implementadas.
+  iryo: false
+  trainline: false
+  omio: false
+  trenes_com: false
+  promociones: false

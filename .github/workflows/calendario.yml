@@ -1,0 +1,51 @@
+name: Barrido de calendario
+
+# Una vez al día dibuja el mapa de precios de todo el horizonte usando solo
+# las fuentes rápidas (API). El resultado, data/calendario.json, es lo que
+# después usa el workflow de vigilancia para saber en qué días profundizar.
+
+on:
+  schedule:
+    - cron: "30 4 * * *"   # 06:30 en España (horario de verano)
+  workflow_dispatch:
+
+concurrency:
+  group: datos            # nunca dos workflows escribiendo data/ a la vez
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  barrer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Barrer el calendario
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -m buscador buscar --fuentes ouigo --guardar --avisar
+
+      - name: Guardar los datos en el repositorio
+        run: |
+          git config user.name  "buscador-trenes[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --staged --quiet; then
+            echo "Sin cambios en los precios."
+            exit 0
+          fi
+          git commit -m "datos: barrido de calendario $(date -u +'%Y-%m-%d %H:%M')"
+          git pull --rebase --autostash
+          git push

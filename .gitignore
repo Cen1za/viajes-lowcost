@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Node / PWA
+node_modules/
+web/dist/
+web/dev-dist/
+# Copia de trabajo de los precios: la fuente de verdad es data/ en la raíz.
+web/public/data/
+
+# Entorno local (nunca subir tokens)
+.env
+
+# Caché de peticiones
+.cache/

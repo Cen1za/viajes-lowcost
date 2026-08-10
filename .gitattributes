@@ -1,0 +1,7 @@
+# El desarrollo es en Windows y los workflows corren en Linux: normalizamos
+# los finales de línea en el repositorio para que no haya diffs fantasma.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.ico binary

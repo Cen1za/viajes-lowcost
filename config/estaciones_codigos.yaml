@@ -1,0 +1,9 @@
+# Generado por `python -m buscador estaciones`. No editar a mano.
+alicante:
+  ouigo: '7160911'
+elche_av:
+  ouigo: '7103410'
+madrid_atocha:
+  ouigo: '7160000'
+madrid_chamartin:
+  ouigo: '7117000'

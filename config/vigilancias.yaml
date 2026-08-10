@@ -1,0 +1,23 @@
+# Viajes concretos que quieres vigilar con fechas ya decididas.
+# Se revisan en cada ejecución del cron (cada 4 horas).
+# Deja la lista vacía si de momento solo usas el modo calendario.
+
+vigilancias: []
+
+# Ejemplo de cómo se define una vigilancia:
+#
+# vigilancias:
+#   - nombre: Puente de diciembre
+#     origen: madrid_atocha
+#     destino: elche_av
+#     ida: 2026-12-05
+#     vuelta: 2026-12-08
+#     # Avísame en cuanto baje de este precio, además de la detección automática.
+#     precio_objetivo_eur: 40
+#
+#   - nombre: Fin de semana de octubre
+#     origen: madrid_atocha
+#     destino: alicante
+#     ida: 2026-10-16
+#     vuelta: 2026-10-18
+#     precio_objetivo_eur: null

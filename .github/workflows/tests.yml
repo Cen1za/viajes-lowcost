@@ -1,0 +1,32 @@
+name: Tests
+
+# Solo prueban la lógica interna (histórico, detección de gangas, planificación
+# de búsquedas). No tocan ninguna web externa, así que son rápidos y no fallan
+# porque Renfe cambie su HTML.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "buscador/**"
+      - "tests/**"
+      - "requirements*.txt"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt pytest
+
+      - name: Ejecutar los tests
+        run: python -m pytest tests -q

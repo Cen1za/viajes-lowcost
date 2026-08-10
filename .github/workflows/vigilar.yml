@@ -1,0 +1,64 @@
+name: Vigilar precios
+
+# Cada 4 horas revisa dos cosas con TODAS las fuentes (incluida Renfe, que va
+# por navegador y es lenta):
+#   1. los viajes fijos de config/vigilancias.yaml
+#   2. los días más baratos que encontró el barrido de calendario
+# Si algo baja de forma llamativa, llega un aviso a Telegram.
+
+on:
+  schedule:
+    - cron: "15 */4 * * *"
+  workflow_dispatch:
+    inputs:
+      top_dias:
+        description: "Cuántos días baratos revisar por ruta"
+        default: "6"
+
+concurrency:
+  group: datos
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  vigilar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      TOP_DIAS: ${{ inputs.top_dias || '6' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Instalar el navegador para Renfe
+        run: playwright install --with-deps chromium
+
+      - name: Revisar los viajes vigilados
+        run: python -m buscador vigilar --guardar --avisar
+
+      - name: Profundizar en los días más baratos
+        run: python -m buscador buscar --top-dias "$TOP_DIAS" --guardar --avisar
+
+      - name: Guardar los datos en el repositorio
+        run: |
+          git config user.name  "buscador-trenes[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --staged --quiet; then
+            echo "Sin cambios en los precios."
+            exit 0
+          fi
+          git commit -m "datos: vigilancia $(date -u +'%Y-%m-%d %H:%M')"
+          git pull --rebase --autostash
+          git push
