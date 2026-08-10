@@ -29,6 +29,12 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
+        // Sin esto, tras un despliegue la app sigue mostrando la versión
+        // anterior hasta que se cierran todas sus pestañas. Con la app
+        // instalada en el móvil eso puede ser días.
+        skipWaiting: true,
+        clientsClaim: true,
+        cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
             // Los datos se sirven de red primero, pero quedan cacheados para
