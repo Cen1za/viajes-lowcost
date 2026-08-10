@@ -408,9 +408,11 @@ export function TarjetaTren({
 
       {motivo && <div className="motivo">{motivo}</div>}
 
-      {/* Ninguna web de tren permite enlazar a un billete concreto, así que en
-          vez de fingirlo se abre la del operador y se ofrece copiar los datos
-          para pegarlos en su buscador. */}
+      {/* Ninguna web permite enlazar a un billete concreto. La de eDreams al
+          menos deja la búsqueda hecha (ruta y día puestos); las demás solo
+          abren su portada, y por eso se ofrece copiar los datos para pegarlos
+          en su buscador. El botón dice a dónde lleva de verdad: poner aquí el
+          nombre del operador haría creer que abre Renfe cuando abre eDreams. */}
       <div className="acciones">
         <BotonCopiar tren={tren} />
         <a
@@ -420,7 +422,7 @@ export function TarjetaTren({
           rel="noreferrer"
           style={{ background: marca.color, borderColor: marca.color }}
         >
-          Abrir {marca.nombre} ↗
+          {tren.fuente === 'edreams' ? 'Ver en eDreams ↗' : `Abrir ${marca.nombre} ↗`}
         </a>
       </div>
     </article>
