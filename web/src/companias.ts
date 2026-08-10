@@ -2,9 +2,12 @@
  * Identidad visual de cada operador.
  *
  * El color es lo que permite reconocer de un vistazo quién vende cada billete
- * sin tener que leer: cada tarjeta lleva el borde de su compañía. Los tonos
- * están tomados de las marcas reales, pero ajustados para que todos tengan
- * contraste suficiente sobre blanco.
+ * sin tener que leer: cada tarjeta lleva el borde de su compañía.
+ *
+ * Los tonos salen de las marcas reales pero están oscurecidos hasta que todos
+ * alcanzan 4.5:1 (WCAG AA) sobre su propio fondo tenue, que es donde peor lo
+ * tienen: ahí van los sellos, en texto pequeño. El azul de Ouigo y el gris
+ * genérico se quedaban en 4.3:1 con su tono de marca.
  */
 
 export interface Compania {
@@ -27,7 +30,7 @@ export const COMPANIAS: Compania[] = [
   {
     id: 'Avlo',
     nombre: 'Avlo',
-    color: '#D6006D',
+    color: '#C80066',
     suave: '#FDEBF4',
     descripcion: 'Low cost de Renfe',
   },
@@ -41,7 +44,7 @@ export const COMPANIAS: Compania[] = [
   {
     id: 'Ouigo',
     nombre: 'Ouigo',
-    color: '#0075BE',
+    color: '#0068A8',
     suave: '#E7F2FA',
     descripcion: 'Low cost de SNCF',
   },
@@ -59,7 +62,7 @@ const POR_ID = new Map(COMPANIAS.map((c) => [c.id.toLowerCase(), c]))
 const DESCONOCIDA: Compania = {
   id: 'otro',
   nombre: 'Otro',
-  color: '#64748B',
+  color: '#566275',
   suave: '#F1F5F9',
   descripcion: 'Operador no identificado',
 }
