@@ -1,4 +1,4 @@
-"""Adaptador de Renfe (AVE y Avlo) mediante navegador real.
+﻿"""Adaptador de Renfe (AVE y Avlo) mediante navegador real.
 
 Renfe no expone una API de precios y sus peticiones directas están protegidas,
 pero la web funciona con normalidad desde un navegador. El flujo replicado aquí
@@ -22,6 +22,7 @@ import unicodedata
 from datetime import date, datetime, time, timedelta
 
 from ..config import Config
+from ..enlaces import web_operador
 from ..modelos import Consulta, Estacion, Oferta
 from .base import AdaptadorBase, ErrorAdaptador, registrar
 
@@ -227,7 +228,7 @@ class AdaptadorRenfe(AdaptadorBase):
             pagina.wait_for_timeout(9000)
 
             crudos = pagina.evaluate(JS_EXTRAER)
-            return self._a_ofertas(crudos, consulta, pagina.url)
+            return self._a_ofertas(crudos, consulta)
         finally:
             pagina.close()
 
@@ -277,7 +278,10 @@ class AdaptadorRenfe(AdaptadorBase):
 
     # -- Normalización ------------------------------------------------------
 
-    def _a_ofertas(self, crudos: list[dict], consulta: Consulta, url: str) -> list[Oferta]:
+    def _a_ofertas(self, crudos: list[dict], consulta: Consulta) -> list[Oferta]:
+        # Ojo: NO se guarda pagina.url. La URL de resultados de Renfe lleva un
+        # token de sesión que caduca y solo funciona en el navegador que la
+        # generó; fuera de él no lleva a ninguna parte.
         ofertas = []
         for crudo in crudos:
             try:
@@ -305,7 +309,7 @@ class AdaptadorRenfe(AdaptadorBase):
                     duracion_min=duracion,
                     precio_eur=float(crudo["precio"]),
                     tarifa="Precio desde",
-                    url_compra=url,
+                    url_compra=web_operador(operador),
                 )
             )
         return ofertas

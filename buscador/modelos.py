@@ -65,7 +65,12 @@ class Oferta(BaseModel):
     tarifa: str | None = None
     plazas_restantes: int | None = None
 
+    #: Enlace a la lista de trenes de ese día. Ni Renfe ni Ouigo permiten
+    #: enlazar a un billete concreto, así que apunta a la búsqueda equivalente
+    #: en Trainline, que sí acepta trayecto y fecha en la URL.
     url_compra: str
+    #: Portada del operador, para comprar sin intermediario.
+    url_operador: str | None = None
     capturado_en: datetime = Field(
         default_factory=lambda: datetime.now(timezone.utc).replace(microsecond=0)
     )

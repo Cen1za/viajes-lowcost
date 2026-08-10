@@ -1,4 +1,4 @@
-/* ---------------------------------------------------------------------------
+﻿/* ---------------------------------------------------------------------------
    Sistema visual: claro, mucho blanco y el color reservado a las compañías.
    El único acento cromático fuerte que aparece en la interfaz es el de cada
    operador, para que el color signifique siempre lo mismo.
@@ -265,6 +265,100 @@ main {
   gap: 10px;
 }
 
+/* Dirección del viaje: lo primero que hay que entender de una tarjeta. */
+.rumbo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: -13px -15px 12px;
+  padding: 9px 15px;
+  border-bottom: 1px solid var(--borde);
+  border-radius: var(--r-m) var(--r-m) 0 0;
+  background: var(--fondo);
+}
+
+.rumbo .marbete {
+  flex: 0 0 auto;
+  padding: 2px 9px;
+  border-radius: 5px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.rumbo.ida .marbete {
+  background: var(--tinta);
+  color: #fff;
+}
+
+.rumbo.vuelta .marbete {
+  background: #fff;
+  color: var(--tinta);
+  box-shadow: inset 0 0 0 1.5px var(--tinta);
+}
+
+.rumbo .trayecto {
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: var(--tinta);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rumbo .flecha {
+  color: var(--tinta-suave);
+  padding: 0 2px;
+}
+
+/* --- Botones de acción ---------------------------------------------------- */
+
+.acciones {
+  display: flex;
+  gap: 8px;
+  margin-top: 11px;
+}
+
+.boton {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  border: 1.5px solid var(--borde-fuerte);
+  border-radius: var(--r-s);
+  background: var(--superficie);
+  color: var(--tinta-media);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.boton:active {
+  background: var(--fondo);
+}
+
+.boton.principal {
+  background: var(--tinta);
+  border-color: var(--tinta);
+  color: #fff;
+}
+
+.boton.grande {
+  width: 100%;
+  padding: 12px;
+  font-size: 0.92rem;
+}
+
+.sellos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-width: 0;
+}
+
 .sello {
   display: inline-flex;
   align-items: center;
@@ -275,6 +369,21 @@ main {
   font-weight: 800;
   letter-spacing: 0.03em;
   text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* El sello de destino es cuadrado para no confundirlo con el de compañía. */
+.sello.destino {
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+}
+
+.sello.destino em {
+  font-style: normal;
+  font-weight: 600;
+  opacity: 0.75;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .precio {
@@ -424,56 +533,124 @@ main {
   color: var(--tinta-suave);
 }
 
-/* --- Calendario ----------------------------------------------------------- */
+/* --- Agrupación por día --------------------------------------------------- */
 
-.rejilla {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
-  gap: 7px;
+.grupo {
+  margin-bottom: 20px;
 }
 
-.dia {
+.dia-cabecera {
+  position: sticky;
+  top: 74px;
+  z-index: 10;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  padding: 9px 5px;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px;
+  margin-bottom: 9px;
   border-radius: var(--r-s);
-  border: 1px solid var(--borde);
-  border-top: 3px solid var(--color-compania, var(--borde-fuerte));
+  background: var(--tinta);
+  color: #fff;
+}
+
+.dia-cabecera .titulo {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.dia-cabecera .resumen {
+  font-size: 0.74rem;
+  opacity: 0.82;
+  white-space: nowrap;
+}
+
+.dia-cabecera strong {
+  font-weight: 800;
+  opacity: 1;
+}
+
+/* --- Calendario por fechas ------------------------------------------------ */
+
+.dia-tarjeta {
   background: var(--superficie);
-  text-decoration: none;
-  color: inherit;
+  border: 1px solid var(--borde);
+  border-radius: var(--r-m);
+  padding: 12px 14px;
+  margin-bottom: 9px;
   box-shadow: var(--sombra);
 }
 
-.dia.barato {
-  background: var(--marca-suave);
+.dia-tarjeta.barato {
   border-color: #a7f3d0;
+  background: linear-gradient(180deg, var(--marca-suave) 0%, var(--superficie) 62%);
 }
 
-.dia .fecha {
-  font-size: 0.66rem;
-  color: var(--tinta-suave);
-  font-weight: 600;
-  text-transform: capitalize;
+.dia-tarjeta-alto {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 9px;
+  margin-bottom: 3px;
+  border-bottom: 1px solid var(--borde);
 }
 
-.dia .importe {
-  font-size: 1.02rem;
+.dia-tarjeta-alto .fecha {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.dia-tarjeta-alto .minimo {
+  font-size: 1.12rem;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
 }
 
-.dia.barato .importe {
+.dia-tarjeta.barato .minimo {
   color: var(--ahorro);
 }
 
-.dia .quien {
-  font-size: 0.6rem;
+.dia-linea {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0;
+  font-size: 0.83rem;
+}
+
+.dia-linea + .dia-linea {
+  border-top: 1px dashed var(--borde);
+}
+
+.dia-linea .flecha {
+  color: var(--tinta-suave);
   font-weight: 700;
-  letter-spacing: 0.02em;
+  flex: 0 0 auto;
+}
+
+.dia-linea .quien {
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+
+.dia-linea .importe {
+  margin-left: auto;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.etiqueta-filtro {
+  flex: 0 0 auto;
+  align-self: center;
+  padding-right: 2px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
 }
 
 /* --- Ajustes -------------------------------------------------------------- */
@@ -610,7 +787,6 @@ main {
 
 .fuente .nombre {
   font-weight: 700;
-  text-transform: capitalize;
 }
 
 .fuente .dato {

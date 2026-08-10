@@ -16,6 +16,11 @@ export interface Tren {
   precio: number
   tarifa: string | null
   plazas: number | null
+  /**
+   * Portada del operador. Ninguna web de tren permite enlazar a un billete
+   * ni a una búsqueda concreta, así que la app copia los datos del viaje al
+   * portapapeles para pegarlos allí.
+   */
   url: string
 }
 

@@ -1,6 +1,7 @@
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { compania } from './companias'
-import { duracion, euros, fechaCorta } from './datos'
+import { duracion, euros, fechaCorta, fechaLarga } from './datos'
+import { destinoDelViaje } from './destinos'
 import type { Tren } from './tipos'
 
 /* --- Iconos de la barra inferior (SVG en línea, sin dependencias) --------- */
@@ -46,6 +47,27 @@ export function Seccion({ titulo, apunte }: { titulo: string; apunte?: ReactNode
     <div className="seccion">
       <h2>{titulo}</h2>
       {apunte && <span className="apunte">{apunte}</span>}
+    </div>
+  )
+}
+
+/** Cabecera de un día dentro de una lista agrupada por fecha. */
+export function CabeceraDia({
+  fecha,
+  minimo,
+  cuantos,
+}: {
+  fecha: string
+  minimo: number
+  cuantos: number
+}) {
+  return (
+    <div className="dia-cabecera">
+      <span className="titulo">{fechaLarga(fecha)}</span>
+      <span className="resumen">
+        {cuantos} {cuantos === 1 ? 'tren' : 'trenes'} · desde{' '}
+        <strong>{euros(minimo)}</strong>
+      </span>
     </div>
   )
 }
@@ -108,33 +130,48 @@ export function Chip({
 
 export function TarjetaTren({
   tren,
-  traslado = 0,
   destacado = false,
   motivo,
   rebajaPct,
+  mostrarFecha = true,
 }: {
   tren: Tren
-  traslado?: number
   destacado?: boolean
   motivo?: string
   rebajaPct?: number | null
+  /** Se oculta cuando la tarjeta ya va bajo una cabecera de día. */
+  mostrarFecha?: boolean
 }) {
   const marca = compania(tren.operador)
+  const punta = destinoDelViaje(tren.origen_id, tren.destino_id)
+  const esVuelta = tren.sentido === 'vuelta'
 
   return (
-    <a
+    <article
       className={`tren${destacado ? ' destacado' : ''}`}
-      href={tren.url}
-      target="_blank"
-      rel="noreferrer"
       style={{ ['--color-compania' as string]: marca.color }}
     >
+      {/* La dirección del viaje va arriba y a lo ancho: es lo primero que hay
+          que saber, antes incluso que el precio. */}
+      <div className={`rumbo ${esVuelta ? 'vuelta' : 'ida'}`}>
+        <span className="marbete">{esVuelta ? 'Vuelta' : 'Ida'}</span>
+        <span className="trayecto">
+          {tren.origen} <span className="flecha">→</span> {tren.destino}
+        </span>
+      </div>
+
       <div className="fila-alta">
-        <span
-          className="sello"
-          style={{ background: marca.suave, color: marca.color }}
-        >
-          {marca.nombre}
+        <span className="sellos">
+          <span className="sello" style={{ background: marca.suave, color: marca.color }}>
+            {marca.nombre}
+          </span>
+          <span
+            className="sello destino"
+            style={{ background: punta.suave, color: punta.color }}
+          >
+            {punta.nombre}
+            {punta.traslado > 0 && <em>+{punta.traslado} min</em>}
+          </span>
         </span>
         <span className="precio" style={{ color: destacado ? 'var(--ahorro)' : undefined }}>
           {euros(tren.precio)}
@@ -151,29 +188,60 @@ export function TarjetaTren({
         <span className="hora">{tren.llegada}</span>
       </div>
 
-      <div className="estaciones">
-        <span>{tren.origen}</span>
-        <span>{tren.destino}</span>
-      </div>
-
       <div className="pie">
-        <span className="etiqueta">
-          {tren.sentido === 'vuelta' ? '← Vuelta' : '→ Ida'}
-        </span>
-        <span className="etiqueta">{fechaCorta(tren.fecha)}</span>
-        {traslado > 0 && (
-          <span className="etiqueta aviso">
-            {/* En la vuelta el traslado se hace ANTES de coger el tren. */}
-            +{traslado} min {tren.sentido === 'vuelta' ? 'desde' : 'hasta'} Elche
-          </span>
-        )}
+        {mostrarFecha && <span className="etiqueta">{fechaCorta(tren.fecha)}</span>}
         {tren.plazas != null && tren.plazas <= 10 && (
           <span className="etiqueta aviso">Quedan {tren.plazas}</span>
         )}
-        <span style={{ marginLeft: 'auto' }}>vía {tren.fuente}</span>
+        <span style={{ marginLeft: 'auto' }}>precio visto en {tren.fuente}</span>
       </div>
 
       {motivo && <div className="motivo">{motivo}</div>}
-    </a>
+
+      {/* Ninguna web de tren permite enlazar a un billete concreto, así que en
+          vez de fingirlo se abre la del operador y se ofrece copiar los datos
+          para pegarlos en su buscador. */}
+      <div className="acciones">
+        <BotonCopiar tren={tren} />
+        <a
+          className="boton principal"
+          href={tren.url}
+          target="_blank"
+          rel="noreferrer"
+          style={{ background: marca.color, borderColor: marca.color }}
+        >
+          Abrir {marca.nombre} ↗
+        </a>
+      </div>
+    </article>
+  )
+}
+
+/** Copia los datos del viaje para pegarlos en el buscador del operador. */
+function BotonCopiar({ tren }: { tren: Tren }) {
+  const [copiado, setCopiado] = useState(false)
+
+  const texto = [
+    `${tren.origen} → ${tren.destino}`,
+    fechaLarga(tren.fecha),
+    `Salida ${tren.salida} · llegada ${tren.llegada}`,
+    `${tren.operador} · ${euros(tren.precio)}`,
+  ].join('\n')
+
+  async function copiar() {
+    try {
+      await navigator.clipboard.writeText(texto)
+      setCopiado(true)
+      setTimeout(() => setCopiado(false), 2000)
+    } catch {
+      // Sin permiso de portapapeles (http, navegador antiguo): no pasa nada,
+      // los datos están a la vista en la propia tarjeta.
+    }
+  }
+
+  return (
+    <button className="boton" onClick={copiar}>
+      {copiado ? '✓ Copiado' : 'Copiar datos'}
+    </button>
   )
 }

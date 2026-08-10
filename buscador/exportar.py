@@ -11,6 +11,7 @@ from datetime import date, datetime, timedelta, timezone
 
 from . import historico
 from .config import DIR_DATOS, Config
+from .enlaces import web_operador
 from .historico import escribir_json
 from .modelos import Oferta, ResultadoFuente
 from .ofertas import Ganga
@@ -26,6 +27,10 @@ def _ahora() -> str:
 
 
 def _oferta_json(oferta: Oferta) -> dict:
+    # El enlace se recalcula aquí en vez de usar el guardado: así los registros
+    # antiguos —que llevaban la URL de sesión de Renfe, inservible fuera de su
+    # navegador— quedan arreglados sin migrar el fichero.
+    enlace_operador = web_operador(oferta.operador)
     return {
         "fuente": oferta.fuente,
         "operador": oferta.operador,
@@ -41,7 +46,7 @@ def _oferta_json(oferta: Oferta) -> dict:
         "precio": round(oferta.precio_eur, 2),
         "tarifa": oferta.tarifa,
         "plazas": oferta.plazas_restantes,
-        "url": oferta.url_compra,
+        "url": enlace_operador,
     }
 
 

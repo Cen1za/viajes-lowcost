@@ -172,6 +172,21 @@ Cuatro pestañas en una barra inferior, pensada para el pulgar:
 fuerte de la interfaz: AVE morado, Avlo magenta, Ouigo azul, iryo rojo. Cada
 tarjeta lleva el borde de quien vende ese billete.
 
+### Por qué los botones llevan a la portada del operador
+
+Ninguna web de tren permite enlazar a un billete ni a una búsqueda concreta.
+Comprobado uno por uno:
+
+| Web | Qué pasa |
+|---|---|
+| **Renfe** | Genera los resultados por POST y los identifica con un token de sesión (`buscarTrenEnlaces.do?c=_XXXX`). Caduca y solo vale en el navegador que hizo la búsqueda. |
+| **Ouigo** | Ignora los parámetros de la URL: entres como entres, acabas en su portada. |
+| **Trainline** | Sí acepta trayecto y fecha, pero protege esa página con DataDome y salta un captcha con frecuencia. Un enlace que a veces lleva a un captcha es peor que no tener enlace. |
+
+Por eso cada tarjeta tiene dos botones: **Copiar datos**, que deja el trayecto,
+la fecha y la hora en el portapapeles, y **Abrir Renfe / Abrir Ouigo**, que va
+a su buscador. Rellenarlo son diez segundos y el enlace nunca se rompe.
+
 ### Filtros y horario preferido
 
 Se guardan en el propio móvil (`localStorage`), no en el repositorio: son tuyos,

@@ -1,4 +1,4 @@
-"""Adaptador de Ouigo España.
+﻿"""Adaptador de Ouigo España.
 
 Ouigo expone una API JSON limpia (la que usa su propio buscador web):
 
@@ -17,6 +17,7 @@ import unicodedata
 from datetime import date, datetime, timedelta
 
 from ..config import Config
+from ..enlaces import web_operador
 from ..modelos import Consulta, Estacion, Oferta
 from .base import AdaptadorBase, ErrorAdaptador, registrar
 
@@ -168,7 +169,7 @@ class AdaptadorOuigo(AdaptadorBase):
             precio_eur=float(precio),
             tarifa=tarifa,
             plazas_restantes=viaje.get("remaining_seats"),
-            url_compra="https://www.ouigo.com/es/",
+            url_compra=web_operador("ouigo"),
         )
 
     # -- Calendario ---------------------------------------------------------

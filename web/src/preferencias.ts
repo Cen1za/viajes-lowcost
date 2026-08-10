@@ -29,11 +29,25 @@ export function horasFranja(f: Franja): string {
   return `${String(f.desde).padStart(2, '0')}–${String(f.hasta).padStart(2, '0')}h`
 }
 
+//: Días de la semana en el orden en que se leen aquí, con el índice que
+//: devuelve Date.getDay() (0 = domingo).
+export const DIAS_SEMANA = [
+  { dia: 1, corto: 'L', nombre: 'Lunes' },
+  { dia: 2, corto: 'M', nombre: 'Martes' },
+  { dia: 3, corto: 'X', nombre: 'Miércoles' },
+  { dia: 4, corto: 'J', nombre: 'Jueves' },
+  { dia: 5, corto: 'V', nombre: 'Viernes' },
+  { dia: 6, corto: 'S', nombre: 'Sábado' },
+  { dia: 0, corto: 'D', nombre: 'Domingo' },
+]
+
 export interface Preferencias {
   /** Ids de FRANJAS. Vacío = cualquier hora vale. */
   franjas: string[]
   /** Ids de compañía. Vacío = todas. */
   companias: string[]
+  /** Índices de Date.getDay(). Vacío = todos los días. */
+  dias: number[]
   /** 'todo' | 'ida' | 'vuelta' */
   sentido: string
   /** Ocultar los trenes que llegan a Alicante y obligan a un traslado. */
@@ -43,6 +57,7 @@ export interface Preferencias {
 const POR_DEFECTO: Preferencias = {
   franjas: [],
   companias: [],
+  dias: [],
   sentido: 'todo',
   soloDirectos: false,
 }
@@ -87,9 +102,27 @@ export function usePreferencias() {
     [],
   )
 
+  const alternarDia = useCallback(
+    (dia: number) =>
+      setPrefs((p) => ({
+        ...p,
+        dias: p.dias.includes(dia)
+          ? p.dias.filter((d) => d !== dia)
+          : [...p.dias, dia],
+      })),
+    [],
+  )
+
   const limpiar = useCallback(() => setPrefs(POR_DEFECTO), [])
 
-  return { prefs, cambiar, alternar, limpiar }
+  return { prefs, cambiar, alternar, alternarDia, limpiar }
+}
+
+/** ¿Cae esa fecha en alguno de los días de la semana elegidos? */
+export function enDia(fechaIso: string, dias: number[]): boolean {
+  if (!dias.length) return true
+  const [a, m, d] = fechaIso.split('-').map(Number)
+  return dias.includes(new Date(a, m - 1, d).getDay())
 }
 
 /** ¿Encaja una hora 'HH:MM' en alguna de las franjas elegidas? */

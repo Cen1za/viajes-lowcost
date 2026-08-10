@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-10T18:25:55+00:00",
+  "actualizado": "2026-08-10T19:02:13+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
@@ -22,7 +22,7 @@
       "precio": 15.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -56,7 +56,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -73,7 +73,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -107,7 +107,7 @@
       "precio": 26.65,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -158,7 +158,7 @@
       "precio": 35.55,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -175,7 +175,7 @@
       "precio": 36.4,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -209,7 +209,7 @@
       "precio": 39.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -226,7 +226,7 @@
       "precio": 42.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -243,7 +243,7 @@
       "precio": 47.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -260,7 +260,7 @@
       "precio": 53.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -277,7 +277,7 @@
       "precio": 53.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -294,7 +294,7 @@
       "precio": 53.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -311,7 +311,7 @@
       "precio": 62.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -328,7 +328,7 @@
       "precio": 71.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_WlEq"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -362,7 +362,7 @@
       "precio": 15.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -430,7 +430,7 @@
       "precio": 19.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -447,7 +447,7 @@
       "precio": 20.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_6jEO"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -464,7 +464,7 @@
       "precio": 21.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -498,7 +498,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -515,7 +515,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -549,7 +549,7 @@
       "precio": 26.65,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -566,7 +566,7 @@
       "precio": 26.65,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -583,7 +583,7 @@
       "precio": 27.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_6jEO"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -600,7 +600,7 @@
       "precio": 29.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -634,7 +634,7 @@
       "precio": 35.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_6jEO"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -651,7 +651,7 @@
       "precio": 35.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_6jEO"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -668,7 +668,7 @@
       "precio": 35.55,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -685,7 +685,7 @@
       "precio": 39.6,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -702,7 +702,7 @@
       "precio": 39.9,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_6jEO"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -719,7 +719,7 @@
       "precio": 56.9,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -736,7 +736,7 @@
       "precio": 57.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_6jEO"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -753,7 +753,7 @@
       "precio": 61.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_uL82"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -770,7 +770,7 @@
       "precio": 66.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_6jEO"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -787,7 +787,7 @@
       "precio": 29.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -838,7 +838,7 @@
       "precio": 34.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_G1J7"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -855,7 +855,7 @@
       "precio": 35.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_G1J7"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -872,7 +872,7 @@
       "precio": 35.55,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -923,7 +923,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -940,7 +940,7 @@
       "precio": 45.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_G1J7"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -957,7 +957,7 @@
       "precio": 49.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -974,7 +974,7 @@
       "precio": 49.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -991,7 +991,7 @@
       "precio": 49.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_G1J7"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1008,7 +1008,7 @@
       "precio": 53.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1025,7 +1025,7 @@
       "precio": 53.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -1059,7 +1059,7 @@
       "precio": 58.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -1093,7 +1093,7 @@
       "precio": 62.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1110,7 +1110,7 @@
       "precio": 71.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1127,7 +1127,7 @@
       "precio": 71.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1144,7 +1144,7 @@
       "precio": 71.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1161,7 +1161,7 @@
       "precio": 73.4,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_66rY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1178,7 +1178,7 @@
       "precio": 74.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_G1J7"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1195,7 +1195,7 @@
       "precio": 121.6,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_G1J7"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -1229,7 +1229,7 @@
       "precio": 15.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -1297,7 +1297,7 @@
       "precio": 20.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1314,7 +1314,7 @@
       "precio": 21.95,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1331,7 +1331,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1348,7 +1348,7 @@
       "precio": 25.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1365,7 +1365,7 @@
       "precio": 25.7,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1382,7 +1382,7 @@
       "precio": 26.65,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1399,7 +1399,7 @@
       "precio": 26.65,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1416,7 +1416,7 @@
       "precio": 27.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1433,7 +1433,7 @@
       "precio": 29.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -1467,7 +1467,7 @@
       "precio": 35.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1484,7 +1484,7 @@
       "precio": 35.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1501,7 +1501,7 @@
       "precio": 35.55,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1518,7 +1518,7 @@
       "precio": 36.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -1552,7 +1552,7 @@
       "precio": 42.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1569,7 +1569,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1586,7 +1586,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1603,7 +1603,7 @@
       "precio": 49.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1620,7 +1620,7 @@
       "precio": 52.7,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1637,7 +1637,7 @@
       "precio": 53.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1654,7 +1654,7 @@
       "precio": 53.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_7I8I"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1671,7 +1671,7 @@
       "precio": 58.4,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_aU46"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1688,7 +1688,7 @@
       "precio": 15.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -1722,7 +1722,7 @@
       "precio": 19.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_EQA4"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -1756,7 +1756,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1773,7 +1773,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1790,7 +1790,7 @@
       "precio": 26.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_EQA4"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1807,7 +1807,7 @@
       "precio": 26.65,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1824,7 +1824,7 @@
       "precio": 27.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_EQA4"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -1875,7 +1875,7 @@
       "precio": 35.55,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1892,7 +1892,7 @@
       "precio": 36.4,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -1926,7 +1926,7 @@
       "precio": 39.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1943,7 +1943,7 @@
       "precio": 41.8,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1960,7 +1960,7 @@
       "precio": 42.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_EQA4"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1977,7 +1977,7 @@
       "precio": 42.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -1994,7 +1994,7 @@
       "precio": 44.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_EQA4"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2011,7 +2011,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2028,7 +2028,7 @@
       "precio": 50.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_EQA4"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2045,7 +2045,7 @@
       "precio": 52.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2062,7 +2062,7 @@
       "precio": 53.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2079,7 +2079,7 @@
       "precio": 53.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -2113,7 +2113,7 @@
       "precio": 70.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_EQA4"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2130,7 +2130,7 @@
       "precio": 71.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZzvR"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -2198,7 +2198,7 @@
       "precio": 24.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P3JQ"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -2232,7 +2232,7 @@
       "precio": 27.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P3JQ"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -2266,7 +2266,7 @@
       "precio": 39.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P3JQ"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -2300,7 +2300,7 @@
       "precio": 43.9,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P3JQ"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2317,7 +2317,7 @@
       "precio": 45.2,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P3JQ"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2334,7 +2334,7 @@
       "precio": 63.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P3JQ"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2351,7 +2351,7 @@
       "precio": 67.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_P3JQ"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2368,7 +2368,7 @@
       "precio": 29.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -2419,7 +2419,7 @@
       "precio": 34.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_V46L"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -2453,7 +2453,7 @@
       "precio": 35.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_V46L"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2470,7 +2470,7 @@
       "precio": 35.55,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2487,7 +2487,7 @@
       "precio": 39.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_V46L"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -2521,7 +2521,7 @@
       "precio": 42.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2538,7 +2538,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2555,7 +2555,7 @@
       "precio": 49.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2572,7 +2572,7 @@
       "precio": 49.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_V46L"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2589,7 +2589,7 @@
       "precio": 50.95,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2606,7 +2606,7 @@
       "precio": 53.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2623,7 +2623,7 @@
       "precio": 53.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -2657,7 +2657,7 @@
       "precio": 62.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -2691,7 +2691,7 @@
       "precio": 68.2,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2708,7 +2708,7 @@
       "precio": 68.8,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_V46L"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2725,7 +2725,7 @@
       "precio": 71.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2742,7 +2742,7 @@
       "precio": 71.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2759,7 +2759,7 @@
       "precio": 80.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_AMJC"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2776,7 +2776,7 @@
       "precio": 130.4,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_V46L"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -2810,7 +2810,7 @@
       "precio": 9.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2827,7 +2827,7 @@
       "precio": 14.2,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -2895,7 +2895,7 @@
       "precio": 21.85,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2912,7 +2912,7 @@
       "precio": 21.95,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2929,7 +2929,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2946,7 +2946,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -2963,7 +2963,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -2997,7 +2997,7 @@
       "precio": 25.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3014,7 +3014,7 @@
       "precio": 25.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3031,7 +3031,7 @@
       "precio": 25.7,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3048,7 +3048,7 @@
       "precio": 26.65,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3065,7 +3065,7 @@
       "precio": 27.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3082,7 +3082,7 @@
       "precio": 29.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3099,7 +3099,7 @@
       "precio": 32.2,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3116,7 +3116,7 @@
       "precio": 35.2,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3133,7 +3133,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3150,7 +3150,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3167,7 +3167,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -3201,7 +3201,7 @@
       "precio": 49.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3218,7 +3218,7 @@
       "precio": 49.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3235,7 +3235,7 @@
       "precio": 52.7,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F7Uy"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3252,7 +3252,7 @@
       "precio": 53.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_PClh"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3269,7 +3269,7 @@
       "precio": 15.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3286,7 +3286,7 @@
       "precio": 15.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_hFHY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -3337,7 +3337,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3354,7 +3354,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3371,7 +3371,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -3405,7 +3405,7 @@
       "precio": 26.35,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_hFHY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3422,7 +3422,7 @@
       "precio": 27.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_hFHY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3439,7 +3439,7 @@
       "precio": 28.15,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -3473,7 +3473,7 @@
       "precio": 29.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -3507,7 +3507,7 @@
       "precio": 34.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_hFHY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3524,7 +3524,7 @@
       "precio": 35.55,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3541,7 +3541,7 @@
       "precio": 36.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3558,7 +3558,7 @@
       "precio": 36.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_hFHY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3575,7 +3575,7 @@
       "precio": 36.4,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3592,7 +3592,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3609,7 +3609,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3626,7 +3626,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3643,7 +3643,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3660,7 +3660,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_XWQW"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -3694,7 +3694,7 @@
       "precio": 52.7,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_hFHY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3711,7 +3711,7 @@
       "precio": 72.9,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_hFHY"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3728,7 +3728,7 @@
       "precio": 15.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_0owU"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3745,7 +3745,7 @@
       "precio": 15.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -3847,7 +3847,7 @@
       "precio": 19.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3864,7 +3864,7 @@
       "precio": 21.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3881,7 +3881,7 @@
       "precio": 21.85,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3898,7 +3898,7 @@
       "precio": 21.95,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_0owU"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3915,7 +3915,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3932,7 +3932,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3949,7 +3949,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3966,7 +3966,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -3983,7 +3983,7 @@
       "precio": 24.1,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_0owU"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -4017,7 +4017,7 @@
       "precio": 26.65,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4034,7 +4034,7 @@
       "precio": 27.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_0owU"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4051,7 +4051,7 @@
       "precio": 31.7,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_0owU"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4068,7 +4068,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4085,7 +4085,7 @@
       "precio": 45.5,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4102,7 +4102,7 @@
       "precio": 45.7,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_0owU"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4119,7 +4119,7 @@
       "precio": 53.7,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_ZxWS"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4136,7 +4136,7 @@
       "precio": 54.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_0owU"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4153,7 +4153,7 @@
       "precio": 15.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F8of"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4170,7 +4170,7 @@
       "precio": 15.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -4221,7 +4221,7 @@
       "precio": 21.95,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F8of"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4238,7 +4238,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4255,7 +4255,7 @@
       "precio": 22.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4272,7 +4272,7 @@
       "precio": 29.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4289,7 +4289,7 @@
       "precio": 31.3,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4306,7 +4306,7 @@
       "precio": 31.6,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F8of"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -4340,7 +4340,7 @@
       "precio": 34.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F8of"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -4374,7 +4374,7 @@
       "precio": 35.55,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4391,7 +4391,7 @@
       "precio": 35.55,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4408,7 +4408,7 @@
       "precio": 35.55,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4425,7 +4425,7 @@
       "precio": 35.55,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4442,7 +4442,7 @@
       "precio": 35.55,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4459,7 +4459,7 @@
       "precio": 36.4,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4476,7 +4476,7 @@
       "precio": 40.6,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F8of"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4493,7 +4493,7 @@
       "precio": 42.25,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4510,7 +4510,7 @@
       "precio": 44.45,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "ouigo",
@@ -4561,7 +4561,7 @@
       "precio": 52.7,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F8of"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4578,7 +4578,7 @@
       "precio": 68.6,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_UdZ2"
+      "url": "https://www.renfe.com/es/es"
     },
     {
       "fuente": "renfe",
@@ -4595,7 +4595,7 @@
       "precio": 69.0,
       "tarifa": "Precio desde",
       "plazas": null,
-      "url": "https://venta.renfe.com/vol/buscarTrenEnlaces.do?c=_F8of"
+      "url": "https://www.renfe.com/es/es"
     }
   ]
 }

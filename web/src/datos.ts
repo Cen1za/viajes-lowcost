@@ -33,12 +33,55 @@ export function useDatos<T>(nombre: string) {
 const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']
 const MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun',
                'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
+const MESES_LARGOS = [
+  'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+  'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre',
+]
+
+/** Convierte '2026-09-11' en Date local, sin sustos de zona horaria. */
+export function aFecha(iso: string): Date {
+  const [a, m, d] = iso.split('-').map(Number)
+  return new Date(a, m - 1, d)
+}
 
 /** '2026-09-11' -> 'vie 11 sep' */
 export function fechaCorta(iso: string): string {
-  const [a, m, d] = iso.split('-').map(Number)
-  const f = new Date(a, m - 1, d)
-  return `${DIAS[f.getDay()].slice(0, 3)} ${d} ${MESES[m - 1]}`
+  const f = aFecha(iso)
+  return `${DIAS[f.getDay()].slice(0, 3)} ${f.getDate()} ${MESES[f.getMonth()]}`
+}
+
+/** '2026-09-11' -> 'Viernes 11 de septiembre' */
+export function fechaLarga(iso: string): string {
+  const f = aFecha(iso)
+  const dia = DIAS[f.getDay()]
+  // Solo la inicial en mayúscula: con text-transform de CSS saldría
+  // "Viernes 11 De Septiembre", que en español está mal.
+  return `${dia[0].toUpperCase()}${dia.slice(1)} ${f.getDate()} de ${MESES_LARGOS[f.getMonth()]}`
+}
+
+/**
+ * Agrupa por fecha y ordena por precio dentro de cada día.
+ *
+ * Es el orden en que se decide un viaje: primero cuándo puedes ir, y solo
+ * después cuál sale mejor de precio ese día. Una lista global ordenada por
+ * precio mezcla fechas y no ayuda a elegir.
+ */
+export function agruparPorDia<T extends { fecha: string; precio: number }>(
+  elementos: T[],
+): { fecha: string; minimo: number; elementos: T[] }[] {
+  const porFecha = new Map<string, T[]>()
+  for (const e of elementos) {
+    const lista = porFecha.get(e.fecha)
+    if (lista) lista.push(e)
+    else porFecha.set(e.fecha, [e])
+  }
+
+  return [...porFecha.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([fecha, lista]) => {
+      const ordenados = [...lista].sort((a, b) => a.precio - b.precio)
+      return { fecha, minimo: ordenados[0].precio, elementos: ordenados }
+    })
 }
 
 /** 181 -> '3h01' */

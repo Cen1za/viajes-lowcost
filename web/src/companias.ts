@@ -30,16 +30,19 @@ export const COMPANIAS: Compania[] = [
   {
     id: 'Avlo',
     nombre: 'Avlo',
-    color: '#C80066',
-    suave: '#FDEBF4',
+    color: '#C2185B',
+    suave: '#FCE9F0',
     descripcion: 'Low cost de Renfe',
   },
   {
     id: 'Renfe',
+    // Neutro a propósito: es el comodín para cuando Renfe no dice si el tren
+    // es AVE o Avlo. Antes compartía el morado del AVE y no había forma de
+    // distinguirlos de un vistazo, que es justo lo que el color debe resolver.
     nombre: 'Renfe',
-    color: '#5B2C82',
-    suave: '#F1ECF7',
-    descripcion: 'Renfe, tipo de tren sin precisar',
+    color: '#37474F',
+    suave: '#ECEFF1',
+    descripcion: 'Renfe, sin precisar si es AVE o Avlo',
   },
   {
     id: 'Ouigo',
