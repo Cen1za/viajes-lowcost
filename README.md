@@ -72,6 +72,15 @@ python -m buscador estaciones    # descubre los códigos de cada web
 3. En GitHub: *Settings → Secrets and variables → Actions* → añade
    `TELEGRAM_BOT_TOKEN` y `TELEGRAM_CHAT_ID`.
 
+4. Escríbele algo a tu bot desde Telegram. Un bot no puede iniciar la
+   conversación, así que hasta que no le hables no te podrá escribir él.
+
+Comprueba que ha quedado bien:
+
+```bash
+python -m buscador probar-aviso
+```
+
 Para probarlo en local, define esas dos variables de entorno antes de ejecutar.
 Si faltan, todo funciona igual pero sin enviar avisos.
 

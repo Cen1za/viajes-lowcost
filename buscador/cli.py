@@ -205,6 +205,29 @@ def _opciones_ciclo(parser: argparse.ArgumentParser) -> None:
     )
 
 
+def cmd_probar_aviso(args: argparse.Namespace) -> int:
+    """Manda un mensaje de prueba para confirmar que Telegram está bien puesto."""
+    from .avisos import enviar_mensaje
+
+    if enviar_mensaje(
+        "✅ Buscador de trenes Madrid → Elche\n\n"
+        "Si lees esto, los avisos están bien configurados. "
+        "Recibirás un mensaje como este cuando aparezca una oferta destacada."
+    ):
+        consola.print("[green]Mensaje enviado. Míralo en Telegram.[/green]")
+        return 0
+
+    consola.print(
+        "[red]No se ha enviado.[/red] Comprueba que existen las variables de entorno "
+        "[bold]TELEGRAM_BOT_TOKEN[/bold] y [bold]TELEGRAM_CHAT_ID[/bold].\n"
+        "  · El token te lo da @BotFather al crear el bot con /newbot\n"
+        "  · Tu chat_id te lo dice @userinfobot\n"
+        "  · Escríbele algo a tu bot antes: Telegram no deja que un bot "
+        "inicie la conversación."
+    )
+    return 1
+
+
 def construir_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="buscador",
@@ -238,6 +261,11 @@ def construir_parser() -> argparse.ArgumentParser:
     p_est = subs.add_parser("estaciones", help="Descubre los códigos de estación.")
     p_est.add_argument("--fuentes", nargs="*", help="Limitar a estas fuentes.")
     p_est.set_defaults(func=cmd_estaciones)
+
+    p_aviso = subs.add_parser(
+        "probar-aviso", help="Envía un mensaje de prueba a tu Telegram."
+    )
+    p_aviso.set_defaults(func=cmd_probar_aviso)
 
     return parser
 
