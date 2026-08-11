@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-11T17:12:43+00:00",
+  "actualizado": "2026-08-11T19:19:29+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
@@ -7,27 +7,6 @@
     "alicante": 25
   },
   "ofertas": [
-    {
-      "fuente": "ouigo",
-      "operador": "Ouigo",
-      "sentido": "ida",
-      "origen": "Madrid Chamartín",
-      "destino": "Alicante Terminal",
-      "origen_id": "madrid_chamartin",
-      "destino_id": "alicante",
-      "fecha": "2026-10-01",
-      "salida": "08:15",
-      "llegada": "10:37",
-      "duracion_min": 142,
-      "precio": 9.0,
-      "tarifa": "Básica",
-      "plazas": 1,
-      "url": "https://www.ouigo.com/es/",
-      "url_busqueda": null,
-      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 1 de 10 días.)",
-      "mediana": null,
-      "caida_pct": null
-    },
     {
       "fuente": "ouigo",
       "operador": "Ouigo",
@@ -293,6 +272,27 @@
       "llegada": "23:27",
       "duracion_min": 149,
       "precio": 9.0,
+      "tarifa": "Básica",
+      "plazas": null,
+      "url": "https://www.ouigo.com/es/",
+      "url_busqueda": null,
+      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 1 de 10 días.)",
+      "mediana": null,
+      "caida_pct": null
+    },
+    {
+      "fuente": "ouigo",
+      "operador": "Ouigo",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-10-01",
+      "salida": "08:15",
+      "llegada": "10:37",
+      "duracion_min": 142,
+      "precio": 13.0,
       "tarifa": "Básica",
       "plazas": null,
       "url": "https://www.ouigo.com/es/",
