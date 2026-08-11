@@ -16,6 +16,8 @@ import os
 
 import httpx
 
+from ..fechas import dia_corto
+
 log = logging.getLogger(__name__)
 
 API = "https://api.telegram.org/bot{token}/sendMessage"
@@ -55,13 +57,52 @@ def enviar_mensaje(texto: str) -> bool:
     return True
 
 
+#: A partir de aquí se manda un resumen en vez de un mensaje por oferta. Con
+#: una o dos, el mensaje completo con horarios y enlace es lo más cómodo; con
+#: treinta y dos -que es lo que salió el primer día- son treinta y dos
+#: notificaciones seguidas, y a la tercera se silencia el bot.
+AVISOS_SUELTOS = 2
+
+#: Cuántas ofertas se detallan dentro del resumen. El resto se cuenta al final:
+#: quien quiera verlas las tiene todas en la app.
+EN_EL_RESUMEN = 8
+
+
+def _resumen(gangas) -> str:
+    """Un solo mensaje con las mejores ofertas, de más barata a menos."""
+    mejores = sorted(gangas, key=lambda g: g.oferta.precio_eur)
+    lineas = [f"🚄 <b>{len(gangas)} ofertas destacadas</b>", ""]
+
+    for ganga in mejores[:EN_EL_RESUMEN]:
+        o = ganga.oferta
+        lineas.append(
+            f"<b>{o.precio_eur:.2f} €</b> · {dia_corto(o.fecha_salida)} "
+            f"{o.hora_salida:%H:%M} · {o.operador}"
+        )
+        lineas.append(f"   {o.origen_nombre} → {o.destino_nombre}")
+
+    if len(mejores) > EN_EL_RESUMEN:
+        lineas.append("")
+        lineas.append(f"…y {len(mejores) - EN_EL_RESUMEN} más en la app.")
+
+    return "\n".join(lineas)
+
+
 def enviar_gangas(gangas) -> int:
-    """Un mensaje por oferta destacada. Devuelve cuántos se enviaron."""
+    """Avisa de las ofertas destacadas. Devuelve cuántos mensajes se enviaron.
+
+    Con pocas ofertas va una a una, con todo el detalle. En cuanto son varias
+    se agrupan en un único mensaje: el objetivo es que el aviso se lea, y una
+    ráfaga de notificaciones consigue justo lo contrario.
+    """
     if not gangas:
         return 0
     if _credenciales() is None:
         log.info("Telegram sin configurar: %d ofertas no avisadas", len(gangas))
         return 0
+
+    if len(gangas) > AVISOS_SUELTOS:
+        return 1 if enviar_mensaje(_resumen(gangas)) else 0
 
     enviados = 0
     for ganga in gangas:

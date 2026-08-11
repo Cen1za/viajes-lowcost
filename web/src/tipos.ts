@@ -83,3 +83,21 @@ export interface Promociones {
   actualizado: string
   campanas: Campana[]
 }
+
+/** Qué suele costar un viaje, para saber si el precio de hoy está bien. */
+export interface Referencia {
+  /** Mediana de los mínimos diarios: el precio "de siempre" de ese viaje. */
+  normal: number
+  /** Con cuántos días de histórico se ha calculado. */
+  dias: number
+}
+
+export interface Referencias {
+  actualizado: string
+  /** false mientras no haya histórico suficiente: entonces la app no opina. */
+  listo: boolean
+  dias_reunidos: number
+  dias_necesarios: number
+  /** ruta -> fecha -> referencia */
+  viajes: Record<string, Record<string, Referencia>>
+}

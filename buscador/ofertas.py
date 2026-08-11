@@ -9,6 +9,7 @@ from datetime import datetime, timedelta, timezone
 from pydantic import BaseModel
 
 from .config import DIR_DATOS, Config
+from .fechas import dia_largo
 from .historico import Referencia
 from .modelos import Oferta
 
@@ -37,7 +38,7 @@ class Ganga(BaseModel):
         lineas = [
             f"🚄 {o.operador} · {o.precio_eur:.2f} €",
             f"{o.origen_nombre} → {o.destino_nombre}",
-            f"{o.fecha_salida:%A %d/%m/%Y} · {o.hora_salida:%H:%M} → {o.hora_llegada:%H:%M}"
+            f"{dia_largo(o.fecha_salida)} · {o.hora_salida:%H:%M} → {o.hora_llegada:%H:%M}"
             f" ({o.duracion_min // 60}h{o.duracion_min % 60:02d})",
             "",
             self.motivo,

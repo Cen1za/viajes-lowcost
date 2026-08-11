@@ -12,7 +12,7 @@ from datetime import date, datetime, timedelta, timezone
 from . import historico
 from .config import DIR_DATOS, Config
 from .enlaces import web_operador
-from .historico import escribir_json
+from .historico import Referencia, escribir_json
 from .modelos import Oferta, ResultadoFuente
 from .ofertas import Ganga
 
@@ -67,6 +67,7 @@ def exportar_todo(
     escribir_json(DIR_DATOS / "calendario.json", _calendario(vigentes))
     escribir_json(DIR_DATOS / "estado_fuentes.json", _estado(resultados))
     escribir_json(DIR_DATOS / "gangas.json", _gangas(gangas, config))
+    escribir_json(DIR_DATOS / "referencias.json", _referencias(vigentes, config))
 
 
 def _vigentes(recientes: list[Oferta]) -> list[Oferta]:
@@ -105,6 +106,47 @@ def _latest(ofertas: list[Oferta], config: Config) -> dict:
         "actualizado": _ahora(),
         "traslado_min": traslados,
         "trenes": [_oferta_json(o) for o in ordenadas],
+    }
+
+
+def _referencias(ofertas: list[Oferta], config: Config) -> dict:
+    """Qué suele costar cada viaje, para poder decir si hoy está barato.
+
+    Es la pregunta de verdad al comprar un billete -¿lo cojo ya o espero?- y
+    no se puede responder con el precio de hoy a secas: hacen falta días.
+    Mientras no los haya se devuelve `listo: false` y la app calla en vez de
+    inventarse un veredicto con dos datos.
+
+    La referencia es la mediana de los mínimos diarios de ese viaje, la misma
+    que decide las gangas, así que la app y los avisos cuentan lo mismo.
+    """
+    referencia = Referencia(historico.cargar())
+    ajustes = config.ofertas
+    hoy = date.today()
+
+    viajes: dict[str, dict[str, dict]] = defaultdict(dict)
+    dias_maximos = 0
+
+    for oferta in ofertas:
+        dia = oferta.fecha_salida.isoformat()
+        if dia in viajes[oferta.ruta]:
+            continue
+        mediana, dias = referencia.mediana(
+            oferta.ruta, oferta.fecha_salida, ajustes.dias_historico
+        )
+        dias_maximos = max(dias_maximos, dias)
+        if mediana is None or dias < ajustes.dias_minimos_historico:
+            continue
+        viajes[oferta.ruta][dia] = {"normal": round(mediana, 2), "dias": dias}
+
+    return {
+        "actualizado": _ahora(),
+        # Con esto la app sabe si puede opinar, y cuánto le falta si no.
+        "listo": dias_maximos >= ajustes.dias_minimos_historico,
+        "dias_reunidos": dias_maximos,
+        "dias_necesarios": ajustes.dias_minimos_historico,
+        "desde": hoy.isoformat(),
+        "viajes": {r: dict(sorted(d.items())) for r, d in viajes.items() if d},
     }
 
 

@@ -9,6 +9,7 @@ import {
   Chip,
   Iconos,
   ProgresoActualizacion,
+  ProveedorReferencias,
   Seccion,
   TarjetaPlan,
   TarjetaTren,
@@ -33,12 +34,14 @@ import {
   horasFranja,
   usePreferencias,
 } from './preferencias'
+import { loQueFalta } from './referencias'
 import type {
   Calendario,
   EstadoFuentes,
   Gangas,
   Latest,
   Promociones,
+  Referencias,
   Tren,
 } from './tipos'
 
@@ -55,8 +58,12 @@ const PESTANAS: { id: Vista; nombre: string; icono: JSX.Element }[] = [
 export default function App() {
   const [vista, setVista] = useState<Vista>('ofertas')
   const preferencias = usePreferencias()
+  // Se carga una vez arriba y viaja por contexto: lo usan las tarjetas de
+  // cuatro vistas distintas para decir si un billete está barato.
+  const { datos: referencias } = useDatos<Referencias>('referencias')
 
   return (
+    <ProveedorReferencias datos={referencias}>
     <div className="app">
       <header className="cabecera">
         <div className="titulo-app">
@@ -88,6 +95,33 @@ export default function App() {
           </button>
         ))}
       </nav>
+    </div>
+    </ProveedorReferencias>
+  )
+}
+
+/**
+ * Explica por qué las tarjetas todavía no dicen si un billete está barato.
+ *
+ * Callar sin más haría pensar que la función no existe. Como el dato tarda
+ * días en reunirse, se enseña cuánto falta y desaparece solo al llegar.
+ */
+function ReuniendoPrecios() {
+  const { datos } = useDatos<Referencias>('referencias')
+  const falta = loQueFalta(datos)
+  if (!falta || !datos) return null
+
+  const hechos = Math.min(datos.dias_reunidos, datos.dias_necesarios)
+  const porcentaje = Math.round((hechos / datos.dias_necesarios) * 100)
+
+  return (
+    <div className="reuniendo">
+      <span className="barra" aria-hidden>
+        <span style={{ width: `${porcentaje}%` }} />
+      </span>
+      <span>
+        {falta} Llevo {hechos} de {datos.dias_necesarios}.
+      </span>
     </div>
   )
 }
@@ -314,6 +348,7 @@ function VistaOfertas(prefs: Prefs) {
   return (
     <>
       <ProgresoActualizacion actualizado={datos.actualizado} />
+      <ReuniendoPrecios />
       <Filtros
         {...prefs}
         companias={companias}

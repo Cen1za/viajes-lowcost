@@ -1,5 +1,7 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import { compania } from './companias'
+import { valorar } from './referencias'
+import type { Referencias } from './tipos'
 import {
   desde,
   duracion,
@@ -13,6 +15,28 @@ import {
 } from './datos'
 import { destinoDelViaje } from './destinos'
 import type { Tren } from './tipos'
+
+/**
+ * Lo que suele costar cada viaje, disponible para cualquier tarjeta.
+ *
+ * Va por contexto y no por props porque las tarjetas se pintan desde cuatro
+ * vistas distintas y hacer viajar el dato por toda la jerarquía ensuciaría
+ * firmas que no tienen nada que ver con esto. Vale null mientras no haya
+ * histórico suficiente, y entonces las tarjetas no dicen nada.
+ */
+const ContextoReferencias = createContext<Referencias | null>(null)
+
+export function ProveedorReferencias({
+  datos,
+  children,
+}: {
+  datos: Referencias | null
+  children: ReactNode
+}) {
+  return (
+    <ContextoReferencias.Provider value={datos}>{children}</ContextoReferencias.Provider>
+  )
+}
 
 /* --- Iconos de la barra inferior (SVG en línea, sin dependencias) --------- */
 
@@ -355,6 +379,7 @@ export function TarjetaTren({
   const marca = compania(tren.operador)
   const punta = destinoDelViaje(tren.origen_id, tren.destino_id)
   const esVuelta = tren.sentido === 'vuelta'
+  const veredicto = valorar(useContext(ContextoReferencias), tren)
 
   return (
     <article
@@ -386,6 +411,14 @@ export function TarjetaTren({
         <span className="precio" style={{ color: destacado ? 'var(--ahorro)' : undefined }}>
           {euros(tren.precio)}
           {rebajaPct != null && <span className="rebaja">−{Math.round(rebajaPct)}%</span>}
+          {/* Responde a "¿lo cojo ya o espero?": compara con lo que ha costado
+              este mismo viaje otros días. Solo aparece cuando hay histórico
+              para opinar; si no, el hueco se queda vacío. */}
+          {veredicto && (
+            <span className={`juicio ${veredicto.tono}`} title={`Suele costar ${euros(veredicto.normal)}`}>
+              {veredicto.etiqueta}
+            </span>
+          )}
         </span>
       </div>
 

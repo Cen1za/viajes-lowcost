@@ -69,7 +69,11 @@ ofertas:
   dias_minimo_reciente: 14
   # Mientras no haya histórico suficiente se usa este umbral absoluto.
   dias_minimos_historico: 10
-  umbral_absoluto_eur: 25.0
+  # Elegido con los precios ya recogidos, no a ojo. Sobre 911 trenes reales de
+  # esta ruta, 25 € marcaba 320 (el 35 %): con uno de cada tres trenes siendo
+  # "chollo" la palabra deja de significar nada. A 15 € quedan 55 (el 6 %),
+  # que es lo que de verdad merece que suene el móvil.
+  umbral_absoluto_eur: 15.0
   # No repetir la misma alerta dentro de esta ventana.
   antispam_horas: 24
 

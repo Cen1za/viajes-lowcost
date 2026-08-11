@@ -1488,3 +1488,61 @@ main {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Veredicto de precio: si el billete está barato o caro para lo que suele
+   costar ese viaje. Va debajo del importe, en línea aparte, porque es una
+   frase y no un número: al lado del precio lo estrecharía en el móvil.
+   Solo aparece cuando hay histórico suficiente para opinar. */
+.juicio {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-align: right;
+  color: var(--tinta-suave);
+}
+
+.juicio.chollo {
+  color: var(--ahorro);
+}
+
+.juicio.bien {
+  color: var(--ahorro);
+  opacity: 0.85;
+}
+
+.juicio.caro {
+  color: var(--error);
+}
+
+/* Aviso de que todavía no hay datos para opinar. Se explica en vez de
+   callar: así se entiende por qué las tarjetas no dicen si algo está barato. */
+.reuniendo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  padding: 10px 13px;
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  background: var(--fondo);
+  color: var(--tinta-suave);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.reuniendo .barra {
+  flex: 0 0 64px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--borde);
+  overflow: hidden;
+}
+
+.reuniendo .barra span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--marca);
+}
