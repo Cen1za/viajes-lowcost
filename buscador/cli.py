@@ -18,7 +18,7 @@ from datetime import date, datetime, timedelta, timezone
 from . import adaptadores as _adaptadores  # noqa: F401 - registra los adaptadores
 from . import historico, ofertas as motor_ofertas
 from .adaptadores import base
-from .avisos import avisar_de_gangas, enviar_gangas
+from .avisos import avisar_de_gangas
 from .config import Config, cargar_config
 from .consultas import (
     plan_calendario,
@@ -356,15 +356,28 @@ def cmd_claves_push(args: argparse.Namespace) -> int:
     )
 
     consola.print("\n[bold]Claves generadas. Guárdalas ya, no se pueden recuperar.[/bold]\n")
-    consola.print("[bold]1.[/bold] En GitHub → Settings → Secrets → Actions, crea:\n")
+
+    consola.print("[bold]1.[/bold] En GitHub → Settings → Secrets and variables → Actions:\n")
     consola.print(f"   VAPID_CLAVE_PRIVADA = [green]{privada}[/green]")
     consola.print("   VAPID_ASUNTO        = mailto:tu@correo.com\n")
-    consola.print("[bold]2.[/bold] En web/src/avisos.ts, pon la pública:\n")
-    consola.print(f"   CLAVE_PUBLICA = [green]{publica}[/green]\n")
+    consola.print("   O de una vez, desde aquí:\n")
+    consola.print(f"     [dim]gh secret set VAPID_CLAVE_PRIVADA --body \"{privada}\"[/dim]")
+    consola.print('     [dim]gh secret set VAPID_ASUNTO --body "mailto:tu@correo.com"[/dim]\n')
+
     consola.print(
-        "[bold]3.[/bold] Despliega, abre la app en el móvil, entra en Ajustes y "
-        "pulsa «Avisarme en este móvil». Te dará un texto: guárdalo como el "
-        "secreto [bold]WEB_PUSH_SUSCRIPCION[/bold].\n"
+        "[bold]2.[/bold] En Vercel → Settings → Environment Variables "
+        "(no hay que tocar código):\n"
+    )
+    consola.print(f"   VITE_VAPID_PUBLICA = [green]{publica}[/green]\n")
+
+    consola.print(
+        "[bold]3.[/bold] Vuelve a desplegar, abre la app en el móvil, entra en "
+        "Ajustes y pulsa «Avisarme en este móvil». Te dará un texto: guárdalo "
+        "como el secreto [bold]WEB_PUSH_SUSCRIPCION[/bold].\n"
+    )
+    consola.print(
+        "[dim]La privada firma los avisos y no debe salir de los secretos. "
+        "La pública va en el navegador y no es sensible.[/dim]\n"
     )
     return 0
 
@@ -416,26 +429,47 @@ def _opciones_ciclo(parser: argparse.ArgumentParser) -> None:
 
 
 def cmd_probar_aviso(args: argparse.Namespace) -> int:
-    """Manda un mensaje de prueba para confirmar que Telegram está bien puesto."""
-    from .avisos import enviar_mensaje
+    """Prueba los dos canales de aviso y dice cuál está bien puesto.
 
-    if enviar_mensaje(
-        "✅ Buscador de trenes Madrid → Elche\n\n"
+    Se prueban ambos aunque uno falle: saber que Telegram va pero el móvil no
+    es justo lo que hace falta para arreglar el que toca.
+    """
+    from .avisos import enviar_mensaje, webpush
+
+    texto = (
+        "Buscador de trenes Madrid → Elche\n\n"
         "Si lees esto, los avisos están bien configurados. "
-        "Recibirás un mensaje como este cuando aparezca una oferta destacada."
-    ):
-        consola.print("[green]Mensaje enviado. Míralo en Telegram.[/green]")
-        return 0
-
-    consola.print(
-        "[red]No se ha enviado.[/red] Comprueba que existen las variables de entorno "
-        "[bold]TELEGRAM_BOT_TOKEN[/bold] y [bold]TELEGRAM_CHAT_ID[/bold].\n"
-        "  · El token te lo da @BotFather al crear el bot con /newbot\n"
-        "  · Tu chat_id te lo dice @userinfobot\n"
-        "  · Escríbele algo a tu bot antes: Telegram no deja que un bot "
-        "inicie la conversación."
+        "Recibirás uno así cuando aparezca una oferta destacada."
     )
-    return 1
+
+    telegram_ok = enviar_mensaje(f"✅ {texto}")
+    push_ok = webpush.enviar("✅ Avisos activados", texto.splitlines()[0]) > 0
+
+    if telegram_ok:
+        consola.print("[green]Telegram: enviado.[/green] Míralo en la aplicación.")
+    else:
+        consola.print(
+            "[yellow]Telegram: sin configurar o con error.[/yellow]\n"
+            "  · El token te lo da @BotFather al crear el bot con /newbot "
+            "→ [bold]TELEGRAM_BOT_TOKEN[/bold]\n"
+            "  · Tu chat_id te lo dice @userinfobot "
+            "→ [bold]TELEGRAM_CHAT_ID[/bold]\n"
+            "  · Escríbele algo a tu bot antes: Telegram no deja que un bot "
+            "inicie la conversación."
+        )
+
+    if push_ok:
+        consola.print("[green]Móvil: enviado.[/green] Debería salirte la notificación.")
+    else:
+        consola.print(
+            "[yellow]Móvil: sin configurar o con error.[/yellow]\n"
+            "  · Genera las claves con [bold]python -m buscador claves-push[/bold]\n"
+            "  · Y activa los avisos desde Ajustes, en la app del móvil."
+        )
+
+    # Basta con que uno funcione para que el sistema sirva: no tener el otro
+    # es información, no un fallo.
+    return 0 if (telegram_ok or push_ok) else 1
 
 
 def construir_parser() -> argparse.ArgumentParser:

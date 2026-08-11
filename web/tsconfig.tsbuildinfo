@@ -1,1 +1,1 @@
-{"root":["./src/app.tsx","./src/avisos.ts","./src/companias.ts","./src/componentes.tsx","./src/datos.ts","./src/destinos.ts","./src/instalacion.ts","./src/main.tsx","./src/preferencias.ts","./src/referencias.ts","./src/tipos.ts"],"version":"5.9.3"}
+{"root":["./src/app.tsx","./src/avisos.ts","./src/companias.ts","./src/componentes.tsx","./src/datos.ts","./src/destinos.ts","./src/instalacion.ts","./src/main.tsx","./src/preferencias.ts","./src/referencias.ts","./src/tipos.ts","./src/vite-env.d.ts"],"version":"5.9.3"}

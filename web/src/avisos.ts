@@ -16,10 +16,16 @@
  *
  *     python -m buscador claves-push
  *
- * Vacía = los avisos por notificación están sin configurar, y la app lo dice
- * en Ajustes en vez de ofrecer un botón que no haría nada.
+ * Se lee de una variable de entorno de compilación (en Vercel: Settings →
+ * Environment Variables → `VITE_VAPID_PUBLICA`) en vez de estar escrita aquí.
+ * No es por secretismo -esta mitad es pública por definición y acaba en el
+ * bundle igual- sino para no tener que editar código y volver a desplegar cada
+ * vez que se cambie; y así el repositorio sirve tal cual a quien lo copie.
+ *
+ * Vacía = los avisos por notificación están sin configurar, y la app calla en
+ * Ajustes en vez de ofrecer un botón que no haría nada.
  */
-export const CLAVE_PUBLICA = ''
+export const CLAVE_PUBLICA = (import.meta.env.VITE_VAPID_PUBLICA ?? '').trim()
 
 export type EstadoAvisos =
   | 'sin-configurar' // falta la clave pública
@@ -77,9 +83,8 @@ export async function activarAvisos(): Promise<string | null> {
   return JSON.stringify(suscripcion.toJSON())
 }
 
-/** Deja de recibir notificaciones en este dispositivo. */
-export async function desactivarAvisos(): Promise<boolean> {
-  const registro = await navigator.serviceWorker.ready
-  const suscripcion = await registro.pushManager.getSubscription()
-  return suscripcion ? suscripcion.unsubscribe() : false
-}
+// No hay función para desactivar a propósito: quitar la suscripción del móvil
+// no impediría que GitHub siguiera mandando avisos, porque quien manda es el
+// secreto WEB_PUSH_SUSCRIPCION. Un botón que promete apagarlos y no lo hace es
+// peor que no tenerlo; para dejar de recibirlos se borra ese secreto, o se
+// revoca el permiso desde el navegador.

@@ -152,11 +152,26 @@ Sin servidor: las manda el propio GitHub Actions. Una vez:
 python -m buscador claves-push
 ```
 
-Te da un par de claves. La privada va a los secretos como `VAPID_CLAVE_PRIVADA`
-(junto a `VAPID_ASUNTO`, un `mailto:` tuyo) y la pública se pega en
-`web/src/avisos.ts`. Después, con la app abierta en el móvil, en *Ajustes →
-Avisos en este móvil*: te dará un texto que hay que guardar como el secreto
-`WEB_PUSH_SUSCRIPCION`.
+Te da un par de claves y las instrucciones. No hay que tocar código:
+
+| Dónde | Qué |
+|---|---|
+| GitHub → Secrets → Actions | `VAPID_CLAVE_PRIVADA` y `VAPID_ASUNTO` (un `mailto:` tuyo) |
+| Vercel → Environment Variables | `VITE_VAPID_PUBLICA` |
+
+Después, con la app abierta en el móvil, en *Ajustes → Avisos en este móvil*:
+te dará un texto que hay que guardar como el secreto `WEB_PUSH_SUSCRIPCION`.
+
+Para comprobar los dos canales de golpe:
+
+```bash
+python -m buscador probar-aviso
+```
+
+Para dejar de recibirlos, se borra el secreto `WEB_PUSH_SUSCRIPCION`. La app no
+tiene botón de apagado a propósito: quitar la suscripción desde el móvil no
+impediría que GitHub siguiera mandando avisos, y un botón que promete apagarlos
+sin conseguirlo es peor que no tenerlo.
 
 Ese paso manual es el precio de no montar un servidor para almacenar una línea
 de texto que cambia una vez al año. Y **la suscripción tiene que ir en un

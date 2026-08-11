@@ -666,7 +666,22 @@ function PanelAvisos() {
   const [copiado, setCopiado] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  if (estado === 'sin-configurar' || estado === 'no-soportado') return null
+  // Sin claves no se puede activar nada, pero ocultar la ficha haría pensar
+  // que la app no sabe avisar. Se dice qué falta.
+  if (estado === 'sin-configurar')
+    return (
+      <Ficha icono={Iconos.senal} titulo="Avisos en este móvil" valor="sin activar">
+        <p className="aclaracion">
+          La app puede avisarte con una notificación cuando aparezca una oferta,
+          sin usar Telegram. Falta generarlo una vez:{' '}
+          <code>python -m buscador claves-push</code> y seguir los tres pasos que
+          indica.
+        </p>
+      </Ficha>
+    )
+
+  // En un navegador sin Web Push no hay nada que ofrecer ni que explicar.
+  if (estado === 'no-soportado') return null
 
   async function activar() {
     setError(null)
