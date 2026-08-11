@@ -37,6 +37,15 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python -m buscador buscar --fuentes ouigo --guardar --avisar
 
+      - name: Mirar las campañas de Renfe y Ouigo
+        # Va aquí y no en su propio workflow porque son dos peticiones HTTP,
+        # tarda un segundo y así comparte el commit de datos y el turno del
+        # grupo de concurrencia. Solo avisa cuando aparece una campaña nueva.
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -m buscador promociones --guardar --avisar
+
       - name: Guardar los datos en el repositorio
         run: |
           git config user.name  "buscador-trenes[bot]"

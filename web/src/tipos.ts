@@ -69,3 +69,17 @@ export interface Gangas {
   traslado_min: Record<string, number>
   ofertas: Ganga[]
 }
+
+/** Campaña anunciada en la portada de una compañía (no un precio de esta ruta). */
+export interface Campana {
+  huella: string
+  compania: string
+  texto: string
+  /** Fecha en que se vio por primera vez, para saber si es reciente. */
+  desde: string
+}
+
+export interface Promociones {
+  actualizado: string
+  campanas: Campana[]
+}

@@ -28,7 +28,8 @@ GitHub Actions (cron)
 | **iryo** | solo en local | Funciona desde casa, pero Cloudflare le pone un CAPTCHA a las IPs de centro de datos, así que en la nube no trae nada. Apagada en `app.yaml`; ver abajo. |
 | **eDreams** | funcionando | Navegador real sobre su URL de resultados. Agrega **AVE, Avlo, Alvia y Ouigo de una vez**, y llega tanto a Elche AV como a Alicante. |
 | Trainline | pendiente | Su búsqueda está protegida con DataDome (403 y captcha). Su API de estaciones sí responde sin problema. |
-| Omio, trenes.com, promociones | pendiente | Omio carga sin bloqueo, es la siguiente candidata razonable. |
+| **Campañas** | funcionando | No es una fuente de precios: vigila qué promociona cada compañía en su portada. Ver abajo. |
+| Omio, trenes.com | descartadas | Son agencias, y está medido que las agencias salen más caras. Ver abajo. |
 
 > **Corrección:** al empezar este proyecto se dio por hecho que eDreams no
 > vendía trenes. Es falso: `edreams.es/trenes` existe y vende AVE, igual que
@@ -126,6 +127,48 @@ Si algún día vuelve a fallar, el adaptador ahora lo dice en una línea en vez 
 agotar el tiempo: distingue "la página llega en blanco" de "hay contenido pero
 no es el formulario", y en cuanto lo detecta deja de reintentar las demás
 consultas, que antes costaban seis minutos y medio para nada.
+
+## Por qué no hay más fuentes de precios
+
+Se midió antes de decidir. Mismo día (11/09/2026), Madrid → Alicante/Elche:
+
+| Opción | Precio | Tiempo |
+|---|---|---|
+| **Ouigo (operador)** | **19 €** | 2h22 |
+| Renfe AVE | 37,25 € | 3h01 |
+| Autobús (ALSA) | 39,05 € | 4h50, nocturno |
+| Avión (Air Europa) | 41-49 € | 1h10 + ir a Barajas + salir del aeropuerto |
+| eDreams (agencia) | +10,85 € sobre el operador | igual |
+
+**Nada baja del precio del operador.** El autobús es más caro *y* más lento; el
+avión sale de 41 € sin contar traslados. Y los tres operadores que existen en
+esta ruta -Renfe, Ouigo e iryo- ya están. No hay un cuarto.
+
+Por eso Omio, trenes.com y Trainline quedan descartadas: son agencias, venden
+lo mismo con comisión y añaden webs que se rompen. Trainline además está
+protegida con DataDome.
+
+### Campañas: lo único que puede bajar de ahí
+
+`python -m buscador promociones` mira qué anuncian Renfe y Ouigo en su portada.
+Dos peticiones HTTP, sin navegador, un segundo. Va dentro del workflow diario
+del calendario.
+
+Dos decisiones que salen de mirar esas páginas de verdad:
+
+- **No se lee su página de "ofertas y promociones".** La de Ouigo es un archivo
+  que nadie limpia: en agosto de 2026 seguía anunciando unos Pink Days que
+  caducaron en enero de 2025, una promo que acabó en septiembre de 2024 y otra
+  de las Fallas de 2023. Raspar eso llenaría el móvil de campañas muertas. Lo
+  que está vivo es lo que destacan en la portada.
+- **Solo se avisa cuando aparece una campaña nueva.** Repetir cada día las
+  mismas cuatro promociones es ruido, y el ruido acaba en que no se lee
+  ninguna. Se guarda una huella en `data/promociones.json` y se habla solo
+  cuando hay algo que antes no estaba.
+
+Con expectativas realistas: las campañas suelen pedir un perfil concreto
+(18-30 años, grupos de 4 a 9, menores) y a un adulto viajando solo no le suele
+aplicar ninguna. El valor está en enterarse el mismo día si sacan una que sí.
 
 ### Groupon y Oferplan: comprobado que no venden trenes
 

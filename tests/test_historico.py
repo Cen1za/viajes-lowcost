@@ -13,6 +13,15 @@ from buscador.modelos import Oferta
 
 VIAJE = date(2026, 12, 5)
 
+#: Momento de referencia de las capturas, anclado al mediodía de hoy.
+#: Con `datetime.now()` a secas estas pruebas fallaban si se ejecutaban entre
+#: las 00:00 y las 02:00 UTC: una captura "de hace dos horas" caía en la
+#: jornada anterior y entonces guardar un punto nuevo es justo lo que toca
+#: hacer, porque la mediana necesita un dato por día. El fallo era del reloj,
+#: no del código, y con el mediodía como origen hay margen de sobra por los
+#: dos lados.
+AHORA = datetime.now(timezone.utc).replace(hour=12, minute=0, second=0, microsecond=0)
+
 
 @pytest.fixture(autouse=True)
 def historico_temporal(tmp_path, monkeypatch):
@@ -35,7 +44,7 @@ def oferta(precio: float, hace_horas: float = 0, hora: int = 8) -> Oferta:
         duracion_min=142,
         precio_eur=precio,
         url_compra="https://ejemplo",
-        capturado_en=datetime.now(timezone.utc) - timedelta(hours=hace_horas),
+        capturado_en=AHORA - timedelta(hours=hace_horas),
     )
 
 

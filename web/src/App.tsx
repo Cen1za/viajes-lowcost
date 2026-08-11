@@ -33,7 +33,14 @@ import {
   horasFranja,
   usePreferencias,
 } from './preferencias'
-import type { Calendario, EstadoFuentes, Gangas, Latest, Tren } from './tipos'
+import type {
+  Calendario,
+  EstadoFuentes,
+  Gangas,
+  Latest,
+  Promociones,
+  Tren,
+} from './tipos'
 
 type Vista = 'ofertas' | 'calendario' | 'trenes' | 'ajustes'
 type Prefs = ReturnType<typeof usePreferencias>
@@ -679,6 +686,41 @@ function Ficha({
   )
 }
 
+/**
+ * Campañas que Renfe y Ouigo anuncian ahora mismo en su portada.
+ *
+ * No son precios de esta ruta y por eso viven aquí y no en las listas de
+ * trenes: casi siempre piden un perfil concreto (18-30 años, grupos de 4 a 9,
+ * menores) y a quien viaja solo no suelen aplicarle. Se enseñan por si alguna
+ * vez sale una que sí sirva; el aviso de Telegram salta solo cuando aparece
+ * una nueva.
+ */
+function PanelCampanas() {
+  const { datos } = useDatos<Promociones>('promociones')
+  const campanas = datos?.campanas ?? []
+
+  if (!campanas.length) return null
+
+  return (
+    <Ficha
+      icono={Iconos.ofertas}
+      titulo="Campañas de las compañías"
+      valor={`${campanas.length} activas`}
+    >
+      {campanas.map((c) => (
+        <div key={c.huella} className="fuente">
+          <span className="nombre">{c.compania}</span>
+          <span className="dato">{c.texto}</span>
+        </div>
+      ))}
+      <p className="aclaracion">
+        Suelen pedir edad, grupo o fechas concretas: comprueba las condiciones
+        antes de contar con el descuento.
+      </p>
+    </Ficha>
+  )
+}
+
 function VistaAjustes({ prefs, cambiar, alternar, alternarDia, limpiar }: Prefs) {
   const { datos } = useDatos<EstadoFuentes>('estado_fuentes')
   const { datos: precios } = useDatos<Latest>('latest')
@@ -877,6 +919,8 @@ function VistaAjustes({ prefs, cambiar, alternar, alternarDia, limpiar }: Prefs)
           raras, se descartan y la fuente se pone en rojo.
         </p>
       </Ficha>
+
+      <PanelCampanas />
 
       <PanelInstalacion />
 

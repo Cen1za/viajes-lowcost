@@ -1,9 +1,10 @@
 """Interfaz de línea de comandos del buscador.
 
 Comandos:
-    buscar      barrido de calendario entre dos fechas
-    vigilar     revisa los viajes fijos de config/vigilancias.yaml
-    estaciones  descubre y guarda los códigos de estación de cada fuente
+    buscar       barrido de calendario entre dos fechas
+    vigilar      revisa los viajes fijos de config/vigilancias.yaml
+    promociones  campañas anunciadas por Renfe y Ouigo, avisando solo de las nuevas
+    estaciones   descubre y guarda los códigos de estación de cada fuente
 """
 
 from __future__ import annotations
@@ -162,6 +163,60 @@ def cmd_vigilar(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_promociones(args: argparse.Namespace) -> int:
+    """Revisa qué campañas anuncian Renfe y Ouigo, y avisa solo de las nuevas."""
+    import json
+
+    from . import promociones as promos
+    from .config import DIR_DATOS
+
+    config = cargar_config()
+    fichero = DIR_DATOS / "promociones.json"
+
+    encontradas, errores = promos.consultar(config.red.user_agent)
+    for error in errores:
+        consola.print(f"[red]{error}[/red]")
+
+    if not encontradas:
+        # Sin nada que leer no se toca el fichero: si la web se cayó, dar por
+        # desaparecidas las campañas haría que se avisara de todas otra vez al
+        # volver a estar disponible.
+        consola.print("[yellow]No se ha podido leer ninguna campaña.[/yellow]")
+        return 1 if errores else 0
+
+    previas = []
+    if fichero.exists():
+        try:
+            previas = json.loads(fichero.read_text(encoding="utf-8")).get("campanas", [])
+        except (ValueError, OSError):
+            consola.print("[yellow]promociones.json ilegible, se rehace.[/yellow]")
+
+    nuevas, estado = promos.novedades(encontradas, previas)
+
+    for campana in estado:
+        marca = "[green]NUEVA[/green] " if any(n.huella == campana["huella"] for n in nuevas) else ""
+        consola.print(f"  {marca}[bold]{campana['compania']}[/bold]: {campana['texto']}")
+
+    if args.guardar:
+        historico.escribir_json(
+            fichero, {"actualizado": datetime.now().isoformat(timespec="seconds"),
+                      "campanas": estado}
+        )
+        consola.print(f"[green]Guardadas {len(estado)} campañas.[/green]")
+
+    if args.avisar and nuevas:
+        from .avisos import enviar_mensaje
+
+        if enviar_mensaje(promos.mensaje(nuevas)):
+            consola.print(f"[green]Avisado de {len(nuevas)} campañas nuevas.[/green]")
+        else:
+            consola.print("[yellow]No se pudo avisar por Telegram.[/yellow]")
+    elif args.avisar:
+        consola.print("Sin campañas nuevas: no se avisa.")
+
+    return 0
+
+
 def cmd_estaciones(args: argparse.Namespace) -> int:
     from .config import guardar_codigos
 
@@ -260,6 +315,13 @@ def construir_parser() -> argparse.ArgumentParser:
     p_vigilar.add_argument("--fuentes", nargs="*", help="Limitar a estas fuentes.")
     _opciones_ciclo(p_vigilar)
     p_vigilar.set_defaults(func=cmd_vigilar)
+
+    p_promos = subs.add_parser(
+        "promociones",
+        help="Mira qué campañas anuncian Renfe y Ouigo; avisa solo de las nuevas.",
+    )
+    _opciones_ciclo(p_promos)
+    p_promos.set_defaults(func=cmd_promociones)
 
     p_est = subs.add_parser("estaciones", help="Descubre los códigos de estación.")
     p_est.add_argument("--fuentes", nargs="*", help="Limitar a estas fuentes.")
