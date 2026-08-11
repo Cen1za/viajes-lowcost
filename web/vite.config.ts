@@ -29,6 +29,10 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
+        // El service worker se regenera en cada compilación, así que la lógica
+        // propia -recibir notificaciones- vive aparte y se importa. Ver
+        // public/push-sw.js.
+        importScripts: ['push-sw.js'],
         // Sin esto, tras un despliegue la app sigue mostrando la versión
         // anterior hasta que se cierran todas sus pestañas. Con la app
         // instalada en el móvil eso puede ser días.

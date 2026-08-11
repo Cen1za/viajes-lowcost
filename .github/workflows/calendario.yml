@@ -42,6 +42,9 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          VAPID_CLAVE_PRIVADA: ${{ secrets.VAPID_CLAVE_PRIVADA }}
+          VAPID_ASUNTO: ${{ secrets.VAPID_ASUNTO }}
+          WEB_PUSH_SUSCRIPCION: ${{ secrets.WEB_PUSH_SUSCRIPCION }}
         run: python -m buscador buscar --fuentes ouigo --guardar --avisar
 
       - name: Mirar las campañas de Renfe y Ouigo
@@ -51,6 +54,9 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          VAPID_CLAVE_PRIVADA: ${{ secrets.VAPID_CLAVE_PRIVADA }}
+          VAPID_ASUNTO: ${{ secrets.VAPID_ASUNTO }}
+          WEB_PUSH_SUSCRIPCION: ${{ secrets.WEB_PUSH_SUSCRIPCION }}
         run: python -m buscador promociones --guardar --avisar
 
       - name: Guardar los datos en el repositorio

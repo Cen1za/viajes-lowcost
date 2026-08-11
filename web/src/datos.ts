@@ -1,4 +1,5 @@
 import { useEffect, useState, useSyncExternalStore } from 'react'
+import { aplicarTraslados } from './destinos'
 
 /* --- Recarga a petición ---------------------------------------------------- */
 
@@ -65,6 +66,11 @@ export function useDatos<T>(nombre: string) {
       })
       .then((d) => {
         if (!vigente) return
+        // Los ficheros que traen trenes traen también los minutos de traslado
+        // de cada estación. Se aplican antes de pintar para que el sello
+        // "+25 min" y el filtro de directos salgan de la configuración y no
+        // de una copia a mano.
+        aplicarTraslados((d as { traslado_min?: Record<string, number> }).traslado_min)
         setDatos(d)
         setError(null)
       })

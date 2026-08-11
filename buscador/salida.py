@@ -2,10 +2,23 @@
 
 from __future__ import annotations
 
+import sys
+
 from rich.console import Console
 from rich.table import Table
 
 from .modelos import Oferta, ResultadoFuente
+
+# La consola de Windows va en cp1252 y revienta con cualquier carácter que no
+# quepa ahí: una flecha "→", un emoji, y a veces hasta los acentos. No es un
+# detalle estético, es un UnicodeEncodeError que tumba el comando entero
+# después de haber hecho el trabajo. Se pide UTF-8 y, si el terminal no puede,
+# que sustituya el carácter en vez de fallar.
+for flujo in (sys.stdout, sys.stderr):
+    try:
+        flujo.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, ValueError):  # ya reconfigurado, o no es un fichero real
+        pass
 
 consola = Console()
 

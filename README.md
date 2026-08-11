@@ -128,6 +128,48 @@ agotar el tiempo: distingue "la página llega en blanco" de "hay contenido pero
 no es el formulario", y en cuanto lo detecta deja de reintentar las demás
 consultas, que antes costaban seis minutos y medio para nada.
 
+## Avisos
+
+Dos canales independientes, los dos opcionales. Si no configuras ninguno el
+buscador sigue funcionando: las ofertas se ven en la app, simplemente no te
+persiguen.
+
+### Telegram
+
+Habla con `@BotFather` (`/newbot`) para el token y con `@userinfobot` para tu
+`chat_id`. Los dos van a *Settings → Secrets and variables → Actions* como
+`TELEGRAM_BOT_TOKEN` y `TELEGRAM_CHAT_ID`. Para comprobarlo:
+
+```bash
+python -m buscador probar-aviso
+```
+
+### Notificación en el móvil (Web Push)
+
+Sin servidor: las manda el propio GitHub Actions. Una vez:
+
+```bash
+python -m buscador claves-push
+```
+
+Te da un par de claves. La privada va a los secretos como `VAPID_CLAVE_PRIVADA`
+(junto a `VAPID_ASUNTO`, un `mailto:` tuyo) y la pública se pega en
+`web/src/avisos.ts`. Después, con la app abierta en el móvil, en *Ajustes →
+Avisos en este móvil*: te dará un texto que hay que guardar como el secreto
+`WEB_PUSH_SUSCRIPCION`.
+
+Ese paso manual es el precio de no montar un servidor para almacenar una línea
+de texto que cambia una vez al año. Y **la suscripción tiene que ir en un
+secreto, no en el repositorio**: contiene un endpoint único que permite mandar
+notificaciones a tu móvil, y este repositorio es público. Admite varios
+dispositivos, uno por línea.
+
+### Nada de ráfagas
+
+El primer día había 32 ofertas por debajo del umbral y se mandaba un mensaje por
+oferta. A partir de dos van **juntas en un solo aviso**, de más barata a menos.
+Un aviso que no se lee no sirve de nada.
+
 ## Por qué no hay más fuentes de precios
 
 Se midió antes de decidir. Mismo día (11/09/2026), Madrid → Alicante/Elche:

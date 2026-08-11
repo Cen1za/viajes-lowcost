@@ -34,6 +34,7 @@ import {
   horasFranja,
   usePreferencias,
 } from './preferencias'
+import { activarAvisos, estadoAvisos } from './avisos'
 import { loQueFalta } from './referencias'
 import type {
   Calendario,
@@ -651,6 +652,91 @@ function VistaTrenes(prefs: Prefs) {
 
 /* --- Instalación ---------------------------------------------------------- */
 
+/**
+ * Avisos como notificación del móvil.
+ *
+ * El paso raro -copiar un texto y pegarlo en GitHub- es el precio de no tener
+ * servidor: quien manda las notificaciones es el propio GitHub Actions, y para
+ * eso necesita saber a qué dispositivo. Se explica en vez de disimularlo.
+ */
+function PanelAvisos() {
+  const [estado, setEstado] = useState(estadoAvisos)
+  const [suscripcion, setSuscripcion] = useState<string | null>(null)
+  const [copiado, setCopiado] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  if (estado === 'sin-configurar' || estado === 'no-soportado') return null
+
+  async function activar() {
+    setError(null)
+    try {
+      const texto = await activarAvisos()
+      if (!texto) {
+        setError('No has dado permiso, así que no puedo avisarte en este móvil.')
+        return
+      }
+      setSuscripcion(texto)
+      setEstado(estadoAvisos())
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'No se han podido activar.')
+    }
+  }
+
+  async function copiar() {
+    if (!suscripcion) return
+    try {
+      await navigator.clipboard.writeText(suscripcion)
+      setCopiado(true)
+      setTimeout(() => setCopiado(false), 2500)
+    } catch {
+      // Sin permiso de portapapeles queda el texto a la vista para copiarlo a mano.
+    }
+  }
+
+  return (
+    <Ficha
+      icono={Iconos.senal}
+      titulo="Avisos en este móvil"
+      valor={estado === 'activo' ? '✓' : undefined}
+    >
+      {estado === 'bloqueado' ? (
+        <p className="aclaracion">
+          Tienes las notificaciones bloqueadas para esta web. Se cambia en los
+          ajustes del navegador, en los permisos del sitio.
+        </p>
+      ) : (
+        <>
+          <p className="aclaracion">
+            Notificación en el móvil cuando aparezca una oferta, sin necesidad de
+            Telegram.
+          </p>
+          {estado !== 'activo' && (
+            <button className="boton-suave" onClick={activar}>
+              Avisarme en este móvil
+            </button>
+          )}
+        </>
+      )}
+
+      {error && <p className="aclaracion aviso-error">{error}</p>}
+
+      {suscripcion && (
+        <>
+          <p className="aclaracion">
+            Falta un paso: copia este texto y guárdalo en GitHub como el secreto{' '}
+            <strong>WEB_PUSH_SUSCRIPCION</strong>. Sin eso el aviso no sabe a qué
+            móvil ir.
+          </p>
+          <textarea className="suscripcion" readOnly rows={3} value={suscripcion} />
+          <button className="boton-suave" onClick={copiar}>
+            {copiado ? '✓ Copiado' : 'Copiar el texto'}
+          </button>
+        </>
+      )}
+    </Ficha>
+  )
+}
+
 function PanelInstalacion() {
   const { estado, instalar, esApple } = useInstalacion()
 
@@ -958,6 +1044,8 @@ function VistaAjustes({ prefs, cambiar, alternar, alternarDia, limpiar }: Prefs)
           raras, se descartan y la fuente se pone en rojo.
         </p>
       </Ficha>
+
+      <PanelAvisos />
 
       <PanelCampanas />
 

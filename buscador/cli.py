@@ -18,7 +18,7 @@ from datetime import date, datetime, timedelta, timezone
 from . import adaptadores as _adaptadores  # noqa: F401 - registra los adaptadores
 from . import historico, ofertas as motor_ofertas
 from .adaptadores import base
-from .avisos import enviar_gangas
+from .avisos import avisar_de_gangas, enviar_gangas
 from .config import Config, cargar_config
 from .consultas import (
     plan_calendario,
@@ -110,12 +110,19 @@ def _cerrar_ciclo(
 
     if args.avisar:
         nuevas = motor_ofertas.filtrar_repetidas(gangas, config.ofertas.antispam_horas)
-        enviados = enviar_gangas(nuevas)
-        if enviados:
+        salidos = avisar_de_gangas(nuevas)
+        # Basta con que un canal haya funcionado para dar la oferta por avisada:
+        # si no, el que sí funciona repetiría el mismo aviso en cada ejecución.
+        if any(salidos.values()):
             motor_ofertas.registrar_enviadas(nuevas, config.ofertas.antispam_horas)
-            consola.print(f"Telegram: {enviados} avisos enviados.")
+            for canal, cuantos in salidos.items():
+                if cuantos:
+                    consola.print(f"{canal}: {cuantos} avisos enviados.")
         elif nuevas:
-            consola.print("[yellow]Telegram sin configurar: avisos no enviados.[/yellow]")
+            consola.print(
+                "[yellow]Ningún canal de avisos configurado: "
+                f"{len(nuevas)} ofertas no avisadas.[/yellow]"
+            )
 
     if args.guardar:
         exportar_todo(encontradas, resultados, gangas, config)
@@ -313,6 +320,55 @@ def cmd_promociones(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_claves_push(args: argparse.Namespace) -> int:
+    """Genera el par de claves que firma las notificaciones del móvil.
+
+    Se ejecuta una sola vez. La privada va a los secretos del repositorio y la
+    pública al código de la web, que es donde el navegador la necesita para
+    suscribirse.
+    """
+    try:
+        from py_vapid import Vapid01
+    except ImportError:
+        consola.print(
+            "[red]Falta pywebpush.[/red] Instálalo con:  pip install pywebpush"
+        )
+        return 1
+
+    import base64
+
+    vapid = Vapid01()
+    vapid.generate_keys()
+
+    def _url64(datos: bytes) -> str:
+        return base64.urlsafe_b64encode(datos).decode().rstrip("=")
+
+    numeros = vapid.private_key.private_numbers()
+    privada = _url64(numeros.private_value.to_bytes(32, "big"))
+
+    from cryptography.hazmat.primitives import serialization
+
+    publica = _url64(
+        vapid.public_key.public_bytes(
+            serialization.Encoding.X962,
+            serialization.PublicFormat.UncompressedPoint,
+        )
+    )
+
+    consola.print("\n[bold]Claves generadas. Guárdalas ya, no se pueden recuperar.[/bold]\n")
+    consola.print("[bold]1.[/bold] En GitHub → Settings → Secrets → Actions, crea:\n")
+    consola.print(f"   VAPID_CLAVE_PRIVADA = [green]{privada}[/green]")
+    consola.print("   VAPID_ASUNTO        = mailto:tu@correo.com\n")
+    consola.print("[bold]2.[/bold] En web/src/avisos.ts, pon la pública:\n")
+    consola.print(f"   CLAVE_PUBLICA = [green]{publica}[/green]\n")
+    consola.print(
+        "[bold]3.[/bold] Despliega, abre la app en el móvil, entra en Ajustes y "
+        "pulsa «Avisarme en este móvil». Te dará un texto: guárdalo como el "
+        "secreto [bold]WEB_PUSH_SUSCRIPCION[/bold].\n"
+    )
+    return 0
+
+
 def cmd_estaciones(args: argparse.Namespace) -> int:
     from .config import guardar_codigos
 
@@ -441,6 +497,12 @@ def construir_parser() -> argparse.ArgumentParser:
     )
     _opciones_ciclo(p_promos)
     p_promos.set_defaults(func=cmd_promociones)
+
+    p_claves = subs.add_parser(
+        "claves-push",
+        help="Genera las claves para avisar por notificación del móvil (una vez).",
+    )
+    p_claves.set_defaults(func=cmd_claves_push)
 
     p_est = subs.add_parser("estaciones", help="Descubre los códigos de estación.")
     p_est.add_argument("--fuentes", nargs="*", help="Limitar a estas fuentes.")

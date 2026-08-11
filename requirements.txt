@@ -7,3 +7,7 @@ rich>=13.7
 # Necesario para la fuente Renfe, que va por navegador real. Además del
 # paquete hay que instalar el navegador:  playwright install chromium
 playwright>=1.49
+
+# Avisos como notificación del móvil (Web Push). Solo hace falta si se
+# configuran los secretos VAPID_*; sin ellos el módulo no llega a usarse.
+pywebpush>=2.0

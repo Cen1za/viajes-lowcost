@@ -422,6 +422,31 @@ function Tramo({ tren }: { tren: Tren }) {
 
 /* --- Tarjeta de tren ------------------------------------------------------ */
 
+/**
+ * ¿Dice algo la tarifa sobre el billete?
+ *
+ * Las de Ouigo sí: una "Promo" no se cambia ni se devuelve, y eso pesa tanto
+ * como el precio. Las demás fuentes rellenan el campo con su propio nombre o
+ * con "Precio desde", que no informa de nada y solo ensucia la tarjeta.
+ */
+const TARIFAS_CON_CONDICIONES = new Set(['Promo', 'Básica'])
+
+function tarifaUtil(tarifa: string | null): boolean {
+  return tarifa != null && TARIFAS_CON_CONDICIONES.has(tarifa)
+}
+
+/** Cómo se escribe cada fuente cuando se le enseña al usuario. */
+const NOMBRE_FUENTE: Record<string, string> = {
+  edreams: 'eDreams',
+  ouigo: 'Ouigo',
+  renfe: 'Renfe',
+  iryo: 'iryo',
+}
+
+function nombreFuente(fuente: string): string {
+  return NOMBRE_FUENTE[fuente] ?? fuente
+}
+
 export function TarjetaTren({
   tren,
   destacado = false,
@@ -493,6 +518,18 @@ export function TarjetaTren({
 
       <div className="pie">
         {mostrarFecha && <span className="etiqueta">{fechaCorta(tren.fecha)}</span>}
+        {tarifaUtil(tren.tarifa) && (
+          <span
+            className="etiqueta tarifa"
+            title={
+              tren.tarifa === 'Promo'
+                ? 'La tarifa barata de Ouigo: no admite cambios ni devolución'
+                : 'Tarifa estándar: admite cambios con condiciones'
+            }
+          >
+            {tren.tarifa}
+          </span>
+        )}
         {tren.plazas != null && tren.plazas <= 10 && (
           <span className="etiqueta aviso">Quedan {tren.plazas}</span>
         )}
@@ -517,7 +554,7 @@ export function TarjetaTren({
           style={{ background: marca.color, borderColor: marca.color }}
         >
           {tren.url_busqueda
-            ? `Ver en ${tren.fuente} ↗`
+            ? `Ver en ${nombreFuente(tren.fuente)} ↗`
             : `Abrir ${marca.nombre} ↗`}
         </a>
       </div>

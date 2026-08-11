@@ -551,6 +551,13 @@ main {
   color: var(--alerta);
 }
 
+/* La tarifa no es una alarma: informa de las condiciones, así que va en el
+   gris del pie y no compite con "Quedan 3 plazas". */
+.etiqueta.tarifa {
+  border: 1px solid var(--borde);
+  background: var(--superficie);
+}
+
 .motivo {
   margin-top: 9px;
   padding: 9px 11px;
@@ -1594,4 +1601,25 @@ main {
   .evolucion em {
     display: none;
   }
+}
+
+/* Texto de la suscripción a los avisos. Es un pegote largo de base64 que hay
+   que copiar entero, así que se muestra pequeño y con scroll propio en vez de
+   estirar la ficha. */
+.suscripcion {
+  width: 100%;
+  margin: 8px 0;
+  padding: 8px 10px;
+  border: 1px solid var(--borde);
+  border-radius: var(--r-s);
+  background: var(--fondo);
+  color: var(--tinta-suave);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.66rem;
+  line-height: 1.35;
+  resize: vertical;
+}
+
+.aviso-error {
+  color: var(--error);
 }
