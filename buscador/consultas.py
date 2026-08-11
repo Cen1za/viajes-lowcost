@@ -71,6 +71,25 @@ def plan_calendario(
     return consultas
 
 
+def plan_proximos_findes(config: Config, cuantos: int) -> list[Consulta]:
+    """Los findes que vienen, se sepa ya su precio o no.
+
+    Hace falta porque ``plan_top_dias`` solo repregunta fechas que ya conoce, y
+    las conoce del histórico que él mismo alimenta: por sí solo nunca descubre
+    el finde que viene. Y el finde que viene es justo sobre el único que aún se
+    puede decidir algo.
+
+    La ventana es de ``cuantos`` semanas desde mañana; qué días de dentro se
+    consultan lo siguen decidiendo ``dias_ida`` y ``dias_vuelta``.
+    """
+    hoy = date.today()
+    return plan_calendario(
+        config,
+        hoy + timedelta(days=1),
+        hoy + timedelta(days=7 * cuantos),
+    )
+
+
 def plan_top_dias(config: Config, cuantos: int) -> list[Consulta]:
     """Consultas solo para los días más baratos que ya conocemos.
 
@@ -79,17 +98,24 @@ def plan_top_dias(config: Config, cuantos: int) -> list[Consulta]:
     (Ouigo) dibuja el mapa de precios de todo el horizonte, y después las
     fuentes lentas solo miran los días que han salido baratos, que son los
     únicos en los que merece la pena comparar operadores.
+
+    El mapa se lee de data/mapa_precios.json, que escribe ``buscador mapa``
+    preguntando el horizonte entero de una vez. Si aún no existe se recurre a
+    data/calendario.json, pero ese fichero se reconstruye desde el histórico
+    que esta misma función alimenta: elegir de ahí es un bucle cerrado en el
+    que nunca entra una fecha que no se estuviera mirando ya.
     """
     import json
 
     from .config import DIR_DATOS
 
-    ruta_calendario = DIR_DATOS / "calendario.json"
+    ruta_calendario = DIR_DATOS / "mapa_precios.json"
+    if not ruta_calendario.exists():
+        ruta_calendario = DIR_DATOS / "calendario.json"
     if not ruta_calendario.exists():
         raise FileNotFoundError(
-            "No hay data/calendario.json todavía. Ejecuta antes un barrido "
-            "completo con una fuente rápida:\n"
-            "  python -m buscador buscar --fuentes ouigo --guardar"
+            "No hay ningún mapa de precios todavía. Dibújalo antes:\n"
+            "  python -m buscador mapa --guardar"
         )
 
     with ruta_calendario.open(encoding="utf-8") as fichero:
@@ -106,13 +132,18 @@ def plan_top_dias(config: Config, cuantos: int) -> list[Consulta]:
         except KeyError:
             continue  # ruta de una configuración anterior
 
-        futuros = [
-            (precio, date.fromisoformat(dia))
-            for dia, precio in por_dia.items()
-            if date.fromisoformat(dia) > hoy
-        ]
         # La vuelta sale de una estación de destino: lo deducimos de la ruta.
         sentido = "vuelta" if origen_id in ids_destino else "ida"
+
+        # El mapa de precios trae los siete días de la semana, pero profundizar
+        # con las fuentes lentas en un martes barato no sirve de nada si nunca
+        # se viaja en martes: la app lo esconderá por días de viaje.
+        permitidos = config.busqueda.indices_dias_semana(sentido)
+        futuros = [
+            (precio, dia)
+            for dia, precio in ((date.fromisoformat(d), p) for d, p in por_dia.items())
+            if dia > hoy and (permitidos is None or dia.weekday() in permitidos)
+        ]
 
         for _, dia in sorted(futuros)[:cuantos]:
             consultas.append(

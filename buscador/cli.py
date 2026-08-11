@@ -2,6 +2,7 @@
 
 Comandos:
     buscar       barrido de calendario entre dos fechas
+    mapa         precio mínimo por día de todo el horizonte, con una petición por tramo
     vigilar      revisa los viajes fijos de config/vigilancias.yaml
     promociones  campañas anunciadas por Renfe y Ouigo, avisando solo de las nuevas
     estaciones   descubre y guarda los códigos de estación de cada fuente
@@ -12,14 +13,19 @@ from __future__ import annotations
 import argparse
 import logging
 import sys
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 
 from . import adaptadores as _adaptadores  # noqa: F401 - registra los adaptadores
 from . import historico, ofertas as motor_ofertas
 from .adaptadores import base
 from .avisos import enviar_gangas
 from .config import Config, cargar_config
-from .consultas import plan_calendario, plan_top_dias, plan_vigilancias
+from .consultas import (
+    plan_calendario,
+    plan_proximos_findes,
+    plan_top_dias,
+    plan_vigilancias,
+)
 from .exportar import exportar_todo
 from .modelos import Consulta, Oferta, ResultadoFuente
 from .salida import consola, mejores_por_tren, tabla_fuentes, tabla_ofertas
@@ -121,7 +127,13 @@ def _cerrar_ciclo(
 def cmd_buscar(args: argparse.Namespace) -> int:
     config = cargar_config()
 
-    if args.top_dias:
+    if args.findes:
+        consultas = plan_proximos_findes(config, args.findes)
+        consola.print(
+            f"Mirando los [bold]{args.findes}[/bold] próximos findes, "
+            f"salgan baratos o no."
+        )
+    elif args.top_dias:
         consultas = plan_top_dias(config, args.top_dias)
         consola.print(
             f"Profundizando en los [bold]{args.top_dias}[/bold] días más baratos "
@@ -143,6 +155,80 @@ def cmd_buscar(args: argparse.Namespace) -> int:
     tabla_fuentes(resultados)
     _cerrar_ciclo(config, ofertas, resultados, args)
     return 0 if ofertas else 1
+
+
+def cmd_mapa(args: argparse.Namespace) -> int:
+    """Dibuja el mapa de precios por día: una sola petición por tramo.
+
+    Ouigo tiene un endpoint de calendario que devuelve el mínimo de todo un
+    rango de golpe. Preguntar día a día solo para decidir *dónde merece la pena
+    mirar en detalle* sería pagar noventa consultas por una decisión que cuesta
+    una.
+
+    Su resultado es lo que después usa ``--top-dias``. Antes ese modo leía
+    data/calendario.json, que se reconstruye desde el histórico que él mismo
+    alimenta: un bucle cerrado en el que ninguna fecha nueva llegaba a entrar.
+    """
+    from .config import DIR_DATOS
+    from .historico import escribir_json
+
+    config = cargar_config()
+    fuentes = [a for a in base.crear_adaptadores(config) if a.nombre == "ouigo"]
+    if not fuentes:
+        consola.print(
+            "[red]Ouigo no está activo.[/red] El mapa de precios sale de su "
+            "endpoint de calendario; actívalo en config/app.yaml."
+        )
+        return 1
+
+    ouigo = fuentes[0]
+    desde = date.today() + timedelta(days=1)
+    hasta = desde + timedelta(days=args.dias or config.busqueda.horizonte_dias)
+
+    idas = [
+        (origen, destino)
+        for origen in config.estaciones.origen
+        for destino in config.estaciones.destino
+    ]
+    tramos = idas + [(d, o) for o, d in idas] if config.busqueda.incluir_vuelta else idas
+
+    rutas: dict[str, dict[str, float]] = {}
+    try:
+        for origen, destino in tramos:
+            try:
+                precios = ouigo.calendario(origen, destino, desde, hasta)
+            except Exception as error:  # una ruta caída no invalida el resto
+                # Flecha ASCII: este aviso salta siempre para los tramos que
+                # Ouigo no cubre (sale de Chamartín, no de Atocha), y una
+                # consola de Windows en cp1252 revienta al imprimir "→".
+                consola.print(f"[yellow]{origen.id} -> {destino.id}: {error}[/yellow]")
+                continue
+            rutas[f"{origen.id}->{destino.id}"] = {
+                dia.isoformat(): precio for dia, precio in sorted(precios.items())
+            }
+    finally:
+        if hasattr(ouigo, "cerrar"):
+            ouigo.cerrar()
+
+    if not rutas:
+        consola.print("[red]Ninguna ruta ha devuelto precios.[/red]")
+        return 1
+
+    dias = sum(len(p) for p in rutas.values())
+    consola.print(
+        f"Mapa de precios: [bold]{len(rutas)}[/bold] rutas, "
+        f"[bold]{dias}[/bold] días con precio, del {desde} al {hasta}."
+    )
+
+    if args.guardar:
+        escribir_json(
+            DIR_DATOS / "mapa_precios.json",
+            {"actualizado": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+             "rutas": rutas},
+        )
+        consola.print("Guardado en data/mapa_precios.json.")
+
+    return 0
 
 
 def cmd_vigilar(args: argparse.Namespace) -> int:
@@ -312,14 +398,37 @@ def construir_parser() -> argparse.ArgumentParser:
     p_buscar.add_argument("--destino", nargs="*", help="Ids de estación de destino.")
     p_buscar.add_argument("--fuentes", nargs="*", help="Limitar a estas fuentes.")
     p_buscar.add_argument("--limite", type=int, default=40, help="Filas a mostrar.")
-    p_buscar.add_argument(
+    # Los dos modos abreviados eligen las fechas por su cuenta, así que no
+    # tiene sentido pedir los dos a la vez.
+    modo = p_buscar.add_mutually_exclusive_group()
+    modo.add_argument(
         "--top-dias", type=int, metavar="N",
         help="En vez de barrer un rango, consulta solo los N días más baratos "
              "de cada ruta según data/calendario.json. Pensado para las fuentes "
              "lentas, después de un barrido con una fuente rápida.",
     )
+    modo.add_argument(
+        "--findes", type=int, metavar="N",
+        help="Consulta los N próximos findes cueste lo que cueste, sin mirar "
+             "si ya se conocía su precio. Es lo que garantiza que el finde que "
+             "viene aparezca en la app.",
+    )
     _opciones_ciclo(p_buscar)
     p_buscar.set_defaults(func=cmd_buscar)
+
+    p_mapa = subs.add_parser(
+        "mapa",
+        help="Precio mínimo por día de todo el horizonte (una petición por tramo).",
+    )
+    p_mapa.add_argument(
+        "--dias", type=int, metavar="N",
+        help="Días hacia delante. Por defecto, el horizonte de config/app.yaml.",
+    )
+    p_mapa.add_argument(
+        "--guardar", action="store_true",
+        help="Escribe data/mapa_precios.json, que es de donde --top-dias elige.",
+    )
+    p_mapa.set_defaults(func=cmd_mapa)
 
     p_vigilar = subs.add_parser("vigilar", help="Revisa config/vigilancias.yaml.")
     p_vigilar.add_argument("--fuentes", nargs="*", help="Limitar a estas fuentes.")

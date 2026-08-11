@@ -26,11 +26,21 @@ def _ahora() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
 
 
+#: Fuentes cuyo enlace de búsqueda se puede pegar en otro navegador y sigue
+#: funcionando. eDreams mete trayecto y fecha en la URL; Renfe la firma con un
+#: token de sesión y Ouigo ignora los parámetros, así que de esas solo se puede
+#: ofrecer la portada. Ver buscador/enlaces.py.
+FUENTES_CON_BUSQUEDA = {"edreams"}
+
+
 def _oferta_json(oferta: Oferta) -> dict:
     # El enlace se recalcula aquí en vez de usar el guardado: así los registros
     # antiguos —que llevaban la URL de sesión de Renfe, inservible fuera de su
     # navegador— quedan arreglados sin migrar el fichero.
     enlace_operador = web_operador(oferta.operador)
+    # …pero cuando la fuente sí da una búsqueda enlazable, se publica aparte:
+    # llegar a los resultados de tu fecha ahorra teclear el viaje entero.
+    busqueda = oferta.url_compra if oferta.fuente in FUENTES_CON_BUSQUEDA else None
     return {
         "fuente": oferta.fuente,
         "operador": oferta.operador,
@@ -47,6 +57,7 @@ def _oferta_json(oferta: Oferta) -> dict:
         "tarifa": oferta.tarifa,
         "plazas": oferta.plazas_restantes,
         "url": enlace_operador,
+        "url_busqueda": busqueda,
     }
 
 
@@ -147,7 +158,46 @@ def _referencias(ofertas: list[Oferta], config: Config) -> dict:
         "dias_necesarios": ajustes.dias_minimos_historico,
         "desde": hoy.isoformat(),
         "viajes": {r: dict(sorted(d.items())) for r, d in viajes.items() if d},
+        "series": _series(ofertas, ajustes.dias_historico),
     }
+
+
+def _series(ofertas: list[Oferta], dias: int) -> dict:
+    """Cómo ha ido cambiando el precio de cada viaje, día a día.
+
+    Se guarda solo el mínimo de cada jornada, no cada captura: la vigilancia
+    corre cada hora y el detalle no aporta nada a la vista de "cómo va este
+    viaje", pero multiplicaría por veinte lo que se descarga el móvil.
+
+    Formato apretado a propósito -listas de [día, precio] con el día en
+    AAAA-MM-DD- porque esto lo lee un teléfono, a veces con mala cobertura.
+    """
+    corte = date.today() - timedelta(days=dias)
+    minimos: dict[str, dict[str, dict[str, float]]] = defaultdict(lambda: defaultdict(dict))
+
+    interesan = {(o.ruta, o.fecha_salida.isoformat()) for o in ofertas}
+
+    for oferta in historico.cargar(desde=corte):
+        viaje = oferta.fecha_salida.isoformat()
+        if (oferta.ruta, viaje) not in interesan:
+            continue  # viajes que ya no se enseñan: no hay que arrastrarlos
+        dia = oferta.capturado_en.date().isoformat()
+        previo = minimos[oferta.ruta][viaje].get(dia)
+        if previo is None or oferta.precio_eur < previo:
+            minimos[oferta.ruta][viaje][dia] = round(oferta.precio_eur, 2)
+
+    series = {
+        ruta: {
+            viaje: [[dia, precio] for dia, precio in sorted(dias_precio.items())]
+            # Un solo punto no es una evolución: no se publica.
+            for viaje, dias_precio in viajes.items()
+            if len(dias_precio) > 1
+        }
+        for ruta, viajes in minimos.items()
+    }
+    # Y una ruta sin ningún viaje que enseñar tampoco: sería una clave vacía
+    # viajando hasta el móvil para nada.
+    return {ruta: viajes for ruta, viajes in series.items() if viajes}
 
 
 def _calendario(ofertas: list[Oferta]) -> dict:

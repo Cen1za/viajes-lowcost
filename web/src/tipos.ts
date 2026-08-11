@@ -17,11 +17,17 @@ export interface Tren {
   tarifa: string | null
   plazas: number | null
   /**
-   * Portada del operador. Ninguna web de tren permite enlazar a un billete
+   * Portada del operador. Ninguna web de operador permite enlazar a un billete
    * ni a una búsqueda concreta, así que la app copia los datos del viaje al
    * portapapeles para pegarlos allí.
    */
   url: string
+  /**
+   * Búsqueda ya hecha para esa fecha y ese trayecto, cuando la fuente da un
+   * enlace que se puede pegar en otro navegador (hoy solo eDreams). Cuando
+   * viene, evita teclear el viaje entero.
+   */
+  url_busqueda?: string | null
 }
 
 export interface Latest {
@@ -100,4 +106,9 @@ export interface Referencias {
   dias_necesarios: number
   /** ruta -> fecha -> referencia */
   viajes: Record<string, Record<string, Referencia>>
+  /**
+   * ruta -> fecha del viaje -> [[día de la captura, precio mínimo], ...].
+   * Solo aparecen los viajes con dos días o más: con un punto no hay curva.
+   */
+  series: Record<string, Record<string, [string, number][]>>
 }

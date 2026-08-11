@@ -1532,7 +1532,7 @@ main {
   line-height: 1.4;
 }
 
-.reuniendo .barra {
+.reuniendo .medidor {
   flex: 0 0 64px;
   height: 5px;
   border-radius: 999px;
@@ -1540,9 +1540,58 @@ main {
   overflow: hidden;
 }
 
-.reuniendo .barra span {
+.reuniendo .medidor span {
   display: block;
   height: 100%;
   border-radius: 999px;
   background: var(--marca);
+}
+
+/* Evolución del precio de un viaje: la forma de la línea dice si conviene
+   esperar mejor que cualquier número suelto. Vive en la cabecera del día, que
+   va sobre fondo oscuro, así que los tonos son los claros de la paleta. */
+.evolucion {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+.evolucion svg {
+  display: block;
+  overflow: visible;
+}
+
+.evolucion polyline {
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.evolucion em {
+  font-style: normal;
+  font-size: 0.7rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.dia-cabecera .evolucion.baja {
+  color: #6ee7b7;
+}
+
+.dia-cabecera .evolucion.sube {
+  color: #fca5a5;
+}
+
+.dia-cabecera .evolucion.igual {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* En pantallas estrechas el día y el precio mandan: la curva se queda, pero
+   sin el porcentaje, que es lo que más ancho ocupa. */
+@media (max-width: 380px) {
+  .evolucion em {
+    display: none;
+  }
 }

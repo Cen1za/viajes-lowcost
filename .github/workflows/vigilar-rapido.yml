@@ -15,6 +15,9 @@ on:
       top_dias:
         description: "Cuántos días baratos revisar por ruta"
         default: "8"
+      findes:
+        description: "Cuántos findes próximos revisar siempre"
+        default: "3"
 
 concurrency:
   group: datos            # nunca dos workflows escribiendo data/ a la vez
@@ -31,6 +34,7 @@ jobs:
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       TOP_DIAS: ${{ inputs.top_dias || '8' }}
+      FINDES: ${{ inputs.findes || '3' }}
     steps:
       - uses: actions/checkout@v7
 
@@ -44,6 +48,16 @@ jobs:
 
       - name: Revisar los viajes vigilados
         run: python -m buscador vigilar --fuentes ouigo --guardar --avisar
+
+      # Va primero a propósito: los findes cercanos son lo único sobre lo que
+      # todavía se puede decidir, y --top-dias nunca los elegiría si no están
+      # entre los más baratos del horizonte. Sin este paso, la app puede no
+      # tener ni un precio de la semana que viene.
+      #
+      # 3 findes son unas 48 consultas a Ouigo; con la pausa de cortesía entre
+      # peticiones, ~3 min de los 25 de margen que tiene el job.
+      - name: Revisar los findes que vienen
+        run: python -m buscador buscar --findes "$FINDES" --fuentes ouigo --guardar --avisar
 
       - name: Profundizar en los días más baratos
         run: python -m buscador buscar --top-dias "$TOP_DIAS" --fuentes ouigo --guardar --avisar

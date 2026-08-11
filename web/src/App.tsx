@@ -116,7 +116,9 @@ function ReuniendoPrecios() {
 
   return (
     <div className="reuniendo">
-      <span className="barra" aria-hidden>
+      {/* Ojo con el nombre: "barra" ya es la navegación inferior, que va
+          fija a la pantalla, y esta heredaba su position:fixed. */}
+      <span className="medidor" aria-hidden>
         <span style={{ width: `${porcentaje}%` }} />
       </span>
       <span>
@@ -441,6 +443,7 @@ function ListaCompleta({
                   fecha={dia.fecha}
                   minimo={dia.minimo}
                   cuantos={dia.elementos.length}
+                  trenes={dia.elementos}
                 />
                 <div className="lista">
                   {dia.elementos.map((t, i) => (
@@ -628,6 +631,7 @@ function VistaTrenes(prefs: Prefs) {
               fecha={grupo.fecha}
               minimo={grupo.minimo}
               cuantos={grupo.elementos.length}
+              trenes={grupo.elementos}
             />
             <div className="lista">
               {grupo.elementos.map((t, i) => (

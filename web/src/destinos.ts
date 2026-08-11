@@ -52,6 +52,22 @@ const GENERICO: Destino = {
   traslado: 0,
 }
 
+/**
+ * Ajusta los minutos de traslado con los que publica el buscador.
+ *
+ * Los de arriba son solo un respaldo para el primer pintado: el valor bueno
+ * está en `traslado_min` de latest.json, que sale de `config/app.yaml`. Sin
+ * esto, cambiar el traslado en la configuración no cambiaba nada en la app,
+ * y ese número decide el filtro "Solo Elche AV" y el sello "+25 min".
+ */
+export function aplicarTraslados(minutos: Record<string, number> | undefined): void {
+  if (!minutos) return
+  for (const [id, valor] of Object.entries(minutos)) {
+    const destino = POR_ID.get(id)
+    if (destino && Number.isFinite(valor)) destino.traslado = valor
+  }
+}
+
 /** El extremo del viaje que no es Madrid, venga en el origen o en el destino. */
 export function destinoDelViaje(origenId: string, destinoId: string): Destino {
   return POR_ID.get(destinoId) ?? POR_ID.get(origenId) ?? GENERICO

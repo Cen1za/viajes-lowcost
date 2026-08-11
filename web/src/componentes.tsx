@@ -219,11 +219,17 @@ export function CabeceraDia({
   fecha,
   minimo,
   cuantos,
+  trenes,
 }: {
   fecha: string
   minimo: number
   cuantos: number
+  /** Para saber de qué ruta dibujar la evolución: la del tren más barato,
+      que es justamente el del "desde X €" que se enseña al lado. */
+  trenes?: Tren[]
 }) {
+  const barato = trenes?.reduce((a, b) => (b.precio < a.precio ? b : a))
+
   return (
     <div className="dia-cabecera">
       <span className="titulo">{fechaLarga(fecha)}</span>
@@ -231,7 +237,61 @@ export function CabeceraDia({
         {cuantos} {cuantos === 1 ? 'tren' : 'trenes'} · desde{' '}
         <strong>{euros(minimo)}</strong>
       </span>
+      {barato && <Evolucion tren={barato} />}
     </div>
+  )
+}
+
+/**
+ * Cómo se ha movido el precio de este viaje desde que se vigila.
+ *
+ * Un número suelto no dice si conviene esperar; la forma de la línea sí. Se
+ * dibuja a mano en SVG -son cuatro puntos- para no meter una librería de
+ * gráficos de cientos de kilobytes en una app que se abre en el andén.
+ *
+ * No aparece hasta que hay al menos dos días: una línea de un punto no es una
+ * evolución, es un adorno.
+ */
+export function Evolucion({ tren }: { tren: Tren }) {
+  const datos = useContext(ContextoReferencias)
+  const serie = datos?.series?.[`${tren.origen_id}->${tren.destino_id}`]?.[tren.fecha]
+  if (!serie || serie.length < 2) return null
+
+  const precios = serie.map(([, precio]) => precio)
+  const alto = 24
+  const ancho = 84
+  const min = Math.min(...precios)
+  const max = Math.max(...precios)
+  const recorrido = max - min || 1
+
+  const puntos = precios
+    .map((precio, i) => {
+      const x = (i / (precios.length - 1)) * ancho
+      const y = alto - ((precio - min) / recorrido) * (alto - 4) - 2
+      return `${x.toFixed(1)},${y.toFixed(1)}`
+    })
+    .join(' ')
+
+  const primero = precios[0]
+  const ultimo = precios[precios.length - 1]
+  const cambio = ((ultimo - primero) / primero) * 100
+  const quieto = Math.abs(cambio) < 1
+  const tono = quieto ? 'igual' : cambio < 0 ? 'baja' : 'sube'
+
+  const leyenda = quieto
+    ? 'Sin cambios'
+    : `${cambio < 0 ? '−' : '+'}${Math.abs(Math.round(cambio))}%`
+
+  return (
+    <span
+      className={`evolucion ${tono}`}
+      title={`Desde que se vigila: ${euros(primero)} → ${euros(ultimo)} en ${serie.length} días`}
+    >
+      <svg viewBox={`0 0 ${ancho} ${alto}`} width={ancho} height={alto} aria-hidden>
+        <polyline points={puntos} fill="none" strokeWidth="2" />
+      </svg>
+      <em>{leyenda}</em>
+    </span>
   )
 }
 
@@ -332,7 +392,7 @@ function Tramo({ tren }: { tren: Tren }) {
   return (
     <a
       className="tramo"
-      href={tren.url}
+      href={tren.url_busqueda || tren.url}
       target="_blank"
       rel="noreferrer"
       style={{ ['--color-compania' as string]: marca.color }}
@@ -442,20 +502,23 @@ export function TarjetaTren({
       {motivo && <div className="motivo">{motivo}</div>}
 
       {/* Ninguna web permite enlazar a un billete concreto. La de eDreams al
-          menos deja la búsqueda hecha (ruta y día puestos); las demás solo
-          abren su portada, y por eso se ofrece copiar los datos para pegarlos
-          en su buscador. El botón dice a dónde lleva de verdad: poner aquí el
-          nombre del operador haría creer que abre Renfe cuando abre eDreams. */}
+          menos deja la búsqueda hecha (ruta y día puestos) y lo publica en
+          url_busqueda; las demás solo abren su portada, y por eso se ofrece
+          copiar los datos para pegarlos en su buscador. El botón dice a dónde
+          lleva de verdad: poner aquí el nombre del operador haría creer que
+          abre Renfe cuando abre eDreams. */}
       <div className="acciones">
         <BotonCopiar tren={tren} />
         <a
           className="boton principal"
-          href={tren.url}
+          href={tren.url_busqueda || tren.url}
           target="_blank"
           rel="noreferrer"
           style={{ background: marca.color, borderColor: marca.color }}
         >
-          {tren.fuente === 'edreams' ? 'Ver en eDreams ↗' : `Abrir ${marca.nombre} ↗`}
+          {tren.url_busqueda
+            ? `Ver en ${tren.fuente} ↗`
+            : `Abrir ${marca.nombre} ↗`}
         </a>
       </div>
     </article>

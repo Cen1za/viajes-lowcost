@@ -88,3 +88,44 @@ def test_la_referencia_usa_los_minimos_del_dia():
     salida = _referencias(ofertas, config)
     viaje = salida["viajes"]["madrid_chamartin->elche_av"][VIAJE.isoformat()]
     assert viaje["normal"] == 20.0, "el de 90 € no puede mover la referencia"
+
+
+# -- Series para el gráfico de evolución ------------------------------------
+
+
+def test_la_serie_guarda_un_punto_por_dia():
+    """La vigilancia corre cada hora; el gráfico solo necesita el mínimo diario."""
+    config = cargar_config()
+    ofertas = []
+    for dia in range(4):
+        for hora in range(3):  # tres capturas del mismo día
+            captura = oferta(30.0 - hora, hace_dias=dia)
+            captura.capturado_en = AHORA - timedelta(days=dia, hours=hora)
+            ofertas.append(captura)
+    historico.guardar(ofertas, [])
+
+    serie = _referencias(ofertas, config)["series"]["madrid_chamartin->elche_av"][
+        VIAJE.isoformat()
+    ]
+    assert len(serie) == 4, "un punto por día, no por captura"
+    assert all(precio == 28.0 for _, precio in serie), "se queda el mínimo del día"
+
+
+def test_la_serie_va_ordenada_por_fecha():
+    config = cargar_config()
+    ofertas = [oferta(20.0 + i, hace_dias=i) for i in range(5)]
+    historico.guardar(ofertas, [])
+
+    serie = _referencias(ofertas, config)["series"]["madrid_chamartin->elche_av"][
+        VIAJE.isoformat()
+    ]
+    dias = [dia for dia, _ in serie]
+    assert dias == sorted(dias)
+
+
+def test_un_solo_dia_no_es_una_evolucion():
+    """Con un punto no hay curva que dibujar: no se publica."""
+    config = cargar_config()
+    ofertas = [oferta(25.0)]
+    historico.guardar(ofertas, [])
+    assert _referencias(ofertas, config)["series"] == {}

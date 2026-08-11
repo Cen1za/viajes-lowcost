@@ -31,6 +31,13 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
+      # Primero el mapa: una petición por tramo devuelve el precio mínimo de
+      # los 90 días. Es lo que después usa --top-dias para decidir dónde
+      # profundizar, y lo que evita que esa decisión dependa de las fechas que
+      # ya se estaban mirando.
+      - name: Dibujar el mapa de precios
+        run: python -m buscador mapa --guardar
+
       - name: Barrer el calendario
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}

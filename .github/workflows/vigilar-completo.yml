@@ -12,6 +12,9 @@ on:
       top_dias:
         description: "Cuántos días baratos revisar por ruta"
         default: "6"
+      findes:
+        description: "Cuántos findes próximos revisar siempre"
+        default: "1"
 
 concurrency:
   group: datos
@@ -28,6 +31,7 @@ jobs:
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       TOP_DIAS: ${{ inputs.top_dias || '6' }}
+      FINDES: ${{ inputs.findes || '1' }}
     steps:
       - uses: actions/checkout@v7
 
@@ -47,6 +51,14 @@ jobs:
 
       - name: Revisar los viajes vigilados
         run: python -m buscador vigilar --guardar --avisar
+
+      # Solo 1 finde: aquí entra Renfe por navegador (~30 s por consulta) y
+      # cada día son 4 consultas (2 orígenes × 2 destinos). Con los días de
+      # app.yaml (jue+vie de ida, lun+mar de vuelta) un finde ya son 16
+      # consultas, unos 8 min. El resto del horizonte lo cubre cada hora el
+      # workflow rápido, que va por API.
+      - name: Comparar operadores en los findes que vienen
+        run: python -m buscador buscar --findes "$FINDES" --guardar --avisar
 
       - name: Profundizar en los días más baratos
         run: python -m buscador buscar --top-dias "$TOP_DIAS" --guardar --avisar

@@ -5,7 +5,7 @@ from datetime import date, datetime, time, timedelta, timezone
 import pytest
 
 from buscador.config import Busqueda, Config, Estaciones
-from buscador.consultas import plan_calendario, rango_fechas
+from buscador.consultas import plan_calendario, plan_proximos_findes, rango_fechas
 from buscador.modelos import Estacion, Oferta
 from buscador.salida import mejores_por_tren
 
@@ -106,6 +106,38 @@ def test_ampliar_los_dias_de_vuelta_anade_fechas():
     assert len([c for c in largo if c.sentido == "vuelta"]) > len(
         [c for c in corto if c.sentido == "vuelta"]
     )
+
+
+# -- Próximos findes -------------------------------------------------------
+
+
+def test_los_findes_cubren_una_semana_por_finde():
+    """Dos findes son dos viernes de ida y dos lunes de vuelta."""
+    plan = plan_proximos_findes(
+        config(dias_ida=["viernes"], dias_vuelta=["lunes"], incluir_vuelta=True), 2
+    )
+    idas = sorted({c.fecha for c in plan if c.sentido == "ida"})
+    vueltas = sorted({c.fecha for c in plan if c.sentido == "vuelta"})
+
+    assert len(idas) == 2 and {d.weekday() for d in idas} == {4}
+    assert len(vueltas) == 2 and {d.weekday() for d in vueltas} == {0}
+
+
+def test_los_findes_empiezan_manana_y_no_miran_atras():
+    """Hoy ya no se puede comprar para hoy: la ventana arranca mañana."""
+    plan = plan_proximos_findes(config(incluir_vuelta=True), 1)
+    fechas = [c.fecha for c in plan]
+    hoy = date.today()
+
+    assert min(fechas) == hoy + timedelta(days=1)
+    assert max(fechas) == hoy + timedelta(days=7)
+
+
+def test_mas_findes_son_mas_fechas():
+    """El parámetro sirve para algo: subirlo alarga el horizonte."""
+    uno = plan_proximos_findes(config(dias_ida=["viernes"]), 1)
+    tres = plan_proximos_findes(config(dias_ida=["viernes"]), 3)
+    assert len({c.fecha for c in tres}) == 3 * len({c.fecha for c in uno})
 
 
 def test_se_puede_desactivar_la_vuelta():
