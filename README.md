@@ -166,9 +166,26 @@ Dos decisiones que salen de mirar esas páginas de verdad:
   ninguna. Se guarda una huella en `data/promociones.json` y se habla solo
   cuando hay algo que antes no estaba.
 
-Con expectativas realistas: las campañas suelen pedir un perfil concreto
-(18-30 años, grupos de 4 a 9, menores) y a un adulto viajando solo no le suele
-aplicar ninguna. El valor está en enterarse el mismo día si sacan una que sí.
+**Se descartan las que piden una edad que no es la tuya.** Es lo que más ruido
+generaba: casi todas las campañas de tren van dirigidas a los de 18 a 30 años.
+Se configura en `config/app.yaml`:
+
+```yaml
+pasajeros:
+  edad: 45   # null para verlas todas
+```
+
+Solo se descarta cuando la campaña dice una edad y no encaja. Una que no
+mencione ninguna se queda siempre: puede ser para todo el mundo, y es preferible
+enseñar una que no aplica a esconder una que sí. Cuidado al tocar esto con
+`De 4 a 9 personas`, que no es un rango de edad aunque lo parezca; hay un test
+para eso.
+
+Como el repositorio es público, si prefieres no publicar tu edad basta con
+dejarla en `null`: volverán a salir las campañas de jóvenes, nada más.
+
+Aun así, las campañas suelen pedir grupo o fechas concretas. El valor está en
+enterarse el mismo día si sacan una que sirva.
 
 ### Groupon y Oferplan: comprobado que no venden trenes
 

@@ -92,3 +92,45 @@ def test_el_mensaje_avisa_de_las_condiciones():
     texto = mensaje([Promocion("Ouigo", "50% de descuento para jóvenes.")])
     assert "Ouigo" in texto and "50%" in texto
     assert "condiciones" in texto.lower()
+
+
+# -- Filtro por edad --------------------------------------------------------
+#
+# Con 45 años, las campañas de "18 a 30" no sirven de nada y solo hacen ruido.
+# Lo delicado es no pasarse: una campaña sin edad puede ser para todo el mundo.
+
+from buscador.promociones import aplicables, edades_a_las_que_va  # noqa: E402
+
+JOVEN = Promocion("Ouigo", "Si tienes entre 18 y 30 años, viaja con un 50% de descuento.")
+GRUPO = Promocion("Renfe", "De 4 a 9 personas, todo son ventajas: un 8% de descuento.")
+TODOS = Promocion("Renfe", "Cada dos viajes, uno gratis por ser Más Renfe.")
+NINOS = Promocion("Renfe", "Bajamos el billete para niños a 5 € con un 50% de descuento.")
+
+
+def test_lee_el_rango_de_edad():
+    assert edades_a_las_que_va(JOVEN.texto) == (18, 30)
+    assert edades_a_las_que_va("Para menores de 14 años, 40% de descuento") == (0, 13)
+    assert edades_a_las_que_va("Mayores de 60 años, 30% de descuento") == (60, 120)
+
+
+def test_de_4_a_9_personas_no_es_una_edad():
+    """El fallo evidente: leer 'de 4 a 9 personas' como si fueran años."""
+    assert edades_a_las_que_va(GRUPO.texto) is None
+
+
+def test_a_los_45_se_van_las_de_jovenes_y_ninos():
+    quedan = aplicables([JOVEN, GRUPO, TODOS, NINOS], 45)
+    assert quedan == [GRUPO, TODOS]
+
+
+def test_a_los_25_si_sirve_la_de_jovenes():
+    assert JOVEN in aplicables([JOVEN, TODOS], 25)
+
+
+def test_sin_edad_configurada_no_se_descarta_nada():
+    assert aplicables([JOVEN, GRUPO, TODOS, NINOS], None) == [JOVEN, GRUPO, TODOS, NINOS]
+
+
+def test_una_campana_sin_edad_siempre_se_queda():
+    """Mejor enseñar una que no aplica que esconder una que sí."""
+    assert aplicables([TODOS], 45) == [TODOS] and aplicables([TODOS], 20) == [TODOS]

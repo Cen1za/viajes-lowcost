@@ -34,6 +34,10 @@ DIAS_SEMANA = {
 class Pasajeros(BaseModel):
     adultos: int = 1
     descuentos: list[str] = Field(default_factory=list)
+    #: Tu edad. Solo se usa para descartar las campañas que piden una edad que
+    #: no tienes (las de 18-30, las de menores). Déjala en null para verlas
+    #: todas. Ver `promociones.aplicables`.
+    edad: int | None = None
 
 
 class Busqueda(BaseModel):

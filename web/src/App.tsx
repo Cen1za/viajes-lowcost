@@ -690,10 +690,9 @@ function Ficha({
  * Campañas que Renfe y Ouigo anuncian ahora mismo en su portada.
  *
  * No son precios de esta ruta y por eso viven aquí y no en las listas de
- * trenes: casi siempre piden un perfil concreto (18-30 años, grupos de 4 a 9,
- * menores) y a quien viaja solo no suelen aplicarle. Se enseñan por si alguna
- * vez sale una que sí sirva; el aviso de Telegram salta solo cuando aparece
- * una nueva.
+ * trenes. Las que piden una edad distinta de la configurada se descartan antes
+ * de llegar aquí, así que esta lista ya viene filtrada; el aviso de Telegram
+ * salta solo cuando aparece una campaña nueva.
  */
 function PanelCampanas() {
   const { datos } = useDatos<Promociones>('promociones')
@@ -714,8 +713,9 @@ function PanelCampanas() {
         </div>
       ))}
       <p className="aclaracion">
-        Suelen pedir edad, grupo o fechas concretas: comprueba las condiciones
-        antes de contar con el descuento.
+        Las que piden una edad que no es la tuya ya no aparecen. Las demás
+        pueden seguir pidiendo grupo o fechas concretas: comprueba las
+        condiciones antes de contar con el descuento.
       </p>
     </Ficha>
   )

@@ -159,6 +159,60 @@ def consultar(user_agent: str, timeout: float = 25.0) -> tuple[list[Promocion], 
     return promociones, errores
 
 
+#: Formas en que estas campañas dicen a qué edades van dirigidas. Todas exigen
+#: la palabra "años" salvo las que nombran directamente a los menores: sin esa
+#: exigencia, "De 4 a 9 personas" se leería como un rango de edad.
+RANGOS_EDAD: tuple[tuple[re.Pattern, str], ...] = (
+    (re.compile(r"(?:entre|de)\s+(\d{1,2})\s*(?:y|a)\s+(\d{1,2})\s*a[ñn]os", re.I), "rango"),
+    (re.compile(r"menores\s+de\s+(\d{1,2})\s*a[ñn]os", re.I), "hasta"),
+    (re.compile(r"(?:mayores\s+de|a\s+partir\s+de\s+los)\s+(\d{1,2})\s*a[ñn]os", re.I), "desde"),
+    (re.compile(r"\bni[ñn]os?\b|\bmenores\b|\binfantil", re.I), "infantil"),
+)
+
+#: Hasta qué edad se considera "niño" cuando la campaña no da un número.
+EDAD_INFANTIL = 13
+
+
+def edades_a_las_que_va(texto: str) -> tuple[int, int] | None:
+    """Franja de edad que pide la campaña, o None si no pide ninguna."""
+    for patron, forma in RANGOS_EDAD:
+        encontrado = patron.search(texto)
+        if not encontrado:
+            continue
+        if forma == "rango":
+            desde, hasta = int(encontrado.group(1)), int(encontrado.group(2))
+            return (desde, hasta) if desde <= hasta else (hasta, desde)
+        if forma == "hasta":
+            return 0, int(encontrado.group(1)) - 1
+        if forma == "desde":
+            return int(encontrado.group(1)), 120
+        return 0, EDAD_INFANTIL
+    return None
+
+
+def aplicables(promociones: list[Promocion], edad: int | None) -> list[Promocion]:
+    """Descarta las campañas que piden una edad que no se tiene.
+
+    Sin edad configurada no se descarta nada. Y una campaña que no menciona
+    ninguna edad se queda siempre: puede ir dirigida a todo el mundo, y es
+    preferible enseñar una que no aplica a esconder una que sí.
+    """
+    if edad is None:
+        return list(promociones)
+
+    conservadas = []
+    for promocion in promociones:
+        franja = edades_a_las_que_va(promocion.texto)
+        if franja and not franja[0] <= edad <= franja[1]:
+            log.info(
+                "promociones: descartada por edad (%d-%d): %s",
+                franja[0], franja[1], promocion.texto[:60],
+            )
+            continue
+        conservadas.append(promocion)
+    return conservadas
+
+
 def novedades(
     actuales: list[Promocion], conocidas: list[dict]
 ) -> tuple[list[Promocion], list[dict]]:

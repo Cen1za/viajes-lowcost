@@ -7,6 +7,12 @@ pasajeros:
   # Valores posibles: tarjeta_joven, tarjeta_dorada, familia_numerosa
   descuentos: []
 
+  # Tu edad, solo para descartar campañas que piden una edad que no tienes
+  # (las de 18 a 30 años, las de menores). Con null se enseñan todas.
+  # OJO: este repositorio es público. Si prefieres no publicar el dato,
+  # déjalo en null y las campañas de jóvenes volverán a aparecer.
+  edad: 45
+
 busqueda:
   # Cuántos días hacia delante barre el modo calendario.
   horizonte_dias: 90

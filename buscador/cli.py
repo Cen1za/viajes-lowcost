@@ -173,14 +173,24 @@ def cmd_promociones(args: argparse.Namespace) -> int:
     config = cargar_config()
     fichero = DIR_DATOS / "promociones.json"
 
-    encontradas, errores = promos.consultar(config.red.user_agent)
+    leidas, errores = promos.consultar(config.red.user_agent)
     for error in errores:
         consola.print(f"[red]{error}[/red]")
 
-    if not encontradas:
-        # Sin nada que leer no se toca el fichero: si la web se cayó, dar por
-        # desaparecidas las campañas haría que se avisara de todas otra vez al
-        # volver a estar disponible.
+    # Fuera las que piden una edad que no se tiene: si no, cada campaña de
+    # "18 a 30 años" avisaría de algo que no se puede usar.
+    encontradas = promos.aplicables(leidas, config.pasajeros.edad)
+    if len(leidas) != len(encontradas):
+        consola.print(
+            f"[dim]{len(leidas) - len(encontradas)} campañas descartadas: "
+            f"piden una edad distinta de {config.pasajeros.edad}.[/dim]"
+        )
+
+    if not leidas:
+        # Ojo: se mira `leidas`, no las que quedan tras filtrar por edad. Que
+        # hoy ninguna campaña sirva es un resultado válido y hay que guardarlo;
+        # lo que no se puede es tocar el fichero cuando la web no ha respondido,
+        # porque al volver daría por nuevas las campañas de siempre.
         consola.print("[yellow]No se ha podido leer ninguna campaña.[/yellow]")
         return 1 if errores else 0
 
