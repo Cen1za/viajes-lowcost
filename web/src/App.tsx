@@ -71,6 +71,7 @@ export default function App() {
           <h1>
             <span aria-hidden>🚄</span> Madrid ⇄ Elche
           </h1>
+          <BotonInstalar />
           <BotonActualizar />
         </div>
         <p className="sub">El precio más bajo de todas las webs, en un sitio.</p>
@@ -734,6 +735,27 @@ function PanelAvisos() {
         </>
       )}
     </Ficha>
+  )
+}
+
+/**
+ * Atajo para instalar, arriba del todo.
+ *
+ * La tarjeta de Ajustes explica bien de qué va, pero está al final de la
+ * pantalla que menos se abre: quien entra a mirar precios no llega nunca. Este
+ * botón solo existe cuando el navegador ya ha ofrecido instalar —así no se
+ * promete algo que luego no va a pasar— y desaparece en cuanto está instalada.
+ */
+function BotonInstalar() {
+  const { estado, instalar } = useInstalacion()
+
+  if (estado !== 'disponible') return null
+
+  return (
+    <button className="instalar" onClick={instalar} title="Instalar la app en este dispositivo">
+      {Iconos.movil}
+      Instalar
+    </button>
   )
 }
 

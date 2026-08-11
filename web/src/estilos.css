@@ -113,6 +113,36 @@ button {
   gap: 10px;
 }
 
+/* Atajo de instalación: aparece solo cuando el navegador la ofrece, así que
+   puede permitirse el rosa sólido sin competir con nada a diario. */
+.instalar {
+  flex: 0 0 auto;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--marca-degradado);
+  color: #fff;
+  font-size: 0.79rem;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 2px 7px rgba(179, 18, 107, 0.28);
+}
+
+.instalar svg {
+  width: 15px;
+  height: 15px;
+  stroke-width: 2;
+}
+
+/* Con el atajo puesto, el hueco de la derecha ya lo ocupa él. */
+.instalar + .actualizar {
+  margin-left: 0;
+}
+
 .actualizar {
   flex: 0 0 auto;
   display: grid;

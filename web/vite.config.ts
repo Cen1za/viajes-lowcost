@@ -9,22 +9,32 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg'],
+      includeAssets: ['favicon.svg', 'icono-192.png', 'icono-512.png'],
       manifest: {
         name: 'Trenes Madrid ⇄ Elche',
         short_name: 'Trenes Elche',
         description: 'Los precios más bajos de tren entre Madrid y Elche.',
         lang: 'es',
-        theme_color: '#ffffff',
+        theme_color: '#b3126b',
         background_color: '#f6f7f9',
         display: 'standalone',
         orientation: 'portrait',
         categories: ['travel', 'utilities'],
-        // Un único SVG escalable: evita arrastrar Pillow o binarios solo para
-        // generar dos PNG. Chrome lo acepta para instalar la app en el móvil.
+        // PNG y no solo SVG: sin un 192 y un 512 en PNG, Chrome no llega a
+        // ofrecer la instalación (comprobado: no dispara beforeinstallprompt),
+        // y Safari no acepta SVG como icono de pantalla de inicio. El SVG se
+        // queda para la pestaña, donde sí escala mejor.
+        // Se regeneran con: python scripts/generar_iconos.py
         icons: [
+          { src: 'icono-192.png', sizes: '192x192', type: 'image/png' },
+          { src: 'icono-512.png', sizes: '512x512', type: 'image/png' },
+          {
+            src: 'icono-maskable-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
           { src: 'favicon.svg', sizes: 'any', type: 'image/svg+xml' },
-          { src: 'favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'maskable' },
         ],
       },
       workbox: {

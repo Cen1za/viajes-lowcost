@@ -1,3 +1,7 @@
 # Dependencias solo para desarrollo y pruebas.
 -r requirements.txt
 pytest>=8.3
+# Solo la usa scripts/generar_iconos.py, que se ejecuta a mano cuando cambia
+# el icono. Los PNG resultantes están en el repositorio, así que ni el
+# despliegue ni los tests la necesitan.
+Pillow>=11.0

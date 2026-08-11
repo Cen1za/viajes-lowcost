@@ -5,9 +5,15 @@
  * requisitos de PWA; guardamos ese evento para poder lanzar el diálogo nativo
  * desde un botón nuestro. Safari no implementa nada de esto, así que ahí solo
  * queda explicar el camino manual.
+ *
+ * El evento se escucha desde el módulo y no desde el hook por dos motivos:
+ * llega **una sola vez**, así que si cada componente montara su propio oyente
+ * solo se enteraría el primero —el botón de la cabecera se ponía y la tarjeta
+ * de Ajustes seguía diciendo que había que instalarla a mano—, y además puede
+ * llegar antes de que React monte nada.
  */
 
-import { useEffect, useState } from 'react'
+import { useSyncExternalStore } from 'react'
 
 interface EventoInstalacion extends Event {
   prompt: () => Promise<void>
@@ -19,45 +25,64 @@ export type EstadoInstalacion =
   | 'disponible'     // podemos lanzar el diálogo nativo
   | 'manual'         // hay que explicar cómo hacerlo a mano (iOS, Firefox…)
 
-export function useInstalacion() {
-  const [evento, setEvento] = useState<EventoInstalacion | null>(null)
-  const [instalada, setInstalada] = useState(
-    () =>
-      window.matchMedia('(display-mode: standalone)').matches ||
-      // Safari en iOS expone esto en vez del display-mode.
-      (navigator as { standalone?: boolean }).standalone === true,
+let evento: EventoInstalacion | null = null
+let instalada = false
+const oyentes = new Set<() => void>()
+
+function avisar() {
+  for (const oyente of oyentes) oyente()
+}
+
+function suscribir(oyente: () => void) {
+  oyentes.add(oyente)
+  return () => {
+    oyentes.delete(oyente)
+  }
+}
+
+function enStandalone(): boolean {
+  return (
+    window.matchMedia('(display-mode: standalone)').matches ||
+    // Safari en iOS expone esto en vez del display-mode.
+    (navigator as { standalone?: boolean }).standalone === true
   )
+}
 
-  useEffect(() => {
-    const alPreguntar = (e: Event) => {
-      e.preventDefault() // así el navegador no muestra su propia barra
-      setEvento(e as EventoInstalacion)
-    }
-    const alInstalar = () => {
-      setInstalada(true)
-      setEvento(null)
-    }
+if (typeof window !== 'undefined') {
+  instalada = enStandalone()
 
-    window.addEventListener('beforeinstallprompt', alPreguntar)
-    window.addEventListener('appinstalled', alInstalar)
-    return () => {
-      window.removeEventListener('beforeinstallprompt', alPreguntar)
-      window.removeEventListener('appinstalled', alInstalar)
-    }
-  }, [])
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault() // así el navegador no muestra su propia barra
+    evento = e as EventoInstalacion
+    avisar()
+  })
 
-  const estado: EstadoInstalacion = instalada
-    ? 'instalada'
-    : evento
-      ? 'disponible'
-      : 'manual'
+  window.addEventListener('appinstalled', () => {
+    instalada = true
+    evento = null
+    avisar()
+  })
+}
+
+function estadoActual(): EstadoInstalacion {
+  if (instalada) return 'instalada'
+  return evento ? 'disponible' : 'manual'
+}
+
+export function useInstalacion() {
+  const estado = useSyncExternalStore(
+    suscribir,
+    estadoActual,
+    () => 'manual' as EstadoInstalacion,
+  )
 
   async function instalar() {
     if (!evento) return
     await evento.prompt()
     const { outcome } = await evento.userChoice
-    if (outcome === 'accepted') setInstalada(true)
-    setEvento(null) // el evento solo se puede usar una vez
+    if (outcome === 'accepted') instalada = true
+    evento = null // el evento solo se puede usar una vez
+    avisar()
   }
 
   return { estado, instalar, esApple: /iPad|iPhone|iPod/.test(navigator.userAgent) }
