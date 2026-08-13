@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-13T23:00:03+00:00",
+  "actualizado": "2026-08-13T23:56:40+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
@@ -2122,24 +2122,6 @@
       "origen_id": "alicante",
       "destino_id": "madrid_chamartin",
       "fecha": "2026-08-17",
-      "salida": "07:51",
-      "llegada": "10:23",
-      "duracion_min": 152,
-      "precio": 75.0,
-      "tarifa": "Básica",
-      "plazas": 1,
-      "url": "https://www.ouigo.com/es/",
-      "url_busqueda": null
-    },
-    {
-      "fuente": "ouigo",
-      "operador": "Ouigo",
-      "sentido": "vuelta",
-      "origen": "Alicante Terminal",
-      "destino": "Madrid Chamartín",
-      "origen_id": "alicante",
-      "destino_id": "madrid_chamartin",
-      "fecha": "2026-08-17",
       "salida": "18:00",
       "llegada": "20:23",
       "duracion_min": 143,
@@ -2274,6 +2256,24 @@
       "plazas": null,
       "url": "https://www.renfe.com/es/es",
       "url_busqueda": "https://www.edreams.es/travel/trains/?step=departure#results/type=O;from=110190675;to=1070286;dep=2026-08-17;adults=1;adultAges=30;buyPath=HOME_RAIL_TAB;internalSearch=true;trainSearch=true"
+    },
+    {
+      "fuente": "ouigo",
+      "operador": "Ouigo",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-08-17",
+      "salida": "07:51",
+      "llegada": "10:23",
+      "duracion_min": 152,
+      "precio": 79.0,
+      "tarifa": "Básica",
+      "plazas": null,
+      "url": "https://www.ouigo.com/es/",
+      "url_busqueda": null
     },
     {
       "fuente": "renfe",
