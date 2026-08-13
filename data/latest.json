@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-13T22:00:51+00:00",
+  "actualizado": "2026-08-13T23:00:03+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
@@ -1952,24 +1952,6 @@
       "url_busqueda": null
     },
     {
-      "fuente": "ouigo",
-      "operador": "Ouigo",
-      "sentido": "vuelta",
-      "origen": "Alicante Terminal",
-      "destino": "Madrid Chamartín",
-      "origen_id": "alicante",
-      "destino_id": "madrid_chamartin",
-      "fecha": "2026-08-17",
-      "salida": "18:00",
-      "llegada": "20:23",
-      "duracion_min": 143,
-      "precio": 69.0,
-      "tarifa": "Básica",
-      "plazas": null,
-      "url": "https://www.ouigo.com/es/",
-      "url_busqueda": null
-    },
-    {
       "fuente": "renfe",
       "operador": "Renfe",
       "sentido": "vuelta",
@@ -2146,6 +2128,24 @@
       "precio": 75.0,
       "tarifa": "Básica",
       "plazas": 1,
+      "url": "https://www.ouigo.com/es/",
+      "url_busqueda": null
+    },
+    {
+      "fuente": "ouigo",
+      "operador": "Ouigo",
+      "sentido": "vuelta",
+      "origen": "Alicante Terminal",
+      "destino": "Madrid Chamartín",
+      "origen_id": "alicante",
+      "destino_id": "madrid_chamartin",
+      "fecha": "2026-08-17",
+      "salida": "18:00",
+      "llegada": "20:23",
+      "duracion_min": 143,
+      "precio": 75.0,
+      "tarifa": "Básica",
+      "plazas": null,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null
     },
@@ -10443,7 +10443,7 @@
       "duracion_min": 149,
       "precio": 9.0,
       "tarifa": "Básica",
-      "plazas": null,
+      "plazas": 5,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null
     },
