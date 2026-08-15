@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-15T14:37:24+00:00",
+  "actualizado": "2026-08-15T15:35:08+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
@@ -147,7 +147,7 @@
       "duracion_min": 149,
       "precio": 9.0,
       "tarifa": "Básica",
-      "plazas": 4,
+      "plazas": 5,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null,
       "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 5 de 10 días.)",
