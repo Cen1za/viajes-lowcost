@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-19T05:10:51+00:00",
+  "actualizado": "2026-08-19T05:43:58+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
@@ -4033,7 +4033,7 @@
       "salida": "20:16",
       "llegada": "23:27",
       "duracion_min": 191,
-      "precio": 19.0,
+      "precio": 17.0,
       "tarifa": "Básica",
       "plazas": null,
       "url": "https://www.ouigo.com/es/",
@@ -4213,7 +4213,7 @@
       "salida": "18:45",
       "llegada": "21:45",
       "duracion_min": 180,
-      "precio": 39.0,
+      "precio": 42.0,
       "tarifa": "Básica",
       "plazas": null,
       "url": "https://www.ouigo.com/es/",
@@ -6686,24 +6686,6 @@
       "url_busqueda": "https://www.edreams.es/travel/trains/?step=departure#results/type=O;from=1070286;to=110190675;dep=2026-09-24;adults=1;adultAges=30;buyPath=HOME_RAIL_TAB;internalSearch=true;trainSearch=true"
     },
     {
-      "fuente": "ouigo",
-      "operador": "Ouigo",
-      "sentido": "ida",
-      "origen": "Madrid Chamartín",
-      "destino": "Elche AV",
-      "origen_id": "madrid_chamartin",
-      "destino_id": "elche_av",
-      "fecha": "2026-09-24",
-      "salida": "18:45",
-      "llegada": "21:45",
-      "duracion_min": 180,
-      "precio": 33.0,
-      "tarifa": "Básica",
-      "plazas": null,
-      "url": "https://www.ouigo.com/es/",
-      "url_busqueda": null
-    },
-    {
       "fuente": "edreams",
       "operador": "AVE",
       "sentido": "ida",
@@ -6791,6 +6773,24 @@
       "tarifa": "Precio desde",
       "plazas": null,
       "url": "https://www.renfe.com/es/es",
+      "url_busqueda": null
+    },
+    {
+      "fuente": "ouigo",
+      "operador": "Ouigo",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-09-24",
+      "salida": "18:45",
+      "llegada": "21:45",
+      "duracion_min": 180,
+      "precio": 35.0,
+      "tarifa": "Básica",
+      "plazas": null,
+      "url": "https://www.ouigo.com/es/",
       "url_busqueda": null
     },
     {
@@ -7563,7 +7563,7 @@
       "duracion_min": 149,
       "precio": 9.0,
       "tarifa": "Básica",
-      "plazas": 5,
+      "plazas": 4,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null
     },
