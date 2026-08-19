@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-19T11:39:08+00:00",
+  "actualizado": "2026-08-19T13:08:29+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
@@ -134,24 +134,6 @@
       "url_busqueda": null
     },
     {
-      "fuente": "ouigo",
-      "operador": "Ouigo",
-      "sentido": "ida",
-      "origen": "Madrid Chamartín",
-      "destino": "Elche AV",
-      "origen_id": "madrid_chamartin",
-      "destino_id": "elche_av",
-      "fecha": "2026-08-20",
-      "salida": "16:15",
-      "llegada": "18:37",
-      "duracion_min": 142,
-      "precio": 65.0,
-      "tarifa": "Básica",
-      "plazas": null,
-      "url": "https://www.ouigo.com/es/",
-      "url_busqueda": null
-    },
-    {
       "fuente": "renfe",
       "operador": "Renfe",
       "sentido": "ida",
@@ -238,6 +220,24 @@
       "precio": 69.0,
       "tarifa": "Básica",
       "plazas": null,
+      "url": "https://www.ouigo.com/es/",
+      "url_busqueda": null
+    },
+    {
+      "fuente": "ouigo",
+      "operador": "Ouigo",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-08-20",
+      "salida": "16:15",
+      "llegada": "18:37",
+      "duracion_min": 142,
+      "precio": 69.0,
+      "tarifa": "Básica",
+      "plazas": 3,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null
     },
@@ -7689,7 +7689,7 @@
       "duracion_min": 152,
       "precio": 19.0,
       "tarifa": "Básica",
-      "plazas": 3,
+      "plazas": 4,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null
     },
