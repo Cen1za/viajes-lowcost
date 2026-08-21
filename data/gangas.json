@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-21T08:57:17+00:00",
+  "actualizado": "2026-08-21T09:52:38+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
@@ -58,9 +58,9 @@
       "origen_id": "madrid_chamartin",
       "destino_id": "elche_av",
       "fecha": "2026-11-12",
-      "salida": "16:15",
-      "llegada": "18:37",
-      "duracion_min": 142,
+      "salida": "18:45",
+      "llegada": "21:45",
+      "duracion_min": 180,
       "precio": 15.0,
       "tarifa": "Básica",
       "plazas": 1,
