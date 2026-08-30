@@ -1,32 +1,10 @@
 {
-  "actualizado": "2026-08-30T12:51:50+00:00",
+  "actualizado": "2026-08-30T13:50:07+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
     "elche_av": 0,
     "alicante": 25
   },
-  "ofertas": [
-    {
-      "fuente": "ouigo",
-      "operador": "Ouigo",
-      "sentido": "vuelta",
-      "origen": "Elche AV",
-      "destino": "Madrid Chamartín",
-      "origen_id": "elche_av",
-      "destino_id": "madrid_chamartin",
-      "fecha": "2026-11-24",
-      "salida": "13:02",
-      "llegada": "15:23",
-      "duracion_min": 141,
-      "precio": 13.0,
-      "tarifa": "Básica",
-      "plazas": 5,
-      "url": "https://www.ouigo.com/es/",
-      "url_busqueda": null,
-      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 6 de 10 días.)",
-      "mediana": null,
-      "caida_pct": null
-    }
-  ]
+  "ofertas": []
 }
