@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-31T11:11:30+00:00",
+  "actualizado": "2026-08-31T13:37:49+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
@@ -7563,7 +7563,7 @@
       "duracion_min": 142,
       "precio": 22.0,
       "tarifa": "Básica",
-      "plazas": null,
+      "plazas": 5,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null
     },
@@ -10677,7 +10677,7 @@
       "duracion_min": 149,
       "precio": 9.0,
       "tarifa": "Básica",
-      "plazas": 2,
+      "plazas": 1,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null
     },
@@ -11829,7 +11829,7 @@
       "duracion_min": 142,
       "precio": 22.0,
       "tarifa": "Básica",
-      "plazas": 5,
+      "plazas": 4,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null
     },
