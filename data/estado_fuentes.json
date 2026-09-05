@@ -1,12 +1,28 @@
 {
-  "actualizado": "2026-09-05T21:12:26+00:00",
+  "actualizado": "2026-09-05T22:12:52+00:00",
   "fuentes": [
     {
       "fuente": "ouigo",
       "ok": true,
-      "ofertas": 96,
+      "ofertas": 72,
       "descartadas": 0,
-      "duracion_s": 96.21,
+      "duracion_s": 72.24,
+      "error": null
+    },
+    {
+      "fuente": "renfe",
+      "ok": true,
+      "ofertas": 221,
+      "descartadas": 0,
+      "duracion_s": 871.2,
+      "error": null
+    },
+    {
+      "fuente": "edreams",
+      "ok": true,
+      "ofertas": 144,
+      "descartadas": 0,
+      "duracion_s": 206.71,
       "error": null
     }
   ]
