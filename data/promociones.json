@@ -1,6 +1,30 @@
 {
-  "actualizado": "2026-09-08T09:08:56",
+  "actualizado": "2026-09-09T09:14:42",
   "campanas": [
+    {
+      "huella": "055958db72d5",
+      "compania": "Ouigo",
+      "texto": "Ouigo Pasar al contenido principal Hoy es un gran día: ¡billetes desde 9€*! Exclusivo hoy en la App: ¡nuevos billetes desde 9€*!",
+      "desde": "2026-09-09"
+    },
+    {
+      "huella": "b7fc4d51f805",
+      "compania": "Ouigo",
+      "texto": "Exclusivo hoy en la App: ¡nuevos billetes desde 9€*!",
+      "desde": "2026-09-09"
+    },
+    {
+      "huella": "c3d385b690c7",
+      "compania": "Ouigo",
+      "texto": "El 15/09 SOLO EN LA APP (en web el 16/09): ¡nuevos billetes desde 9€*!",
+      "desde": "2026-09-09"
+    },
+    {
+      "huella": "9d256643f153",
+      "compania": "Ouigo",
+      "texto": "El 15/09 SOLO EN LA APP: ¡nuevos billetes desde 9€*!",
+      "desde": "2026-09-09"
+    },
     {
       "huella": "a9f806d8d49f",
       "compania": "Renfe",
