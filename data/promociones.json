@@ -1,35 +1,29 @@
 {
-  "actualizado": "2026-09-12T08:55:00",
+  "actualizado": "2026-09-16T09:35:03",
   "campanas": [
     {
-      "huella": "055958db72d5",
+      "huella": "e22de1905b1b",
       "compania": "Ouigo",
-      "texto": "Ouigo Pasar al contenido principal Hoy es un gran día: ¡billetes desde 9€*! Exclusivo hoy en la App: ¡nuevos billetes desde 9€*!",
-      "desde": "2026-09-09"
+      "texto": "Ouigo Pasar al contenido principal ES EL MOMENTO: ¡BILLETES DESDE 9€*! ¡Ya a la venta!",
+      "desde": "2026-09-16"
     },
     {
-      "huella": "b7fc4d51f805",
+      "huella": "b050d8b3417a",
       "compania": "Ouigo",
-      "texto": "Exclusivo hoy en la App: ¡nuevos billetes desde 9€*!",
-      "desde": "2026-09-09"
+      "texto": "Nuevos billetes desde 9€* Y desde 19€ entre MAD &lt;&gt; BAR.",
+      "desde": "2026-09-16"
+    },
+    {
+      "huella": "76755c0baa87",
+      "compania": "Ouigo",
+      "texto": "ES EL MOMENTO: ¡BILLETES DESDE 9€*! ¡Ya a la venta!",
+      "desde": "2026-09-16"
     },
     {
       "huella": "c3d385b690c7",
       "compania": "Ouigo",
       "texto": "El 15/09 SOLO EN LA APP (en web el 16/09): ¡nuevos billetes desde 9€*!",
       "desde": "2026-09-09"
-    },
-    {
-      "huella": "695d4755477c",
-      "compania": "Ouigo",
-      "texto": "Desde el 15/09 SOLO en la App y a partir del 16/09 en web: ¡nuevos billetes desde 9€* a cualquiera de nuestros destinos y desde 19€ en la ruta Madrid &lt;&gt; Barcelona!",
-      "desde": "2026-09-10"
-    },
-    {
-      "huella": "a9f806d8d49f",
-      "compania": "Renfe",
-      "texto": "Además, cada dos viajes, ¡tendrás uno GRATIS solo por ser Más Renfe!",
-      "desde": "2026-08-11"
     },
     {
       "huella": "d51d1ae6ccd3",
