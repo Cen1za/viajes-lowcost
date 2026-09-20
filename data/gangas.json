@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-09-20T01:04:10+00:00",
+  "actualizado": "2026-09-20T06:10:03+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
@@ -24,7 +24,7 @@
       "plazas": 3,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null,
-      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 3 de 10 días.)",
+      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 4 de 10 días.)",
       "mediana": null,
       "caida_pct": null
     },
@@ -45,7 +45,7 @@
       "plazas": null,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null,
-      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 4 de 10 días.)",
+      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 5 de 10 días.)",
       "mediana": null,
       "caida_pct": null
     },
@@ -66,7 +66,7 @@
       "plazas": null,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null,
-      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 4 de 10 días.)",
+      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 5 de 10 días.)",
       "mediana": null,
       "caida_pct": null
     },
@@ -87,7 +87,7 @@
       "plazas": 3,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null,
-      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 3 de 10 días.)",
+      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 4 de 10 días.)",
       "mediana": null,
       "caida_pct": null
     }
