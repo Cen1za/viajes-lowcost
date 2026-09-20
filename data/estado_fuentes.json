@@ -1,12 +1,12 @@
 {
-  "actualizado": "2026-09-20T09:33:56+00:00",
+  "actualizado": "2026-09-20T12:19:01+00:00",
   "fuentes": [
     {
       "fuente": "ouigo",
       "ok": true,
-      "ofertas": 312,
+      "ofertas": 96,
       "descartadas": 0,
-      "duracion_s": 624.23,
+      "duracion_s": 96.25,
       "error": null
     }
   ]
