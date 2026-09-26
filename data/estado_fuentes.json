@@ -1,13 +1,29 @@
 {
-  "actualizado": "2026-09-26T21:06:45+00:00",
+  "actualizado": "2026-09-26T22:44:56+00:00",
   "fuentes": [
     {
       "fuente": "ouigo",
       "ok": true,
-      "ofertas": 95,
+      "ofertas": 71,
       "descartadas": 0,
-      "duracion_s": 96.26,
+      "duracion_s": 72.44,
       "error": null
+    },
+    {
+      "fuente": "renfe",
+      "ok": true,
+      "ofertas": 144,
+      "descartadas": 0,
+      "duracion_s": 894.6,
+      "error": "TimeoutError: Locator.click: Timeout 20000ms exceeded.\nCall log:\n  - waiting for locator(\"#ticketSearchBt\").first\n    - locator resolved to <rf-button id=\"ticketSearchBt\" aria-live=\"assertive\" text-help=\"Buscar billete\" class-custom=\"rf-button--search\" class=\"sc-rf-button-h sc-rf-button-s hydrated\">…</rf-button>\n  - attempting click action\n    - waiting for element to be visible, enabled and stable\n    - element is visible, enabled and stable\n    - scrolling into view if needed\n    - done scrolling\n    - performing click action\n    - click action done\n    - waiting for scheduled navigations to finish\n"
+    },
+    {
+      "fuente": "edreams",
+      "ok": true,
+      "ofertas": 101,
+      "descartadas": 0,
+      "duracion_s": 288.69,
+      "error": "edreams: no aparecieron resultados para 2026-10-08 | edreams: no aparecieron resultados para 2026-10-06"
     }
   ]
 }
