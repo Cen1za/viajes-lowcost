@@ -1,12 +1,12 @@
 {
-  "actualizado": "2026-10-14T13:37:34+00:00",
+  "actualizado": "2026-10-14T18:41:55+00:00",
   "fuentes": [
     {
       "fuente": "ouigo",
       "ok": true,
       "ofertas": 70,
       "descartadas": 0,
-      "duracion_s": 72.2,
+      "duracion_s": 72.26,
       "error": null
     },
     {
@@ -14,15 +14,15 @@
       "ok": true,
       "ofertas": 213,
       "descartadas": 0,
-      "duracion_s": 883.57,
+      "duracion_s": 883.33,
       "error": null
     },
     {
       "fuente": "edreams",
       "ok": true,
-      "ofertas": 138,
+      "ofertas": 144,
       "descartadas": 0,
-      "duracion_s": 252.93,
+      "duracion_s": 172.75,
       "error": null
     }
   ]
