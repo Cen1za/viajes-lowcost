@@ -1,28 +1,12 @@
 {
-  "actualizado": "2026-10-19T23:42:55+00:00",
+  "actualizado": "2026-10-20T00:19:18+00:00",
   "fuentes": [
     {
       "fuente": "ouigo",
-      "ok": false,
-      "ofertas": 0,
-      "descartadas": 0,
-      "duracion_s": 459.06,
-      "error": "ouigo: sin respuesta de https://mdw02.api-es.ouigo.com/api/Sale/journeysearch (Server error '500 Internal Server Error' for url 'https://mdw02.api-es.ouigo.com/api/Sale/journeysearch'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) | ouigo: sin respuesta de https://mdw02.api-es.ouigo.com/api/Sale/journeysearch (Server error '500 Internal Server Error' for url 'https://mdw02.api-es.ouigo.com/api/Sale/journeysearch'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) | ouigo: sin respuesta de https://mdw02.api-es.ouigo.com/api/Sale/journeysearch (Server error '500 Internal Server Error' for url 'https://mdw02.api-es.ouigo.com/api/Sale/journeysearch'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500)"
-    },
-    {
-      "fuente": "renfe",
       "ok": true,
-      "ofertas": 215,
+      "ofertas": 94,
       "descartadas": 0,
-      "duracion_s": 887.45,
-      "error": null
-    },
-    {
-      "fuente": "edreams",
-      "ok": true,
-      "ofertas": 141,
-      "descartadas": 0,
-      "duracion_s": 237.95,
+      "duracion_s": 96.21,
       "error": null
     }
   ]
