@@ -1,12 +1,28 @@
 {
-  "actualizado": "2026-10-21T10:06:02+00:00",
+  "actualizado": "2026-10-21T13:47:13+00:00",
   "fuentes": [
     {
       "fuente": "ouigo",
       "ok": true,
-      "ofertas": 93,
+      "ofertas": 70,
       "descartadas": 0,
-      "duracion_s": 96.24,
+      "duracion_s": 72.22,
+      "error": null
+    },
+    {
+      "fuente": "renfe",
+      "ok": true,
+      "ofertas": 120,
+      "descartadas": 0,
+      "duracion_s": 984.67,
+      "error": "TimeoutError: Locator.click: Timeout 20000ms exceeded.\nCall log:\n  - waiting for locator(\"#ticketSearchBt\").first\n    - locator resolved to <rf-button id=\"ticketSearchBt\" aria-live=\"assertive\" text-help=\"Buscar billete\" class-custom=\"rf-button--search\" class=\"sc-rf-button-h sc-rf-button-s hydrated\">…</rf-button>\n  - attempting click action\n    - waiting for element to be visible, enabled and stable\n    - element is visible, enabled and stable\n    - scrolling into view if needed\n    - done scrolling\n    - performing click action\n    - click action done\n    - waiting for scheduled navigations to finish\n | TimeoutError: Locator.click: Timeout 20000ms exceeded.\nCall log:\n  - waiting for locator(\"#ticketSearchBt\").first\n    - locator resolved to <rf-button id=\"ticketSearchBt\" aria-live=\"assertive\" text-help=\"Buscar billete\" class-custom=\"rf-button--search\" class=\"sc-rf-button-h sc-rf-button-s hydrated\">…</rf-button>\n  - attempting click action\n    - waiting for element to be visible, enabled and stable\n    - element is visible, enabled and stable\n    - scrolling into view if needed\n    - done scrolling\n    - performing click action\n    - click action done\n    - waiting for scheduled navigations to finish\n | TimeoutError: Locator.click: Timeout 20000ms exceeded.\nCall log:\n  - waiting for locator(\"#ticketSearchBt\").first\n    - locator resolved to <rf-button id=\"ticketSearchBt\" aria-live=\"assertive\" text-help=\"Buscar billete\" class-custom=\"rf-button--search\" class=\"sc-rf-button-h sc-rf-button-s hydrated\">…</rf-button>\n  - attempting click action\n    - waiting for element to be visible, enabled and stable\n    - element is visible, enabled and stable\n    - scrolling into view if needed\n    - done scrolling\n    - performing click action\n    - click action done\n    - waiting for scheduled navigations to finish\n"
+    },
+    {
+      "fuente": "edreams",
+      "ok": true,
+      "ofertas": 167,
+      "descartadas": 0,
+      "duracion_s": 248.02,
       "error": null
     }
   ]
