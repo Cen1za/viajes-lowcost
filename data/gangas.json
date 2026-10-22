@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-10-22T09:42:44+00:00",
+  "actualizado": "2026-10-22T10:06:49+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
@@ -45,7 +45,7 @@
       "plazas": 1,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null,
-      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 0 de 10 días.)",
+      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 1 de 10 días.)",
       "mediana": null,
       "caida_pct": null
     },
@@ -136,48 +136,6 @@
     {
       "fuente": "ouigo",
       "operador": "Ouigo",
-      "sentido": "vuelta",
-      "origen": "Alicante Terminal",
-      "destino": "Madrid Chamartín",
-      "origen_id": "alicante",
-      "destino_id": "madrid_chamartin",
-      "fecha": "2027-01-12",
-      "salida": "13:39",
-      "llegada": "16:08",
-      "duracion_min": 149,
-      "precio": 13.0,
-      "tarifa": "Básica",
-      "plazas": null,
-      "url": "https://www.ouigo.com/es/",
-      "url_busqueda": null,
-      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 9 de 10 días.)",
-      "mediana": null,
-      "caida_pct": null
-    },
-    {
-      "fuente": "ouigo",
-      "operador": "Ouigo",
-      "sentido": "vuelta",
-      "origen": "Alicante Terminal",
-      "destino": "Madrid Chamartín",
-      "origen_id": "alicante",
-      "destino_id": "madrid_chamartin",
-      "fecha": "2027-01-18",
-      "salida": "13:39",
-      "llegada": "16:08",
-      "duracion_min": 149,
-      "precio": 13.0,
-      "tarifa": "Básica",
-      "plazas": 2,
-      "url": "https://www.ouigo.com/es/",
-      "url_busqueda": null,
-      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 3 de 10 días.)",
-      "mediana": null,
-      "caida_pct": null
-    },
-    {
-      "fuente": "ouigo",
-      "operador": "Ouigo",
       "sentido": "ida",
       "origen": "Madrid Chamartín",
       "destino": "Elche AV",
@@ -234,7 +192,7 @@
       "plazas": null,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null,
-      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 0 de 10 días.)",
+      "motivo": "Por debajo de 15 €. (Aún sin histórico suficiente para comparar: 1 de 10 días.)",
       "mediana": null,
       "caida_pct": null
     }
