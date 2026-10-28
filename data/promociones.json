@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-10-27T10:07:24",
+  "actualizado": "2026-10-28T10:53:58",
   "campanas": [
     {
       "huella": "e22de1905b1b",
@@ -26,10 +26,10 @@
       "desde": "2026-09-09"
     },
     {
-      "huella": "d51d1ae6ccd3",
+      "huella": "30633bcb99d1",
       "compania": "Renfe",
-      "texto": "De 4 a 9 personas, todo son ventajas: compartís el viaje, las risas… y un 8% de descuento.",
-      "desde": "2026-08-11"
+      "texto": "Viaja con la tarifa 4 o más De 4 a 9 personas: compartís el viaje, las risas… y un 8% de descuento.",
+      "desde": "2026-10-28"
     }
   ]
 }
