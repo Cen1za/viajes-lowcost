@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-10-28T21:02:14+00:00",
+  "actualizado": "2026-10-28T23:59:09+00:00",
   "nombres": {
     "madrid_chamartin->elche_av": "Madrid Chamartín → Elche AV",
     "madrid_chamartin->alicante": "Madrid Chamartín → Alicante Terminal",
@@ -134,7 +134,7 @@
       "2027-01-26": "Ouigo"
     },
     "madrid_atocha->elche_av": {
-      "2026-10-29": "Renfe",
+      "2026-10-29": "3 maletas",
       "2026-10-30": "Renfe"
     },
     "madrid_atocha->alicante": {
@@ -260,11 +260,11 @@
       "2027-01-12": "13:39–16:08",
       "2027-01-18": "13:39–16:08",
       "2027-01-19": "21:05–23:38",
-      "2027-01-25": "07:51–10:23",
+      "2027-01-25": "13:39–16:08",
       "2027-01-26": "07:51–10:23"
     },
     "madrid_atocha->elche_av": {
-      "2026-10-29": "14:27–17:21",
+      "2026-10-29": "11:05–14:06",
       "2026-10-30": "11:05–14:06"
     },
     "madrid_atocha->alicante": {
@@ -394,7 +394,7 @@
       "2027-01-26": 9.0
     },
     "madrid_atocha->elche_av": {
-      "2026-10-29": 74.5,
+      "2026-10-29": 62.0,
       "2026-10-30": 83.8
     },
     "madrid_atocha->alicante": {
