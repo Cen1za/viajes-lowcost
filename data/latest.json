@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-10-28T16:00:14+00:00",
+  "actualizado": "2026-10-28T21:02:14+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
@@ -386,24 +386,6 @@
       "url_busqueda": "https://www.edreams.es/travel/trains/?step=departure#results/type=O;from=1064946;to=9629;dep=2026-10-29;adults=1;adultAges=30;buyPath=HOME_RAIL_TAB;internalSearch=true;trainSearch=true"
     },
     {
-      "fuente": "ouigo",
-      "operador": "Ouigo",
-      "sentido": "ida",
-      "origen": "Madrid Chamartín",
-      "destino": "Alicante Terminal",
-      "origen_id": "madrid_chamartin",
-      "destino_id": "alicante",
-      "fecha": "2026-10-29",
-      "salida": "18:45",
-      "llegada": "21:07",
-      "duracion_min": 142,
-      "precio": 69.0,
-      "tarifa": "Básica",
-      "plazas": null,
-      "url": "https://www.ouigo.com/es/",
-      "url_busqueda": null
-    },
-    {
       "fuente": "edreams",
       "operador": "1 maleta de cabina",
       "sentido": "ida",
@@ -516,13 +498,13 @@
       "operador": "Ouigo",
       "sentido": "ida",
       "origen": "Madrid Chamartín",
-      "destino": "Elche AV",
+      "destino": "Alicante Terminal",
       "origen_id": "madrid_chamartin",
-      "destino_id": "elche_av",
+      "destino_id": "alicante",
       "fecha": "2026-10-29",
       "salida": "18:45",
-      "llegada": "21:45",
-      "duracion_min": 180,
+      "llegada": "21:07",
+      "duracion_min": 142,
       "precio": 75.0,
       "tarifa": "Básica",
       "plazas": null,
@@ -564,6 +546,24 @@
       "plazas": null,
       "url": "https://www.renfe.com/es/es",
       "url_busqueda": "https://www.edreams.es/travel/trains/?step=departure#results/type=O;from=1070286;to=110190675;dep=2026-10-29;adults=1;adultAges=30;buyPath=HOME_RAIL_TAB;internalSearch=true;trainSearch=true"
+    },
+    {
+      "fuente": "ouigo",
+      "operador": "Ouigo",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-10-29",
+      "salida": "18:45",
+      "llegada": "21:45",
+      "duracion_min": 180,
+      "precio": 79.0,
+      "tarifa": "Básica",
+      "plazas": null,
+      "url": "https://www.ouigo.com/es/",
+      "url_busqueda": null
     },
     {
       "fuente": "renfe",
@@ -15465,7 +15465,7 @@
       "duracion_min": 152,
       "precio": 9.0,
       "tarifa": "Básica",
-      "plazas": 2,
+      "plazas": 1,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null
     },
