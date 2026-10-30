@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-10-30T19:18:57+00:00",
+  "actualizado": "2026-10-30T23:40:27+00:00",
   "fuentes": [
     {
       "fuente": "ouigo",
@@ -14,15 +14,15 @@
       "ok": false,
       "ofertas": 0,
       "descartadas": 0,
-      "duracion_s": 740.45,
+      "duracion_s": 741.18,
       "error": "TimeoutError: Locator.click: Timeout 20000ms exceeded.\nCall log:\n  - waiting for locator(\"#origin\").first\n | TimeoutError: Locator.click: Timeout 20000ms exceeded.\nCall log:\n  - waiting for locator(\"#origin\").first\n | TimeoutError: Locator.click: Timeout 20000ms exceeded.\nCall log:\n  - waiting for locator(\"#origin\").first\n"
     },
     {
       "fuente": "edreams",
       "ok": true,
-      "ofertas": 134,
+      "ofertas": 154,
       "descartadas": 0,
-      "duracion_s": 217.66,
+      "duracion_s": 229.88,
       "error": null
     }
   ]
