@@ -1,13 +1,29 @@
 {
-  "actualizado": "2026-11-07T02:46:42+00:00",
+  "actualizado": "2026-11-07T08:38:06+00:00",
   "fuentes": [
     {
       "fuente": "ouigo",
       "ok": true,
-      "ofertas": 93,
+      "ofertas": 71,
       "descartadas": 0,
-      "duracion_s": 96.26,
+      "duracion_s": 72.21,
       "error": null
+    },
+    {
+      "fuente": "renfe",
+      "ok": false,
+      "ofertas": 0,
+      "descartadas": 0,
+      "duracion_s": 741.07,
+      "error": "TimeoutError: Locator.click: Timeout 20000ms exceeded.\nCall log:\n  - waiting for locator(\"#origin\").first\n | TimeoutError: Locator.click: Timeout 20000ms exceeded.\nCall log:\n  - waiting for locator(\"#origin\").first\n | TimeoutError: Locator.click: Timeout 20000ms exceeded.\nCall log:\n  - waiting for locator(\"#origin\").first\n"
+    },
+    {
+      "fuente": "edreams",
+      "ok": false,
+      "ofertas": 0,
+      "descartadas": 0,
+      "duracion_s": 1088.55,
+      "error": "edreams: no aparecieron resultados para 2027-02-04 | edreams: no aparecieron resultados para 2026-12-10 | edreams: no aparecieron resultados para 2027-01-07"
     }
   ]
 }
