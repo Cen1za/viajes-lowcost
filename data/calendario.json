@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-10T17:45:33+00:00",
+  "actualizado": "2026-11-10T21:05:27+00:00",
   "nombres": {
     "madrid_chamartin->elche_av": "Madrid Chamartín → Elche AV",
     "madrid_chamartin->alicante": "Madrid Chamartín → Alicante Terminal",
@@ -405,10 +405,10 @@
     },
     "madrid_atocha->elche_av": {
       "2026-11-12": 123.0,
-      "2026-11-13": 38.0
+      "2026-11-13": 98.0
     },
     "madrid_atocha->alicante": {
-      "2026-11-12": 106.0,
+      "2026-11-12": 123.0,
       "2026-11-13": 109.0
     },
     "elche_av->madrid_atocha": {

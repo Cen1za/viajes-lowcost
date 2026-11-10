@@ -1,12 +1,28 @@
 {
-  "actualizado": "2026-11-10T17:45:33+00:00",
+  "actualizado": "2026-11-10T21:05:27+00:00",
   "fuentes": [
     {
       "fuente": "ouigo",
       "ok": true,
-      "ofertas": 94,
+      "ofertas": 70,
       "descartadas": 0,
-      "duracion_s": 96.38,
+      "duracion_s": 72.19,
+      "error": null
+    },
+    {
+      "fuente": "renfe",
+      "ok": false,
+      "ofertas": 0,
+      "descartadas": 0,
+      "duracion_s": 741.22,
+      "error": "TimeoutError: Locator.click: Timeout 20000ms exceeded.\nCall log:\n  - waiting for locator(\"#origin\").first\n | TimeoutError: Locator.click: Timeout 20000ms exceeded.\nCall log:\n  - waiting for locator(\"#origin\").first\n | TimeoutError: Locator.click: Timeout 20000ms exceeded.\nCall log:\n  - waiting for locator(\"#origin\").first\n"
+    },
+    {
+      "fuente": "edreams",
+      "ok": true,
+      "ofertas": 143,
+      "descartadas": 0,
+      "duracion_s": 248.95,
       "error": null
     }
   ]
