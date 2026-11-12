@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-11T21:25:00+00:00",
+  "actualizado": "2026-11-12T02:56:22+00:00",
   "traslado_min": {
     "madrid_atocha": 0,
     "madrid_chamartin": 0,
@@ -458,24 +458,6 @@
       "url_busqueda": "https://www.edreams.es/travel/trains/?step=departure#results/type=O;from=1070286;to=9629;dep=2026-11-13;adults=1;adultAges=30;buyPath=HOME_RAIL_TAB;internalSearch=true;trainSearch=true"
     },
     {
-      "fuente": "ouigo",
-      "operador": "Ouigo",
-      "sentido": "ida",
-      "origen": "Madrid Chamartín",
-      "destino": "Alicante Terminal",
-      "origen_id": "madrid_chamartin",
-      "destino_id": "alicante",
-      "fecha": "2026-11-13",
-      "salida": "18:45",
-      "llegada": "21:07",
-      "duracion_min": 142,
-      "precio": 29.0,
-      "tarifa": "Básica",
-      "plazas": null,
-      "url": "https://www.ouigo.com/es/",
-      "url_busqueda": null
-    },
-    {
       "fuente": "edreams",
       "operador": "1 maleta de cabina",
       "sentido": "ida",
@@ -548,6 +530,24 @@
       "url_busqueda": null
     },
     {
+      "fuente": "ouigo",
+      "operador": "Ouigo",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Alicante Terminal",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "alicante",
+      "fecha": "2026-11-13",
+      "salida": "18:45",
+      "llegada": "21:07",
+      "duracion_min": 142,
+      "precio": 33.0,
+      "tarifa": "Básica",
+      "plazas": null,
+      "url": "https://www.ouigo.com/es/",
+      "url_busqueda": null
+    },
+    {
       "fuente": "edreams",
       "operador": "3 maletas",
       "sentido": "ida",
@@ -566,24 +566,6 @@
       "url_busqueda": "https://www.edreams.es/travel/trains/?step=departure#results/type=O;from=1070286;to=9629;dep=2026-11-13;adults=1;adultAges=30;buyPath=HOME_RAIL_TAB;internalSearch=true;trainSearch=true"
     },
     {
-      "fuente": "ouigo",
-      "operador": "Ouigo",
-      "sentido": "ida",
-      "origen": "Madrid Chamartín",
-      "destino": "Elche AV",
-      "origen_id": "madrid_chamartin",
-      "destino_id": "elche_av",
-      "fecha": "2026-11-13",
-      "salida": "16:15",
-      "llegada": "18:37",
-      "duracion_min": 142,
-      "precio": 35.0,
-      "tarifa": "Básica",
-      "plazas": null,
-      "url": "https://www.ouigo.com/es/",
-      "url_busqueda": null
-    },
-    {
       "fuente": "edreams",
       "operador": "3 maletas",
       "sentido": "ida",
@@ -600,6 +582,24 @@
       "plazas": null,
       "url": "https://www.renfe.com/es/es",
       "url_busqueda": "https://www.edreams.es/travel/trains/?step=departure#results/type=O;from=1070286;to=110190675;dep=2026-11-13;adults=1;adultAges=30;buyPath=HOME_RAIL_TAB;internalSearch=true;trainSearch=true"
+    },
+    {
+      "fuente": "ouigo",
+      "operador": "Ouigo",
+      "sentido": "ida",
+      "origen": "Madrid Chamartín",
+      "destino": "Elche AV",
+      "origen_id": "madrid_chamartin",
+      "destino_id": "elche_av",
+      "fecha": "2026-11-13",
+      "salida": "16:15",
+      "llegada": "18:37",
+      "duracion_min": 142,
+      "precio": 39.0,
+      "tarifa": "Básica",
+      "plazas": null,
+      "url": "https://www.ouigo.com/es/",
+      "url_busqueda": null
     },
     {
       "fuente": "ouigo",
@@ -1065,7 +1065,7 @@
       "duracion_min": 200,
       "precio": 49.0,
       "tarifa": "Básica",
-      "plazas": 5,
+      "plazas": 3,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null
     },
@@ -8733,7 +8733,7 @@
       "duracion_min": 149,
       "precio": 9.0,
       "tarifa": "Básica",
-      "plazas": 3,
+      "plazas": 2,
       "url": "https://www.ouigo.com/es/",
       "url_busqueda": null
     },
