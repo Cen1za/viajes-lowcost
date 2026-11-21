@@ -1,28 +1,27 @@
 {
-  "actualizado": "2026-11-20T22:02:15+00:00",
+  "actualizado": "2026-11-21T01:28:18+00:00",
   "nombres": {
     "madrid_chamartin->elche_av": "Madrid Chamartín → Elche AV",
     "madrid_chamartin->alicante": "Madrid Chamartín → Alicante Terminal",
     "elche_av->madrid_chamartin": "Elche AV → Madrid Chamartín",
     "alicante->madrid_chamartin": "Alicante Terminal → Madrid Chamartín",
-    "madrid_atocha->elche_av": "Madrid Puerta de Atocha → Elche AV",
-    "madrid_atocha->alicante": "Madrid Puerta de Atocha → Alicante Terminal",
     "elche_av->madrid_atocha": "Elche AV → Madrid Puerta de Atocha",
-    "alicante->madrid_atocha": "Alicante Terminal → Madrid Puerta de Atocha"
+    "alicante->madrid_atocha": "Alicante Terminal → Madrid Puerta de Atocha",
+    "madrid_atocha->elche_av": "Madrid Puerta de Atocha → Elche AV",
+    "madrid_atocha->alicante": "Madrid Puerta de Atocha → Alicante Terminal"
   },
   "sentidos": {
     "madrid_chamartin->elche_av": "ida",
     "madrid_chamartin->alicante": "ida",
     "elche_av->madrid_chamartin": "vuelta",
     "alicante->madrid_chamartin": "vuelta",
-    "madrid_atocha->elche_av": "ida",
-    "madrid_atocha->alicante": "ida",
     "elche_av->madrid_atocha": "vuelta",
-    "alicante->madrid_atocha": "vuelta"
+    "alicante->madrid_atocha": "vuelta",
+    "madrid_atocha->elche_av": "ida",
+    "madrid_atocha->alicante": "ida"
   },
   "operadores": {
     "madrid_chamartin->elche_av": {
-      "2026-11-20": "Ouigo",
       "2026-11-26": "Ouigo",
       "2026-11-27": "Ouigo",
       "2026-12-03": "Ouigo",
@@ -51,7 +50,6 @@
       "2027-02-19": "Ouigo"
     },
     "madrid_chamartin->alicante": {
-      "2026-11-20": "Ouigo",
       "2026-11-26": "Ouigo",
       "2026-11-27": "Ouigo",
       "2026-12-03": "Ouigo",
@@ -135,16 +133,6 @@
       "2027-02-15": "Ouigo",
       "2027-02-16": "Ouigo"
     },
-    "madrid_atocha->elche_av": {
-      "2026-11-20": "3 maletas",
-      "2026-11-26": "3 maletas",
-      "2026-11-27": "3 maletas"
-    },
-    "madrid_atocha->alicante": {
-      "2026-11-20": "3 maletas",
-      "2026-11-26": "3 maletas",
-      "2026-11-27": "3 maletas"
-    },
     "elche_av->madrid_atocha": {
       "2026-11-23": "3 maletas",
       "2026-11-24": "3 maletas"
@@ -152,11 +140,18 @@
     "alicante->madrid_atocha": {
       "2026-11-23": "3 maletas",
       "2026-11-24": "3 maletas"
+    },
+    "madrid_atocha->elche_av": {
+      "2026-11-26": "3 maletas",
+      "2026-11-27": "3 maletas"
+    },
+    "madrid_atocha->alicante": {
+      "2026-11-26": "3 maletas",
+      "2026-11-27": "3 maletas"
     }
   },
   "horarios": {
     "madrid_chamartin->elche_av": {
-      "2026-11-20": "08:15–11:15",
       "2026-11-26": "08:15–11:15",
       "2026-11-27": "08:15–11:15",
       "2026-12-03": "08:15–11:15",
@@ -185,7 +180,6 @@
       "2027-02-19": "17:15–19:36"
     },
     "madrid_chamartin->alicante": {
-      "2026-11-20": "08:15–10:37",
       "2026-11-26": "08:15–10:37",
       "2026-11-27": "08:15–10:37",
       "2026-12-03": "08:15–10:37",
@@ -269,16 +263,6 @@
       "2027-02-15": "07:51–10:23",
       "2027-02-16": "07:51–10:23"
     },
-    "madrid_atocha->elche_av": {
-      "2026-11-20": "14:27–17:21",
-      "2026-11-26": "11:05–14:06",
-      "2026-11-27": "11:05–14:06"
-    },
-    "madrid_atocha->alicante": {
-      "2026-11-20": "17:15–21:28",
-      "2026-11-26": "11:05–13:31",
-      "2026-11-27": "19:40–22:52"
-    },
     "elche_av->madrid_atocha": {
       "2026-11-23": "19:25–22:32",
       "2026-11-24": "16:14–19:17"
@@ -286,11 +270,18 @@
     "alicante->madrid_atocha": {
       "2026-11-23": "20:00–22:32",
       "2026-11-24": "16:47–19:17"
+    },
+    "madrid_atocha->elche_av": {
+      "2026-11-26": "11:05–14:06",
+      "2026-11-27": "11:05–14:06"
+    },
+    "madrid_atocha->alicante": {
+      "2026-11-26": "11:05–13:31",
+      "2026-11-27": "19:40–22:52"
     }
   },
   "rutas": {
     "madrid_chamartin->elche_av": {
-      "2026-11-20": 29.0,
       "2026-11-26": 22.0,
       "2026-11-27": 35.0,
       "2026-12-03": 22.0,
@@ -319,9 +310,8 @@
       "2027-02-19": 15.0
     },
     "madrid_chamartin->alicante": {
-      "2026-11-20": 25.0,
       "2026-11-26": 15.0,
-      "2026-11-27": 22.0,
+      "2026-11-27": 25.0,
       "2026-12-03": 15.0,
       "2026-12-04": 25.0,
       "2026-12-10": 15.0,
@@ -403,16 +393,6 @@
       "2027-02-15": 15.0,
       "2027-02-16": 9.0
     },
-    "madrid_atocha->elche_av": {
-      "2026-11-20": 83.0,
-      "2026-11-26": 38.0,
-      "2026-11-27": 51.0
-    },
-    "madrid_atocha->alicante": {
-      "2026-11-20": 79.0,
-      "2026-11-26": 38.0,
-      "2026-11-27": 68.0
-    },
     "elche_av->madrid_atocha": {
       "2026-11-23": 86.0,
       "2026-11-24": 51.0
@@ -420,6 +400,14 @@
     "alicante->madrid_atocha": {
       "2026-11-23": 86.0,
       "2026-11-24": 64.0
+    },
+    "madrid_atocha->elche_av": {
+      "2026-11-26": 38.0,
+      "2026-11-27": 51.0
+    },
+    "madrid_atocha->alicante": {
+      "2026-11-26": 38.0,
+      "2026-11-27": 68.0
     }
   }
 }
